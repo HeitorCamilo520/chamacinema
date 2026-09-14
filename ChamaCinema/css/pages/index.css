@@ -1,0 +1,200 @@
+#body{
+    height: 100%;
+    
+}
+
+main {
+    height: 100%;
+   flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-black-deepest);
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    min-height: 430px;
+    overflow: hidden;
+    margin: auto;
+  }
+  
+  .carousel-slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .slide {
+    min-width: 100%;
+    min-height: 430px;
+    display: flex;
+    align-items: flex-end;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+  }
+
+  .slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, .9), rgba(0, 0, 0, .15));
+  }
+  
+  .slide img {
+    width: 100%;
+    display: block;
+  }
+
+  .slide-conteudo {
+    position: relative;
+    z-index: 1;
+    max-width: 560px;
+    padding: 3rem 5rem;
+    color: white;
+  }
+
+  .slide-conteudo h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    margin: .35rem 0;
+  }
+
+  .slide-legenda {
+    color: #e50914;
+    font-weight: bold;
+    letter-spacing: .12rem;
+    margin: 0;
+  }
+
+  .slide-detalhes {
+    color: #e50914;
+    font-weight: bold;
+  }
+
+  .slide-sinopse {
+    line-height: 1.5;
+  }
+
+  .mensagem-carousel {
+    color: white;
+    margin: auto;
+  }
+  
+  button.prev, button.next {
+    aspect-ratio: 1 / 1;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: var(--radius-full);
+  }
+  
+  button.prev { left: 10px; }
+  button.next { right: 10px; }
+
+  @media (max-width: 600px) {
+    .carousel-container,
+    .slide {
+      min-height: 390px;
+    }
+
+    .slide-conteudo {
+      padding: 2rem 3rem;
+    }
+  }
+
+  #container-catalogo {
+    width: min(1200px, 92%);
+    padding: 2rem 0;
+  }
+
+  #container-catalogo h1 {
+    color: white;
+    margin: 0 0 1rem;
+  }
+
+  .catalogo-faixa {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  #container-em-alta {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    gap: 1.25rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding: .25rem;
+  }
+
+  #container-em-alta::-webkit-scrollbar {
+    display: none;
+  }
+
+  .catalogo-prev,
+  .catalogo-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: var(--radius-full);
+    background-color: rgba(0, 0, 0, .5);
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .catalogo-prev { left: 10px; }
+  .catalogo-next { right: 10px; }
+
+  .catalogo-prev:hover,
+  .catalogo-next:hover {
+    background-color: rgba(0, 0, 0, .8);
+  }
+
+  .filme-card {
+    flex: 0 0 180px;
+    overflow: hidden;
+    background: #171717;
+    border-radius: 8px;
+    color: white;
+  }
+
+  .filme-card img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    display: block;
+  }
+
+  .filme-info {
+    padding: .75rem;
+  }
+
+  .filme-info h2 {
+    font-size: 1rem;
+    margin: 0 0 .4rem;
+  }
+
+  .filme-info p,
+  .mensagem-catalogo {
+    color: #c8c8c8;
+    margin: 0;
+  }
+
+
