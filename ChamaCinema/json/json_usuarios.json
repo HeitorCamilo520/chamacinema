@@ -1,0 +1,33 @@
+[
+    {
+        "usuario":"StanLee01",
+        "email":"stanlee@gmail.com",
+        "senha" : "1234567",
+        "nacionalidade":null,
+        "linkFoto":"Imagens/StanLee.jpg",
+        "dataNasc":null
+    
+    },
+
+    {
+        "usuario":"SandraLee02",
+        "email":"sandralee@gmail.com",
+        "senha" : "7654321",
+        "nacionalidade":null,
+        "linkFoto":"Imagens/SandraLee.jpg",
+        "dataNasc":null
+    
+    },
+
+    {
+        "usuario":"JoãoCosta03",
+        "email":"joaocosta@gmail.com",
+        "senha" : "03030303",
+        "nacionalidade":"Brasil",
+        "linkFoto":"Imagens/JoaoCosta.jpg",
+        "dataNasc":null
+    
+    }
+
+
+]
