@@ -5,6 +5,10 @@ function validarLogin(event) {
     const senha = document.getElementById('senha-login').value;
     const mensagem = document.getElementById('mensagem-login');
 
+    fetch('../json/json_usuarios.json')
+    .then(resposta => resposta.json())
+
+
     mensagem.textContent = '';
     mensagem.classList.remove('visivel');
 
@@ -18,11 +22,6 @@ function validarLogin(event) {
         return false;
     }
 
-    if(emailOuUsuario === "usuario" && senha === "1234567"){
-
-        window.location.href = 'index.html';
-
-    }
 
     if(emailOuUsuario === "produtor" && senha === "1234567"){
 
