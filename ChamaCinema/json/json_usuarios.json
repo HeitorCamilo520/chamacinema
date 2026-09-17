@@ -5,7 +5,8 @@
         "senha" : "1234567",
         "nacionalidade":null,
         "linkFoto":"Imagens/StanLee.jpg",
-        "dataNasc":null
+        "dataNasc":null,
+        "preferencias":[]
     
     },
 
@@ -15,8 +16,8 @@
         "senha" : "7654321",
         "nacionalidade":null,
         "linkFoto":"Imagens/SandraLee.jpg",
-        "dataNasc":null
-    
+        "dataNasc":null,
+        "preferencias":[]
     },
 
     {
@@ -25,9 +26,7 @@
         "senha" : "03030303",
         "nacionalidade":"Brasil",
         "linkFoto":"Imagens/JoaoCosta.jpg",
-        "dataNasc":null
-    
+        "dataNasc":null,
+        "preferencias":[]    
     }
-
-
 ]
