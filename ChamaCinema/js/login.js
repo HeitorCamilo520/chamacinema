@@ -18,7 +18,20 @@ function validarLogin(event) {
         return false;
     }
 
-    window.location.href = 'index.html';
+    if(emailOuUsuario === 'produtor' && senha === '1234567'){
+        window.location.href = 'produtor.html';
+
+
+    }
+    else if(emailOuUsuario === 'admin' && senha === '1234567'){
+        window.location.href = 'admin.html';
+
+    }
+    else{
+        window.location.href = 'index.html';
+
+    }
+
     return true;
 }
 
