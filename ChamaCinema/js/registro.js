@@ -26,8 +26,43 @@ function validarFormulario(event) {
         return false;
     }
 
-    // Se tudo estiver correto, redireciona para a próxima página
-    window.location.href = 'preferencias.html';
+
+    fetch('../json/json_usuarios.json')
+    .then(resposta => resposta.json())
+    .then(usuariosJson => {
+
+        let existe = false;
+
+
+        for (let i = 0; i < usuariosJson.length; i++) {
+            if (usuariosJson[i].usuario === usuario || usuariosJson[i].email === email){
+                mostrarMensagem(mensagem, "Já existe uma conta com este nome de usuário ou email");
+                existe = true;
+
+            }
+        }
+
+        if(existe==true){
+            mostrarMensagem(mensagem, "Já existe uma conta com este nome de usuário ou email");
+
+        }
+        else{
+            novoUsuario = {
+                    "usuario":usuario,
+                    "email":email,
+                    "senha":senha,
+                    "nacionalidade":null,
+                    "linkFoto": null,
+                    "dataNasc":null,
+                    "preferencias":[]
+                }
+                usuariosJson.push(novoUsuario);
+                window.location.href = 'preferencias.html';
+                usuariosStringJson = JSON.stringify(usuariosJson);
+
+        }
+    })
+    
     return true;
 }
 
