@@ -10,7 +10,7 @@ function validarFormulario(event) {
     mensagem.textContent = '';
     mensagem.classList.remove('visivel');
 
-    if (!usuario || !email || !senha || !confirmarSenha) {
+    if (!usuario || !email || !senha || !confirmarSenha) { //aqui tinha que ser !=null, nâo? Esses const não são booleanos pra serem negados
         mostrarMensagem(mensagem, 'Por favor, preencha todos os campos.');
         return false;
     }
