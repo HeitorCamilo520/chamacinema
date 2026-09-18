@@ -1,7 +1,9 @@
-function getmemoria(local = "usuarios") {
-    localStorage.getItem(local)
+async function getmemoria(local = "usuarios") {
+    alert("pegou");
+    return localStorage.getItem(local);
 }
 
-function setmemoria(VetObjeto) {
-    localStorage.setItem("usuarios", JSON.stringify(VetObjeto))
+async function setmemoria(VetObjeto) {
+    alert("guardou");
+    localStorage.setItem("usuarios", JSON.stringify(VetObjeto));
 }
