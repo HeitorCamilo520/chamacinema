@@ -7,10 +7,14 @@ function validarFormulario(event) {
     const confirmarSenha = document.getElementById('confirmar-senha-registro').value;
     const mensagem = document.getElementById('mensagem-registro');
 
+
+    //alert(usuario + " " + email + " " + senha + " " + confirmarSenha);
+
+
     mensagem.textContent = '';
     mensagem.classList.remove('visivel');
 
-    if (!usuario || !email || !senha || !confirmarSenha) { //aqui tinha que ser !=null, nâo? Esses const não são booleanos pra serem negados
+    if (usuario == "" || email == "" || senha == "" || confirmarSenha == "") {
         mostrarMensagem(mensagem, 'Por favor, preencha todos os campos.');
         return false;
     }
@@ -26,31 +30,22 @@ function validarFormulario(event) {
         return false;
     }
 
-    function escreveUsuarios(){
-        fetch('../json/json_usuarios.json')
-        .then(resposta => resposta.json())
-        .then(usuariosJson => {
-            localStorage.setItem("usuarios",JSON.stringify(usuariosJson));
-            }
-        )
-    }
 
-    
-let usuarios = localStorage.getItem("usuarios");
-let usuariosJson = JSON.parse(usuarios);
+    fetch('../json/json_usuarios.json')
+    .then(resposta => resposta.json())
+    .then(usuariosJson => {
+        alert(usuariosJson);
 
         let existe = false;
 
         for (let i = 0; i < usuariosJson.length; i++) {
             if (usuariosJson[i].usuario === usuario || usuariosJson[i].email === email){
                 existe = true;
-
             }
         }
 
-        if(existe==true){
+        if(existe){
             mostrarMensagem(mensagem, "Já existe uma conta com este nome de usuário ou email");
-
         }
         else{
             novoUsuario = {
@@ -60,19 +55,21 @@ let usuariosJson = JSON.parse(usuarios);
                     "nacionalidade":null,
                     "linkFoto": null,
                     "dataNasc":null,
-                    "preferencias":[]
+                    "preferencias":[],
+                    "logado" : true
                 }
+
                 usuariosJson.push(novoUsuario);
-                localStorage.setItem("usuarios",JSON.stringify(usuariosJson));
+
+                setmemoria(usuariosJson);
+
                 window.location.href = 'preferencias.html';
-            
 
         }
-    
-
+    } )
     
     return true;
-
+}
 
 function mostrarMensagem(elemento, texto) {
     elemento.textContent = texto;
