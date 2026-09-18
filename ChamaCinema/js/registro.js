@@ -26,17 +26,23 @@ function validarFormulario(event) {
         return false;
     }
 
+    function escreveUsuarios(){
+        fetch('../json/json_usuarios.json')
+        .then(resposta => resposta.json())
+        .then(usuariosJson => {
+            localStorage.setItem("usuarios",JSON.stringify(usuariosJson));
+            }
+        )
+    }
 
-    fetch('../json/json_usuarios.json')
-    .then(resposta => resposta.json())
-    .then(usuariosJson => {
+    
+let usuarios = localStorage.getItem("usuarios");
+let usuariosJson = JSON.parse(usuarios);
 
         let existe = false;
 
-
         for (let i = 0; i < usuariosJson.length; i++) {
             if (usuariosJson[i].usuario === usuario || usuariosJson[i].email === email){
-                mostrarMensagem(mensagem, "Já existe uma conta com este nome de usuário ou email");
                 existe = true;
 
             }
@@ -57,14 +63,16 @@ function validarFormulario(event) {
                     "preferencias":[]
                 }
                 usuariosJson.push(novoUsuario);
+                localStorage.setItem("usuarios",JSON.stringify(usuariosJson));
                 window.location.href = 'preferencias.html';
-                usuariosStringJson = JSON.stringify(usuariosJson);
+            
 
         }
-    })
+    
+
     
     return true;
-}
+
 
 function mostrarMensagem(elemento, texto) {
     elemento.textContent = texto;
