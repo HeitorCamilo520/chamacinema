@@ -3,6 +3,16 @@ let currentIndex = 0;
 const catalogo = document.querySelector('#container-em-alta');
 const slidesContainer = document.querySelector('#carousel-slides');
 
+
+function escreveUsuarios(){
+   fetch('../json/json_usuarios.json')
+   .then(resposta => resposta.json())
+        .then(usuariosJson => {
+          localStorage.setItem("usuarios",JSON.stringify(usuariosJson));
+        }
+        )
+}
+
 async function buscarComTimeout(url) {
   const controlador = new AbortController();
   const temporizador = setTimeout(() => controlador.abort(), 10000);
