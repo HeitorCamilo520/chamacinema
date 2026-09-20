@@ -9,7 +9,7 @@ function validarLogin(event) {
 
     mensagem.textContent = '';
     mensagem.classList.remove('visivel');
-/* 
+
     if (emailOuUsuario == "") {
         mostrarMensagem(mensagem, 'Por favor, preencha o campo de e-mail ou usuário.');
         return false;
@@ -44,7 +44,6 @@ function validarLogin(event) {
         window.location.href = 'index.html';
 
     }
- */
 
     fetch('../json/json_usuarios.json')
     .then(resposta => resposta.json())
