@@ -92,7 +92,10 @@ html.transicao-ativa[data-origem="login"] #login-main {
 
     color: var(--color-white);
 
-    background: linear-gradient(135deg, var(--color-black-panel), var(--color-black-panel-alt));
+   background: linear-gradient(135deg,
+        var(--color-black-panel) 0%,
+        var(--color-black-panel-alt) 42%,
+        var(--color-black-deepest) 100%);
     border: 1px solid var(--color-gray-deep);
     border-radius: var(--radius-lg);
     isolation: isolate;
