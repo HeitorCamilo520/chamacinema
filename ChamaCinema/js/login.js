@@ -34,15 +34,16 @@ function validarLogin(event) {
     if(emailOuUsuario === 'produtor' && senha === '1234567'){
         window.location.href = 'produtor.html';
 
-
     }
     else if(emailOuUsuario === 'admin' && senha === '1234567'){
         window.location.href = 'admin.html';
 
     }
-    else{
+    else if(emailOuUsuario === 'usuario' && senha === '1234567'){
         window.location.href = 'index.html';
-
+    }
+    else {
+        mostrarMensagem(mensagem, 'Este usuario não existe.');
     }
 
     fetch('../json/json_usuarios.json')
@@ -56,10 +57,10 @@ function validarLogin(event) {
         alert(VetUsuarios);
         let existe = false;
 
-        for (let i = 0; i < usuariosJson.length; i++) {
-            if (usuariosJson[i].usuario === emailOuUsuario || usuariosJson[i].email === emailOuUsuario){
+        for (const element of usuariosJson) {
+            if (element.usuario === emailOuUsuario || element.email === emailOuUsuario){
                 existe = true;
-                usuariosJson[i].logado = true;
+                element.logado = true;
             }
         }
 
@@ -77,7 +78,6 @@ function validarLogin(event) {
 }
 
 function mostrarMensagem(elemento, texto) {
-    alert(texto);
     elemento.textContent = texto;
     elemento.classList.add('visivel');
 }

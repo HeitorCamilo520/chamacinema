@@ -1,6 +1,3 @@
-const TMDB_IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
-const TMDB_BACKDROP_URL = 'https://image.tmdb.org/t/p/w1280';
-
 const pesquisa = document.querySelector('#pesquisa');
 const formularioPesquisa = pesquisa?.closest('form');
 const resultadosPesquisa = document.querySelector('#resultados-pesquisa');
@@ -48,8 +45,8 @@ pesquisa?.addEventListener('input', () => {
           </a>
         `).join('')
         : '<p class="mensagem-pesquisa">Nenhum filme encontrado.</p>';
-    } catch (erro) {
-      resultadosPesquisa.innerHTML = `<p class="mensagem-pesquisa">${erro.message}</p>`;
+    } catch (error_) {
+      resultadosPesquisa.innerHTML = `<p class="mensagem-pesquisa">${error_.message}</p>`;
     }
   }, 350);
 });

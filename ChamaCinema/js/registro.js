@@ -38,8 +38,8 @@ function validarFormulario(event) {
 
         let existe = false;
 
-        for (let i = 0; i < usuariosJson.length; i++) {
-            if (usuariosJson[i].usuario === usuario || usuariosJson[i].email === email){
+        for (const element of usuariosJson) {
+            if (element.usuario === usuario || element.email === email){
                 existe = true;
             }
         }

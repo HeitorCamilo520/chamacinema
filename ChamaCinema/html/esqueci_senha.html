@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <script>
+        (function () {
+            var origem = sessionStorage.getItem("cc_origem_pagina");
+            sessionStorage.removeItem("cc_origem_pagina");
+            if (origem) {
+                document.documentElement.classList.add("transicao-ativa");
+                document.documentElement.dataset.origem = origem;
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chama Cinema</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/pages/esqueci_senha.css">
     <link rel="stylesheet" href="../css/components/registro_transparente.css">
     <link rel="stylesheet" href="../css/components/login_transparente.css">
+    <link rel="stylesheet" href="../css/pages/esqueci_senha.css">
 </head>
 
 <body id="body">
@@ -16,7 +26,7 @@
     <header id="header">
 
         <a href="index.html" id="container-logo">
-            <img src="../css/pages/Imagens/Geral_7.png" alt="Logo do Chama Cinema" id="logo">
+            <img src="../Imagens/Geral_7.png" alt="Logo do Chama Cinema" id="logo">
             ChamaCinema
         </a>
 
@@ -61,7 +71,7 @@
             <div id="container-login">
 
                 <div id="logo-titulo-login">
-                    <img src="../css/pages/Imagens/Geral_7.png" alt="Logo ChamaCinema" id="logo-login">
+                    <img src="../Imagens/Geral_7.png" alt="Logo ChamaCinema" id="logo-login">
                     <p id="texto-logo-login">ChamaCinema</p>
                 </div>
 
@@ -180,6 +190,7 @@
     <script src="../js/config.js"></script>
     <script src="../js/header.js"></script>
     <script src="../js/fundo_animado.js"></script>
+    <script src="../js/transicoes.js"></script>
     <script src="../js/esqueci_senha.js"></script>
     <script src="../js/manipulaLS.js"></script>
 
