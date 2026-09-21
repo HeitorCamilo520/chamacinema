@@ -6,7 +6,8 @@
         "nacionalidade":null,
         "linkFoto":"Imagens/StanLee.jpg",
         "dataNasc":null,
-        "preferencias":[]
+        "preferencias":[],
+        "logado":false
     
     },
 
@@ -17,7 +18,8 @@
         "nacionalidade":null,
         "linkFoto":"Imagens/SandraLee.jpg",
         "dataNasc":null,
-        "preferencias":[]
+        "preferencias":[],
+        "logado":false
     },
 
     {
@@ -27,6 +29,7 @@
         "nacionalidade":"Brasil",
         "linkFoto":"Imagens/JoaoCosta.jpg",
         "dataNasc":null,
-        "preferencias":[]    
+        "preferencias":[],
+        "logado":false
     }
 ]
