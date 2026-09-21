@@ -19,7 +19,7 @@ function validarFormulario(event) {
         return false;
     }
 
-    if (senha !== confirmarSenha) {
+    if (senha != confirmarSenha) {
         mostrarMensagem(mensagem, 'As senhas não coincidem.');
         return false;
     }
