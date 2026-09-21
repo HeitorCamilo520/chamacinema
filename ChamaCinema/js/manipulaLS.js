@@ -1,7 +1,8 @@
-async function getmemoria(local = "usuarios") {
-    return localStorage.getItem(local);
+function getmemoria(local = "usuarios") {
+    let dados = localStorage.getItem(local);
+    return dados ? JSON.parse(dados) : null
 }
 
-async function setmemoria(VetObjeto) {
-    localStorage.setItem("usuarios", JSON.stringify(VetObjeto));
+function setmemoria(chave = "usuarios", VetObjeto) {
+    localStorage.setItem(chave, JSON.stringify(VetObjeto));
 }
