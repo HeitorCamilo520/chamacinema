@@ -39,12 +39,6 @@ function validarLogin(event) {
         window.location.href = 'admin.html';
 
     }
-    else if(emailOuUsuario === 'usuario' && senha === '1234567'){
-        window.location.href = 'index.html';
-    }
-    else {
-        mostrarMensagem(mensagem, 'Este usuario não existe.');
-    }
 
     fetch('../json/json_usuarios.json')
     .then(resposta => resposta.json())
@@ -61,16 +55,15 @@ function validarLogin(event) {
             if (element.usuario === emailOuUsuario || element.email === emailOuUsuario){
                 existe = true;
                 element.logado = true;
+                setmemoria(usuariosJson);
+                window.location.href = 'index.html';
             }
+
         }
 
         if(!existe){
-            mostrarMensagem(mensagem, "Ainda não existe uma conta com este nome de usuário ou email");
+            mostrarMensagem(mensagem, 'Este usuario não existe.');
             return false;
-        }
-        else {
-            setmemoria(usuariosJson);
-            window.location.href = 'index.html';
         }
     })
 
