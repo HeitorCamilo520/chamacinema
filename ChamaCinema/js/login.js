@@ -32,7 +32,6 @@ function validarLogin(event) {
     fetch('../json/json_usuarios.json')
     .then(resposta => resposta.json())
     .then(usuariosJson => {
-        setmemoria(usuariosJson);
             
         let VetUsuarios = getmemoria("usuarios");
         VetUsuarios = JSON.parse(VetUsuarios);
