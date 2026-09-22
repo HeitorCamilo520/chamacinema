@@ -8,7 +8,7 @@
         "dataNasc":null,
         "preferencias":[],
         "logado":false,
-        "plano":"usuarioPadrao"
+        "plano":"Produtor"
     
     },
 
@@ -21,7 +21,7 @@
         "dataNasc":null,
         "preferencias":[],
         "logado":false,
-        "plano":"usuarioAdministrador"
+        "plano":"Administrador"
     },
 
     {
@@ -33,6 +33,6 @@
         "dataNasc":null,
         "preferencias":[],
         "logado":false,
-        "plano":"usuarioProdutor"
+        "plano":"Faísca"
     }
 ]
