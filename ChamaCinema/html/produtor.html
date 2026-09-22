@@ -26,7 +26,17 @@
         <button class="opcoes_header"><i class="fa-solid fa-tag icone-header" id="etiqueta_plano"></i><p>Planos</p></button>
         <button class="opcoes_header"><i class="fa-solid fa-heart icone-header" id="coracao_favoritos"></i><p></p>Favoritos</p></button>
         <a href="login.html" class="opcoes_header"><i class="fa-solid fa-user icone-header" id="pessoa_login"></i><p>Login</p></a>
-        <button class="opcoes_header"><i class="fas fa-ellipsis-vertical fa-lg" id="dropdown_icon"></i> </button>
+        <button class="opcoes_header" onclick="dropdownMenu()"><i class="fas fa-ellipsis-vertical fa-lg" id="dropdown_icon"></i></button>
+        <div id="dropdown_menu" class="dropdown-menu"">
+            <table>
+                <tr><td>
+                    <p>
+                        <i class="fa-solid fa-gear"></i>
+                        Configurações
+                    </p>
+                </td></tr>
+            </table>
+        </div>
     </header>
 
     <main>
@@ -67,8 +77,8 @@
 
     </footer>
     <script src="../js/config.js"></script>
+    <script src="../js/manipulaLS.js"></script>
     <script src="../js/header.js"></script>
     <script src="../js/index.js"></script>
-    <script src="../js/manipulaLS.js"></script>
 </body>
 </html>

@@ -53,14 +53,19 @@
             <p>Favoritos</p>
         </button>
 
-        <a href="login.html" class="opcoes_header">
-            <i class="fa-solid fa-user icone-header" id="pessoa_login"></i>
-            <p>Login</p>
-        </a>
+        <div id="usuario-login" class="opcoes_header"></div>
 
-        <button class="opcoes_header">
-            <i class="fas fa-ellipsis-vertical fa-lg" id="dropdown_icon"></i>
-        </button>
+        <button class="opcoes_header" onclick="dropdownMenu()"><i class="fas fa-ellipsis-vertical fa-lg" id="dropdown_icon"></i></button>
+        <div id="dropdown_menu" class="dropdown-menu"">
+            <table>
+                <tr><td>
+                    <p>
+                        <i class="fa-solid fa-gear"></i>
+                        Configurações
+                    </p>
+                </td></tr>
+            </table>
+        </div>
 
     </header>
 
@@ -204,11 +209,11 @@
     </footer>
 
     <script src="../js/config.js"></script>
+    <script src="../js/manipulaLS.js"></script>
     <script src="../js/header.js"></script>
     <script src="../js/fundo_animado.js"></script>
     <script src="../js/transicoes.js"></script>
     <script src="../js/login.js"></script>
-    <script src="../js/manipulaLS.js"></script>
 
 </body>
 </html>

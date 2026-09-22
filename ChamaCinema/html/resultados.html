@@ -22,17 +22,34 @@
         <button class="opcoes_header"><i class="fa-solid fa-clapperboard icone-header" id="catalogo-icone"></i><p>Catalogo</p></button>
         <button class="opcoes_header"><i class="fa-solid fa-tag icone-header" id="etiqueta_plano"></i><p>Planos</p></button>
         <button class="opcoes_header"><i class="fa-solid fa-heart icone-header" id="coracao_favoritos"></i><p>Favoritos</p></button>
-        <a href="login.html" class="opcoes_header"><i class="fa-solid fa-user icone-header" id="pessoa_login"></i><p>Login</p></a>
-        <button class="opcoes_header"><i class="fas fa-ellipsis-vertical fa-lg" id="dropdown_icon"></i></button>
+        <div id="usuario-login" class="opcoes_header"></div>
+        <button class="opcoes_header" onclick="dropdownMenu()"><i class="fas fa-ellipsis-vertical fa-lg" id="dropdown_icon"></i></button>
+        <div id="dropdown_menu" class="dropdown-menu"">
+            <table>
+                <tr><td>
+                    <p>
+                        <i class="fa-solid fa-gear"></i>
+                        Configurações
+                    </p>
+                </td></tr>
+            </table>
+        </div>
     </header>
     <main id="pagina-resultados">
         <section id="lista-resultados">
             <p class="mensagem-resultados">Carregando resultados...</p>
         </section>
     </main>
+
+    <footer>
+        <div id="footer-container">
+            <p id="footer-texto">© 2024 ChamaCinema. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
     <script src="../js/config.js"></script>
+    <script src="../js/manipulaLS.js"></script>
     <script src="../js/header.js"></script>
     <script src="../js/resultados.js"></script>
-    <script src="../js/manipulaLS.js"></script>
 </body>
 </html>
