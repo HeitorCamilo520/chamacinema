@@ -41,7 +41,7 @@
         "email":"arthur.leonnardo@estudante.iftm.edu.br",
         "senha" : "12345678",
         "nacionalidade":"Brasileiro",
-        "linkFoto":"../Imagens/ArthPLeo.jpg",
+        "linkFoto":"../Imagens/ArthPLeo.png",
         "dataNasc":"25/05/2010",
         "preferencias":["Animação", "Aventura", "Comédia", "Fantasia", "Ficção Científica"],
         "logado":false,
