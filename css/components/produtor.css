@@ -1,0 +1,55 @@
+body::before {
+  content: "";
+  position: fixed;
+  inset: -12% -8% -12% -8%;
+  z-index: -1;
+  background-image: url(../../Imagens/Estampa_produtor.png) !important;
+  background-repeat: repeat;
+  background-size: 45% auto;
+  background-position: center;
+  opacity: 0.4;
+  transform: perspective(1400px) rotateZ(-12deg) scale(1.2);
+  transform-origin: center center;
+  pointer-events: none;
+}
+
+  #container-produtor {
+    width: min(1200px, 100%);
+    padding: 1.2rem 0 0;
+  }
+
+  #botao-produtor {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    border: none;
+    border-radius: var(--radius-lg);
+    background-image: radial-gradient(
+      var(--color-orange) 0%,
+      var(--color-orange-dark) 50%
+    );
+    color: white;
+    cursor: pointer;
+  }
+
+  #botao-produtor .icone-produtor {
+    font-size: 2.5rem;
+  }
+
+  #container-produtor-texto h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  #container-produtor-texto h2 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--color-gray-light);
+  }
+
+  #botao-produtor:hover {
+    background-color: var(--color-black-panel-strong);
+  }

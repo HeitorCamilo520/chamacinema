@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/planos.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+</head>
+<body class="min-h-screen flex flex-col justify-between bg-movie-grid selection:bg-orange-500 selection:text-white">
+    
+  <main class="flex-grow flex flex-col justify-center items-center px-4 py-12 md:py-16">
+    <div class="max-w-6xl w-full mx-auto text-center space-y-3 mb-10 md:mb-14">
+      <h1 class="text-3xl md:text-5xl font-black tracking-tight text-white">
+        Evolua seu plano.
+      </h1>
+      <p class="text-slate-400 text-base md:text-lg font-normal">
+        Selecione o melhor plano para você.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl w-full mx-auto items-stretch">
+
+      <!-- CARD 1: FAÍSCA -->
+      <div id="card-faisca" class="card-faisca flame-pattern rounded-3xl p-6 lg:p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden card-hover border border-white/10">
+        <div>
+          <h2 class="text-3xl lg:text-4xl font-black tracking-wider text-white mb-6 uppercase">
+            Faísca
+          </h2>
+          <ul class="space-y-4 text-sm lg:text-base text-white/95 font-medium leading-snug">
+            <li class="flex items-start gap-2.5">
+              <span class="text-xl leading-none font-bold select-none">•</span>
+              <span>Recomendações de obra com base em sua navegação e preferências.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-xl leading-none font-bold select-none">•</span>
+              <span>Submissão de avaliações para as obras.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mt-10 pt-4 text-center space-y-4">
+          <div class="text-2xl lg:text-3xl font-extrabold text-white">
+            Gratuito
+          </div>
+          <button 
+            onclick="selectPlan('Faísca')" 
+            class="plan-btn w-full bg-[#111215] hover:bg-black text-white font-bold py-3.5 px-6 rounded-2xl shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95"
+          >
+            <i data-lucide="tag" class="w-4 h-4 fill-white"></i>
+            <span>Assinar</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- CARD 2: LABAREDA (Default Selected) -->
+      <div id="card-labareda" class="card-labareda flame-pattern rounded-3xl p-6 lg:p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden card-hover border border-white/10 ring-4 ring-orange-500/30">
+        <div>
+          <h2 class="text-3xl lg:text-4xl font-black tracking-wider text-white mb-6 uppercase">
+            Labareda
+          </h2>
+          <ul class="space-y-4 text-sm lg:text-base text-white/95 font-medium leading-snug">
+            <li class="flex items-start gap-2.5">
+              <span class="text-xl leading-none font-bold select-none">•</span>
+              <span>Benefícios <strong class="font-bold text-white">Faísca</strong>.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-xl leading-none font-bold select-none">•</span>
+              <span>Acesso ao <strong class="font-bold text-white">Pyro</strong>: chatbot de IA especialista em recomendações.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mt-10 pt-4 text-center space-y-4">
+          <div class="text-2xl lg:text-3xl font-extrabold text-white">
+            R$ 29,90 <span class="text-sm lg:text-base font-normal opacity-90">/mês</span>
+          </div>
+          <button 
+            onclick="selectPlan('Labareda')" 
+            class="plan-btn w-full bg-white text-slate-900 font-bold py-3.5 px-6 rounded-2xl shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95"
+          >
+            <i data-lucide="check" class="w-5 h-5 stroke-[3]"></i>
+            <span>Selecionado</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- CARD 3: PRODUTOR -->
+      <div id="card-produtor" class="card-produtor flame-pattern rounded-3xl p-6 lg:p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden card-hover border border-white/10">
+        <div>
+          <h2 class="text-3xl lg:text-4xl font-black tracking-wider text-white mb-6 uppercase">
+            Produtor
+          </h2>
+          <ul class="space-y-4 text-sm lg:text-base text-white/95 font-medium leading-snug">
+            <li class="flex items-start gap-2.5">
+              <span class="text-xl leading-none font-bold select-none">•</span>
+              <span>Benefícios <strong class="font-bold text-white">Labareda</strong>.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-xl leading-none font-bold select-none">•</span>
+              <span>Possibilidade de <strong class="font-bold text-white">cadastrar obras</strong> no sistema.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mt-10 pt-4 text-center space-y-4">
+          <div class="text-2xl lg:text-3xl font-extrabold text-white">
+            R$ 59,90 <span class="text-sm lg:text-base font-normal opacity-90">/mês</span>
+          </div>
+          <button 
+            onclick="selectPlan('Produtor')" 
+            class="plan-btn w-full bg-[#111215] hover:bg-black text-white font-bold py-3.5 px-6 rounded-2xl shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95">
+            <i data-lucide="tag" class="w-4 h-4 fill-white"></i>
+            <span>Assinar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-[#0b0c0e]/90 border-t border-white/5 py-6 px-4 md:px-8 text-xs md:text-sm text-slate-400">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      
+      <a href="#" class="flex items-center gap-1.5 hover:text-white transition-colors">
+        <span>Ajuda</span>
+        <i data-lucide="help-circle" class="w-4 h-4"></i>
+      </a>
+
+      <div class="text-center font-normal">
+        © 2026 – 2026 by ChamaCinema®
+      </div>
+
+      <a href="#" class="flex items-center gap-1.5 hover:text-white transition-colors">
+        <span>Anuncie aqui</span>
+        <i data-lucide="external-link" class="w-4 h-4"></i>
+      </a>
+
+    </div>
+  </footer>
+
+  <div id="toast" class="fixed bottom-8 right-8 bg-slate-900 text-white px-6 py-4 rounded-2xl shadow-2xl border border-white/10 flex items-center gap-3 translate-y-24 opacity-0 transition-all duration-300 z-50">
+    <div class="w-8 h-8 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center">
+      <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+    </div>
+    <div>
+      <h4 class="font-bold text-sm" id="toast-title">Plano Atualizado!</h4>
+      <p class="text-xs text-slate-300" id="toast-desc">Você selecionou o plano com sucesso.</p>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Dynamic Plan Selection Functionality
+    function selectPlan(planName) {
+      const plans = [
+        { name: 'Faísca', id: 'card-faisca' },
+        { name: 'Labareda', id: 'card-labareda' },
+        { name: 'Produtor', id: 'card-produtor' }
+      ];
+
+      plans.forEach(plan => {
+        const card = document.getElementById(plan.id);
+        const button = card.querySelector('.plan-btn');
+
+        if (plan.name === planName) {
+          // Highlight card
+          card.classList.add('ring-4', 'ring-orange-500/30');
+          button.className = 'plan-btn w-full bg-white text-slate-900 font-bold py-3.5 px-6 rounded-2xl shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95';
+          button.innerHTML = '<i data-lucide="check" class="w-5 h-5 stroke-[3]"></i><span>Selecionado</span>';
+        } else {
+          // Unhighlight card
+          card.classList.remove('ring-4', 'ring-orange-500/30');
+          button.className = 'plan-btn w-full bg-[#111215] hover:bg-black text-white font-bold py-3.5 px-6 rounded-2xl shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95';
+          button.innerHTML = '<i data-lucide="tag" class="w-4 h-4 fill-white"></i><span>Assinar</span>';
+        }
+      });
+
+      // Re-render icons for dynamic content changes
+      lucide.createIcons();
+
+      // Show Notification Toast
+      showToast(`Plano ${planName} Selecionado`, `Você alterou sua assinatura para o plano ${planName}.`);
+    }
+
+    function showToast(title, description) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-title').textContent = title;
+      document.getElementById('toast-desc').textContent = description;
+
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 3500);
+    }
+  </script>
+    <script src="../js/manipulaLS.js"></script>
+</body>
+</html>
