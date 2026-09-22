@@ -34,5 +34,17 @@
         "preferencias":[],
         "logado":false,
         "plano":"Faísca"
+    },
+
+    {
+        "usuario":"ArthPLeo",
+        "email":"arthur.leonnardo@estudante.iftm.edu.br",
+        "senha" : "12345678",
+        "nacionalidade":"Brasileiro",
+        "linkFoto":"../Imagens/ArthPLeo.jpg",
+        "dataNasc":"25/05/2010",
+        "preferencias":["Animação", "Aventura", "Comédia", "Fantasia", "Ficção Científica"],
+        "logado":false,
+        "plano":"Administrador"
     }
 ]
