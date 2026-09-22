@@ -37,9 +37,7 @@ function validarLogin(event) {
         window.location.href = 'administrador.html';
 
     }
-    else if(emailOuUsuario === 'usuario' && senha === '1234567'){
-        window.location.href = 'index.html';
-    }
+    
     else {
         mostrarMensagem(mensagem, 'Este usuario não existe.');
     }
@@ -57,6 +55,7 @@ function validarLogin(event) {
   
     achouUsuario.logado = true;
     setmemoria("usuarios", usuarios);
+    setmemoria("usuarioLogado", achouUsuario);
     window.location.href = 'index.html';
     
 

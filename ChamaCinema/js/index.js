@@ -1,12 +1,10 @@
-let currentIndex = 0;
-
 const catalogo = document.querySelector('#container-em-alta');
 const slidesContainer = document.querySelector('#carousel-slides');
+let currentIndex = 0;
 
 async function buscarComTimeout(url) {
   const controlador = new AbortController();
   const temporizador = setTimeout(() => controlador.abort(), 10000);
-
   try {
     return await fetch(url, { signal: controlador.signal });
   } finally {
@@ -14,21 +12,23 @@ async function buscarComTimeout(url) {
   }
 }
 
-async function buscarFilmes(endpoint = '/movie/popular?language=pt-BR&page=1') {
+function mensagemDeErro(erro) {
+  return erro.name === 'AbortError'
+    ? 'A TMDB demorou para responder. Tente novamente.'
+    : erro.message;
+}
+
+// ===== Catálogo (filmes em alta) =====
+
+async function buscarFilmes() {
   catalogo.innerHTML = '<p class="mensagem-catalogo">Carregando filmes...</p>';
-
   try {
-    const separador = endpoint.includes('?') ? '&' : '?';
-    const resposta = await buscarComTimeout(`${TMDB_API_URL}${endpoint}${separador}api_key=${TMDB_API_KEY}`);
+    const resposta = await buscarComTimeout(`${TMDB_API_URL}/movie/popular?language=pt-BR&page=1&api_key=${TMDB_API_KEY}`);
     if (!resposta.ok) throw new Error('Não foi possível acessar a TMDB.');
-
-    const dados = await resposta.json();
-    renderizarFilmes(dados.results);
+    const { results } = await resposta.json();
+    renderizarFilmes(results);
   } catch (erro) {
-    const mensagem = erro.name === 'AbortError'
-      ? 'A TMDB demorou para responder. Tente novamente.'
-      : erro.message;
-    catalogo.innerHTML = `<p class="mensagem-catalogo">${mensagem}</p>`;
+    catalogo.innerHTML = `<p class="mensagem-catalogo">${mensagemDeErro(erro)}</p>`;
   }
 }
 
@@ -50,31 +50,25 @@ function renderizarFilmes(filmes) {
 }
 
 function moverCatalogo(direcao) {
-  const distancia = catalogo.clientWidth * 0.8;
-  catalogo.scrollBy({ left: direcao * distancia, behavior: 'smooth' });
+  catalogo.scrollBy({ left: direcao * catalogo.clientWidth * 0.8, behavior: 'smooth' });
 }
 
-buscarFilmes();
+// ===== Carrossel de destaques =====
 
 async function buscarDestaques() {
   try {
     const resposta = await buscarComTimeout(`${TMDB_API_URL}/movie/popular?language=pt-BR&page=1&api_key=${TMDB_API_KEY}`);
     if (!resposta.ok) throw new Error('Não foi possível carregar os destaques.');
-
-    const dados = await resposta.json();
-    renderizarDestaques(dados.results.slice(0, 5));
+    const { results } = await resposta.json();
+    renderizarDestaques(results.slice(0, 5));
   } catch (erro) {
-    const mensagem = erro.name === 'AbortError'
-      ? 'A TMDB demorou para responder. Tente novamente.'
-      : erro.message;
-    slidesContainer.innerHTML = `<p class="mensagem-carousel">${mensagem}</p>`;
+    slidesContainer.innerHTML = `<p class="mensagem-carousel">${mensagemDeErro(erro)}</p>`;
   }
 }
 
 function renderizarDestaques(filmes) {
   slidesContainer.innerHTML = filmes.map((filme) => {
     const imagem = filme.backdrop_path ? `${TMDB_BACKDROP_URL}${filme.backdrop_path}` : 'Imagens/Geral_6.png';
-
     return `
       <article class="slide">
         <img class="slide-imagem" src="${imagem}" alt="${filme.title}">
@@ -88,44 +82,30 @@ function renderizarDestaques(filmes) {
     `;
   }).join('');
 
-  const slides = document.querySelectorAll('.slide');
-  if (slides.length) {
-    currentIndex = 0;
-    const slidesTrack = document.querySelector('.carousel-slides');
-    if (slidesTrack) {
-      slidesTrack.style.transform = 'translateX(0%)';
-    }
-  }
+  currentIndex = 0;
+  atualizarPosicaoSlide();
 }
-
-buscarDestaques();
 
 function moveSlide(direction) {
-  const slides = document.querySelectorAll('.slide');
-  if (!slides.length) return;
+  const totalSlides = document.querySelectorAll('.slide').length;
+  if (!totalSlides) return;
 
-  currentIndex += direction;
-
-  if (currentIndex >= slides.length) {
-    currentIndex = 0;
-  } else if (currentIndex < 0) {
-    currentIndex = slides.length - 1;
-  }
-
-  const offset = -currentIndex * 100;
-  const slidesTrack = document.querySelector('.carousel-slides');
-  if (slidesTrack) {
-    slidesTrack.style.transform = `translateX(${offset}%)`;
-  }
+  currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+  atualizarPosicaoSlide();
 }
 
-const botaoAnterior = document.querySelector('.prev');
-const botaoProximo = document.querySelector('.next');
-
-if (botaoAnterior) {
-  botaoAnterior.addEventListener('click', () => moveSlide(-1));
+function atualizarPosicaoSlide() {
+  slidesContainer.style.transform = `translateX(${-currentIndex * 100}%)`;
 }
 
-if (botaoProximo) {
-  botaoProximo.addEventListener('click', () => moveSlide(1));
-}
+// ===== Eventos =====
+
+document.querySelector('.prev')?.addEventListener('click', () => moveSlide(-1));
+document.querySelector('.next')?.addEventListener('click', () => moveSlide(1));
+document.querySelector('.catalogo-prev')?.addEventListener('click', () => moverCatalogo(-1));
+document.querySelector('.catalogo-next')?.addEventListener('click', () => moverCatalogo(1));
+
+// ===== Início =====
+
+buscarFilmes();
+buscarDestaques();

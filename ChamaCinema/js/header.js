@@ -1,7 +1,16 @@
 const pesquisa = document.querySelector('#pesquisa');
 const formularioPesquisa = pesquisa?.closest('form');
 const resultadosPesquisa = document.querySelector('#resultados-pesquisa');
+const dropdown = document.getElementById('dropdown_menu');
 let temporizadorPesquisa;
+
+if(!getmemoria("usuarios")){
+        fetch('../json/json_usuarios.json')
+        .then(resposta => resposta.json())
+        .then(usuariosJson =>{
+            setmemoria("usuarios", usuariosJson);
+        })
+    }
 
 function redirecionarParaResultados() {
   const termo = pesquisa?.value.trim();
@@ -56,3 +65,58 @@ document.addEventListener('click', (evento) => {
     resultadosPesquisa.hidden = true;
   }
 });
+
+function dropdownMenu() {
+  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+
+    document.addEventListener('click', (evento) => {
+    const botaoDropdown = document.getElementById('dropdown_icon')?.closest('button');
+    if (dropdown && !dropdown.contains(evento.target) && !botaoDropdown?.contains(evento.target)) {
+      dropdown.style.display = 'none';
+    }
+  });
+}
+
+
+function atualizarOpcaoSairConta() {
+  const tabela = document.querySelector('#dropdown_menu table');
+  const sairConta = document.getElementById('sair-conta');
+  const usuario = document.getElementById('usuario-login');
+
+  if (getmemoria("usuarioLogado")) {
+    usuario.innerHTML = `
+    <div id="foto">
+                <img src="../Imagens/Geral_7.png">
+            </div>
+            <p>${getmemoria("usuarioLogado").usuario}</p>
+      `;
+
+    if (!sairConta) {
+      tabela.innerHTML += `
+        <tr id="sair-conta" onclick="sairDaConta()">
+          <td>
+            <p>
+              <i class="fa-solid fa-right-from-bracket"></i>
+              Sair da conta
+            </p>
+          </td>
+        </tr>`;
+    }
+  } else if (sairConta) {
+    sairConta.remove();
+  }
+
+  if (!getmemoria("usuarioLogado")) {
+    usuario.innerHTML = `<a href="login.html" class="opcoes_header"><i class="fa-solid fa-user icone-header" id="pessoa_login"></i><p>Login</p></a>`;
+  }
+
+}
+
+function sairDaConta() {
+  const usuarios = getmemoria("usuarios").map(u => ({ ...u, logado: false }));
+  setmemoria("usuarios", usuarios);
+  setmemoria("usuarioLogado", '');
+  window.location.reload();
+}
+
+document.addEventListener('DOMContentLoaded', atualizarOpcaoSairConta);
