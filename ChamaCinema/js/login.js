@@ -29,19 +29,6 @@ function validarLogin(event) {
         return false;
     }
 
-    if(emailOuUsuario === 'produtor' && senha === '1234567'){
-        window.location.href = 'produtor.html';
-
-    }
-    else if(emailOuUsuario === 'administrador' && senha === '1234567'){
-        window.location.href = 'administrador.html';
-
-    }
-    
-    else {
-        mostrarMensagem(mensagem, 'Este usuario não existe.');
-    }
-
     let usuarios = getmemoria("usuarios");
     
     let achouUsuario = usuarios.find(
@@ -56,8 +43,21 @@ function validarLogin(event) {
     achouUsuario.logado = true;
     setmemoria("usuarios", usuarios);
     setmemoria("usuarioLogado", achouUsuario);
-    window.location.href = 'index.html';
     
+    if(achouUsuario.plano === "usuarioPadrao"){
+        window.location.href = 'index.html';
+
+    }
+    else if (achouUsuario.plano === "usuarioProdutor"){
+        window.location.href = 'produtor.html';
+
+    }
+    else if (achouUsuario.plano === "usuarioAdministrador"){
+        window.location.href = 'administrador.html';
+
+    }
+    
+
 
     return true;
 }
