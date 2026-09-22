@@ -44,15 +44,15 @@ function validarLogin(event) {
     setmemoria("usuarios", usuarios);
     setmemoria("usuarioLogado", achouUsuario);
     
-    if(achouUsuario.plano === "usuarioPadrao"){
+    if(achouUsuario.plano === "Faísca"){
         window.location.href = 'index.html';
 
     }
-    else if (achouUsuario.plano === "usuarioProdutor"){
+    else if (achouUsuario.plano === "Produtor"){
         window.location.href = 'produtor.html';
 
     }
-    else if (achouUsuario.plano === "usuarioAdministrador"){
+    else if (achouUsuario.plano === "Administrador"){
         window.location.href = 'administrador.html';
 
     }
