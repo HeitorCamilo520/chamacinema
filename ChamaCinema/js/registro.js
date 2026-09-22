@@ -14,13 +14,9 @@ function validarFormulario(event) {
 
     const usuario = document.getElementById('usuario-registro').value.trim();
     const email = document.getElementById('email-registro').value.trim();
-    const senha = document.getElementById('senha-registro').value;
-    const confirmarSenha = document.getElementById('confirmar-senha-registro').value;
+    const senha = document.getElementById('senha-registro1').value;
+    const confirmarSenha = document.getElementById('senha-registro2').value;
     const mensagem = document.getElementById('mensagem-registro');
-
-
-    //alert(usuario + " " + email + " " + senha + " " + confirmarSenha);
-
 
     mensagem.textContent = '';
     mensagem.classList.remove('visivel');
@@ -44,15 +40,14 @@ function validarFormulario(event) {
     let usuarios = getmemoria("usuarios");
 
     let existe = usuarios.find(
-        u => (u.usuario === usuario || u.email === email)
-
-    )
+        u => (u.usuario === usuario || u.email === email));
 
     if(existe){
         mostrarMensagem(mensagem, "Já existe uma conta com este nome de usuário ou email");
+        return false;
     }
-
-    novoUsuario = {
+    else{
+        novoUsuario = {
         "usuario":usuario,
         "email":email,
         "senha":senha,
@@ -67,6 +62,11 @@ function validarFormulario(event) {
     usuarios.push(novoUsuario);
     setmemoria("usuarios",usuarios);
     window.location.href = 'preferencias.html';
+
+
+    }
+
+    
     return true;
 }
 
