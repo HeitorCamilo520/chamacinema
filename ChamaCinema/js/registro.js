@@ -55,7 +55,8 @@ function validarFormulario(event) {
         "linkFoto": null,
         "dataNasc":null,
         "preferencias":[],
-        "logado" : true
+        "logado" : true,
+        "plano": "usuarioPadrao"
     }
 
 
