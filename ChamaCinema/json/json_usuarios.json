@@ -7,7 +7,8 @@
         "linkFoto":"Imagens/StanLee.jpg",
         "dataNasc":null,
         "preferencias":[],
-        "logado":false
+        "logado":false,
+        "plano":"usuarioPadrao"
     
     },
 
@@ -19,7 +20,8 @@
         "linkFoto":"Imagens/SandraLee.jpg",
         "dataNasc":null,
         "preferencias":[],
-        "logado":false
+        "logado":false,
+        "plano":"usuarioAdministrador"
     },
 
     {
@@ -30,6 +32,7 @@
         "linkFoto":"Imagens/JoaoCosta.jpg",
         "dataNasc":null,
         "preferencias":[],
-        "logado":false
+        "logado":false,
+        "plano":"usuarioProdutor"
     }
 ]
