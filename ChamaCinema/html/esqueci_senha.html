@@ -13,7 +13,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chama Cinema</title>
+    <title>Esqueci minha senha</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/components/registro_transparente.css">
@@ -91,7 +91,12 @@
                     <input type="text" placeholder="Entre com seu e-mail ou Usuário" id="email-login">
 
                     <p id="texto-senha">Senha</p>
-                    <input type="password" placeholder="Senha" id="senha-login">
+                    <div>
+                        <input type="password" placeholder="Senha" id="senha-login" disabled>
+                        <label id="mostrar-senha">
+                            <i class="fa-solid fa-eye" id="icone-olho" onclick="mostrarSenha()"></i>
+                        </label>
+                    </div>
 
                     <div id="lembrar-senha-container">
 
@@ -162,16 +167,28 @@
                     <input type="email" placeholder="Entre com seu e-mail" id="email-registro" disabled>
 
                     <p id="texto-senha">Senha</p>
-                    <input type="password" placeholder="Senha" id="senha-registro" disabled>
+                    
+                    <div>
+                        <input type="password" placeholder="Senha" id="senha-registro1" disabled>
+                        <label id="mostrar-senha1">
+                            <i class="fa-solid fa-eye icone-olho-confirmar" onclick="mostrarSenha(1)"></i>
+                        </label>
+                    </div>
 
                     <p id="texto-senha">Confirmar Senha</p>
-                    <input type="password" placeholder="Confirme sua senha" id="confirmar-senha-registro" disabled>
+
+                    <div>
+                        <input type="password" placeholder="Senha" id="senha-registro2" disabled>
+                        <label id="mostrar-senha2">
+                            <i class="fa-solid fa-eye icone-olho-confirmar" onclick="mostrarSenha(2)"></i>
+                        </label>
+                    </div>
 
                     <button type="submit" id="botao-registro" disabled>Entrar</button>
 
                 </form>
 
-                <p id="texto-esqueci_senha">Ja tem uma conta? <a href="#" id="link-cadastro">esqueci_senha</a></p>
+                <p id="texto-esqueci_senha">Ja tem uma conta? <a href="#" id="link-cadastro">Login</a></p>
 
             </div>
         

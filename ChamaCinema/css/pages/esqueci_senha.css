@@ -101,6 +101,10 @@ html.transicao-ativa[data-origem="login"] #esqueci_senha-main {
     animation: esqueci_senha-entrando 0.7s ease forwards;
 }
 
+html.transicao-ativa[data-origem="login"] #registro-main {
+    animation: registro-saindo 0.7s ease forwards;
+}
+
 @keyframes esqueci_senha-entrando {
     from {
         transform: translateY(200%) scale(0.75);
@@ -110,6 +114,18 @@ html.transicao-ativa[data-origem="login"] #esqueci_senha-main {
     to {
         transform: translateY(0) scale(1);
         filter: blur(0);
+    }
+}
+
+@keyframes registro-saindo {
+    from {
+        transform: translateX(0) scale(0.75);
+        filter: blur(1.5px);
+    }
+
+    to {
+        transform: translateX(100%) scale(0.75);
+        filter: blur(1.5px);
     }
 }
 

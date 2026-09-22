@@ -105,6 +105,10 @@ html.transicao-ativa[data-origem="esqueci_senha"] #login-main {
     animation: login-entrando-de-cima 0.7s ease forwards;
 }
 
+html.transicao-ativa[data-origem="esqueci_senha"] #registro-main {
+    animation: registro-entrando 0.7s ease forwards;
+}
+
 @keyframes login-entrando {
     from {
         transform: translateX(-100%) scale(0.75);
@@ -126,6 +130,18 @@ html.transicao-ativa[data-origem="esqueci_senha"] #login-main {
     to {
         transform: translateY(0) scale(1);
         filter: blur(0);
+    }
+}
+
+@keyframes registro-entrando {
+    from {
+        transform: translateX(100%) scale(0.75);
+        filter: blur(1.5px);
+    }
+
+    to {
+        transform: translateX(0) scale(0.75);
+        filter: blur(1.5px);
     }
 }
 
@@ -337,6 +353,16 @@ html.transicao-ativa[data-origem="esqueci_senha"] #login-main {
 
     border-color: var(--color-red);
     background-color: var(--color-black-panel-strong);
+}
+
+#icone-olho {
+    position: absolute;
+    right: 10px;
+    transform: translateY(90%);
+
+    cursor: pointer;
+
+    color: var(--color-gray-light);
 }
 
 

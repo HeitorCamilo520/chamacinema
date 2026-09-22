@@ -33,8 +33,8 @@ function validarLogin(event) {
         window.location.href = 'produtor.html';
 
     }
-    else if(emailOuUsuario === 'admin' && senha === '1234567'){
-        window.location.href = 'admin.html';
+    else if(emailOuUsuario === 'administrador' && senha === '1234567'){
+        window.location.href = 'administrador.html';
 
     }
     else if(emailOuUsuario === 'usuario' && senha === '1234567'){
@@ -68,5 +68,18 @@ function mostrarMensagem(elemento, texto) {
     elemento.classList.add('visivel');
 }
 
+function mostrarSenha() {
+    const senhaInput = document.getElementById('senha-login');
+    const mostrarSenha = document.getElementById('mostrar-senha');
+
+    if (senhaInput.type == 'text') {
+        mostrarSenha.innerHTML = '<i class="fa-solid fa-eye" id="icone-olho" onclick="mostrarSenha()"></i>';
+        senhaInput.type = 'password';
+    }
+    else {
+        mostrarSenha.innerHTML = '<i class="fa-solid fa-eye-slash" id="icone-olho" onclick="mostrarSenha()"></i>';
+        senhaInput.type = 'text';
+    }
+}
 
 

@@ -75,3 +75,36 @@ function mostrarMensagem(elemento, texto) {
     elemento.textContent = texto;
     elemento.classList.add('visivel');
 }
+
+function mostrarSenha(a) {
+
+    if (a == 1){
+    const senhaInput = document.getElementById('senha-registro1');
+    const mostrarSenha = document.getElementById('mostrar-senha1');
+
+        if (senhaInput.type == 'text') {
+            mostrarSenha.innerHTML = '<i class="fa-solid fa-eye icone-olho-confirmar" onclick="mostrarSenha(1)"></i>';
+            senhaInput.type = 'password';
+        }
+        else {
+            mostrarSenha.innerHTML = '<i class="fa-solid fa-eye-slash icone-olho-confirmar" onclick="mostrarSenha(1)"></i>';
+            senhaInput.type = 'text';
+        }
+
+    }
+
+    if (a == 2){
+        const senhaInput = document.getElementById('senha-registro2');
+        const mostrarSenha = document.getElementById('mostrar-senha2');
+    
+        if (senhaInput.type == 'text') {
+            mostrarSenha.innerHTML = '<i class="fa-solid fa-eye icone-olho-confirmar" onclick="mostrarSenha(2)"></i>';
+            senhaInput.type = 'password';
+        }
+        else {
+            mostrarSenha.innerHTML = '<i class="fa-solid fa-eye-slash icone-olho-confirmar" onclick="mostrarSenha(2)"></i>';
+            senhaInput.type = 'text';
+        }
+        }
+
+}

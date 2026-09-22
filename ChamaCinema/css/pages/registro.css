@@ -327,6 +327,17 @@ html.transicao-ativa[data-origem="login"] #registro-main {
     background-color: var(--color-black-panel-strong);
 }
 
+.icone-olho-confirmar {
+    z-index: 5;
+    position: absolute;
+    right: 10px;
+    transform: translateY(90%);
+
+    cursor: pointer;
+
+    color: var(--color-gray-light);
+}
+
 
 /* =========================
    LEMBRAR SENHA

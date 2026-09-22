@@ -211,6 +211,15 @@ html.transicao-ativa[data-origem="login"] #login-main {
     background-color: var(--color-black-panel-strong);
 }
 
+#icone-olho {
+    position: absolute;
+    right: 10px;
+    transform: translateY(90%);
+    cursor: default;
+
+    color: var(--color-gray-light);
+}
+
 
 /* =========================
    LEMBRAR SENHA
