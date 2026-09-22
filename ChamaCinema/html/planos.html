@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planos</title>
+    <title>Chama Cinema</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/pages/planos.css">
@@ -15,7 +15,23 @@
 
 </head>
 <body class="min-h-screen flex flex-col justify-between bg-movie-grid selection:bg-orange-500 selection:text-white">
-    
+     <header id="header">
+        <a href="index.html" id="container-logo"><img src="../Imagens/Geral_7.png" alt="Logo do Chama Cinema" id="logo"> ChamaCinema</a>
+
+        <form id="formulario-pesquisa">
+            <div class="barra-pesquisa">
+                <input id="pesquisa" type="text" placeholder="Procure por filmes ou séries...">
+                <i class="fa-solid fa-magnifying-glass" id="lupa"></i>
+            </div>
+            <div id="resultados-pesquisa" class="resultados-pesquisa" aria-live="polite"></div>
+        </form>
+
+        <button class="opcoes_header"><i class="fa-solid fa-clapperboard icone-header" id="catalogo-icone"></i><p>Catalogo</p></button>
+        <a href="planos.html" class="opcoes_header"><i class="fa-solid fa-tag icone-header" id="etiqueta_plano"></i><p>Planos</p></a>
+        <button class="opcoes_header"><i class="fa-solid fa-heart icone-header" id="coracao_favoritos"></i><p></p>Favoritos</p></button>
+        <a href="login.html" class="opcoes_header"><i class="fa-solid fa-user icone-header" id="pessoa_login"></i><p>Login</p></a>
+        <button class="opcoes_header"><i class="fas fa-ellipsis-vertical fa-lg" id="dropdown_icon"></i> </button>
+    </header>
   <main class="flex-grow flex flex-col justify-center items-center px-4 py-12 md:py-16">
     <div class="max-w-6xl w-full mx-auto text-center space-y-3 mb-10 md:mb-14">
       <h1 class="text-3xl md:text-5xl font-black tracking-tight text-white">
@@ -60,37 +76,6 @@
         </div>
       </div>
 
-      <!-- CARD 2: LABAREDA (Default Selected) -->
-      <div id="card-labareda" class="card-labareda flame-pattern rounded-3xl p-6 lg:p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden card-hover border border-white/10 ring-4 ring-orange-500/30">
-        <div>
-          <h2 class="text-3xl lg:text-4xl font-black tracking-wider text-white mb-6 uppercase">
-            Labareda
-          </h2>
-          <ul class="space-y-4 text-sm lg:text-base text-white/95 font-medium leading-snug">
-            <li class="flex items-start gap-2.5">
-              <span class="text-xl leading-none font-bold select-none">•</span>
-              <span>Benefícios <strong class="font-bold text-white">Faísca</strong>.</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <span class="text-xl leading-none font-bold select-none">•</span>
-              <span>Acesso ao <strong class="font-bold text-white">Pyro</strong>: chatbot de IA especialista em recomendações.</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="mt-10 pt-4 text-center space-y-4">
-          <div class="text-2xl lg:text-3xl font-extrabold text-white">
-            R$ 29,90 <span class="text-sm lg:text-base font-normal opacity-90">/mês</span>
-          </div>
-          <button 
-            onclick="selectPlan('Labareda')" 
-            class="plan-btn w-full bg-white text-slate-900 font-bold py-3.5 px-6 rounded-2xl shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95"
-          >
-            <i data-lucide="check" class="w-5 h-5 stroke-[3]"></i>
-            <span>Selecionado</span>
-          </button>
-        </div>
-      </div>
 
       <!-- CARD 3: PRODUTOR -->
       <div id="card-produtor" class="card-produtor flame-pattern rounded-3xl p-6 lg:p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden card-hover border border-white/10">
@@ -99,10 +84,6 @@
             Produtor
           </h2>
           <ul class="space-y-4 text-sm lg:text-base text-white/95 font-medium leading-snug">
-            <li class="flex items-start gap-2.5">
-              <span class="text-xl leading-none font-bold select-none">•</span>
-              <span>Benefícios <strong class="font-bold text-white">Labareda</strong>.</span>
-            </li>
             <li class="flex items-start gap-2.5">
               <span class="text-xl leading-none font-bold select-none">•</span>
               <span>Possibilidade de <strong class="font-bold text-white">cadastrar obras</strong> no sistema.</span>
@@ -163,7 +144,6 @@
     function selectPlan(planName) {
       const plans = [
         { name: 'Faísca', id: 'card-faisca' },
-        { name: 'Labareda', id: 'card-labareda' },
         { name: 'Produtor', id: 'card-produtor' }
       ];
 
@@ -205,6 +185,5 @@
       }, 3500);
     }
   </script>
-    <script src="../js/manipulaLS.js"></script>
 </body>
 </html>
