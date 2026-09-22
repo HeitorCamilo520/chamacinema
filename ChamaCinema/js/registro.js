@@ -1,3 +1,14 @@
+document.addEventListener('DOMContentLoaded', () =>{
+    if(!getmemoria("usuarios")){
+        fetch('../json/json_usuarios.json')
+        .then(resposta => resposta.json())
+        .then(usuariosJson =>{
+            setmemoria("usuarios", usuariosJson);
+        })
+    }
+})
+
+
 function validarFormulario(event) {
     event.preventDefault(); 
 
@@ -30,44 +41,32 @@ function validarFormulario(event) {
         return false;
     }
 
+    let usuarios = getmemoria("usuarios");
 
-    fetch('../json/json_usuarios.json')
-    .then(resposta => resposta.json())
-    .then(usuariosJson => {
-        alert(usuariosJson);
+    let existe = usuarios.find(
+        u => (u.usuario === usuario || u.email === email)
 
-        let existe = false;
+    )
 
-        for (const element of usuariosJson) {
-            if (element.usuario === usuario || element.email === email){
-                existe = true;
-            }
-        }
+    if(existe){
+        mostrarMensagem(mensagem, "Já existe uma conta com este nome de usuário ou email");
+    }
 
-        if(existe){
-            mostrarMensagem(mensagem, "Já existe uma conta com este nome de usuário ou email");
-        }
-        else{
-            novoUsuario = {
-                    "usuario":usuario,
-                    "email":email,
-                    "senha":senha,
-                    "nacionalidade":null,
-                    "linkFoto": null,
-                    "dataNasc":null,
-                    "preferencias":[],
-                    "logado" : true
-                }
+    novoUsuario = {
+        "usuario":usuario,
+        "email":email,
+        "senha":senha,
+        "nacionalidade":null,
+        "linkFoto": null,
+        "dataNasc":null,
+        "preferencias":[],
+        "logado" : true
+    }
 
-                usuariosJson.push(novoUsuario);
 
-                setmemoria(usuariosJson);
-
-                window.location.href = 'preferencias.html';
-
-        }
-    } )
-    
+    usuarios.push(novoUsuario);
+    setmemoria("usuarios",usuarios);
+    window.location.href = 'preferencias.html';
     return true;
 }
 
