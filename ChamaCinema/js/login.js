@@ -29,17 +29,6 @@ function validarLogin(event) {
         return false;
     }
 
-    
-    if (!emailOuUsuario) {
-        mostrarMensagem(mensagem, 'Por favor, preencha o campo de e-mail ou usuário.');
-        return false;
-    }
-
-    if (!senha) {
-        mostrarMensagem(mensagem, 'Por favor, preencha o campo de senha.');
-        return false;
-    }
-
     if(emailOuUsuario === 'produtor' && senha === '1234567'){
         window.location.href = 'produtor.html';
 
