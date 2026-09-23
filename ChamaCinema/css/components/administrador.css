@@ -1,0 +1,55 @@
+body::before {
+    content: "";
+    position: fixed;
+    inset: -12% -8% -12% -8%;
+    z-index: -1;
+    background-image: url(../../Imagens/Estampa_adm.png);
+    background-repeat: repeat;
+    background-size: 45% auto;
+    background-position: center;
+    opacity: 0.3;
+    transform: perspective(1400px) rotateZ(-12deg) scale(1.2);
+    transform-origin: center center;
+    pointer-events: none;
+}
+
+  #container-administrador {
+    width: min(1200px, 100%);
+    padding: 1.2rem 0 0;
+  }
+
+  #botao-administrador {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    border: none;
+    border-radius: var(--radius-lg);
+    background-image: radial-gradient(
+      var(--color-red) 0%,
+      var(--color-red-dark) 50%
+    );
+    color: white;
+    cursor: pointer;
+  }
+
+  #botao-administrador .icone-administrador {
+    font-size: 2.5rem;
+  }
+
+  #container-administrador-texto h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  #container-administrador-texto h2 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--color-gray-light);
+  }
+
+  #botao-administrador:hover {
+    background-color: var(--color-black-panel-strong);
+  }
