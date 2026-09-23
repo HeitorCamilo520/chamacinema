@@ -15,7 +15,7 @@
 
 </head>
 <body class="min-h-screen flex flex-col justify-between bg-movie-grid selection:bg-orange-500 selection:text-white">
-     <header id="header">
+     <header id="header" class="relative z-50">
         <a href="index.html" id="container-logo"><img src="../Imagens/Geral_7.png" alt="Logo do Chama Cinema" id="logo"> ChamaCinema</a>
 
         <form id="formulario-pesquisa">
@@ -42,9 +42,8 @@
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl w-full mx-auto items-stretch">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl w-full mx-auto items-stretch">
 
-      <!-- CARD 1: FAÍSCA -->
       <div id="card-faisca" class="card-faisca flame-pattern rounded-3xl p-6 lg:p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden card-hover border border-white/10">
         <div>
           <h2 class="text-3xl lg:text-4xl font-black tracking-wider text-white mb-6 uppercase">
@@ -61,7 +60,7 @@
             </li>
           </ul>
         </div>
-
+    
         <div class="mt-10 pt-4 text-center space-y-4">
           <div class="text-2xl lg:text-3xl font-extrabold text-white">
             Gratuito
@@ -75,9 +74,7 @@
           </button>
         </div>
       </div>
-
-
-      <!-- CARD 3: PRODUTOR -->
+    
       <div id="card-produtor" class="card-produtor flame-pattern rounded-3xl p-6 lg:p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden card-hover border border-white/10">
         <div>
           <h2 class="text-3xl lg:text-4xl font-black tracking-wider text-white mb-6 uppercase">
@@ -90,7 +87,7 @@
             </li>
           </ul>
         </div>
-
+    
         <div class="mt-10 pt-4 text-center space-y-4">
           <div class="text-2xl lg:text-3xl font-extrabold text-white">
             R$ 59,90 <span class="text-sm lg:text-base font-normal opacity-90">/mês</span>
@@ -137,10 +134,8 @@
   </div>
 
   <script>
-    // Initialize Lucide Icons
     lucide.createIcons();
 
-    // Dynamic Plan Selection Functionality
     function selectPlan(planName) {
       const plans = [
         { name: 'Faísca', id: 'card-faisca' },
@@ -152,22 +147,18 @@
         const button = card.querySelector('.plan-btn');
 
         if (plan.name === planName) {
-          // Highlight card
           card.classList.add('ring-4', 'ring-orange-500/30');
           button.className = 'plan-btn w-full bg-white text-slate-900 font-bold py-3.5 px-6 rounded-2xl shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95';
           button.innerHTML = '<i data-lucide="check" class="w-5 h-5 stroke-[3]"></i><span>Selecionado</span>';
         } else {
-          // Unhighlight card
           card.classList.remove('ring-4', 'ring-orange-500/30');
           button.className = 'plan-btn w-full bg-[#111215] hover:bg-black text-white font-bold py-3.5 px-6 rounded-2xl shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95';
           button.innerHTML = '<i data-lucide="tag" class="w-4 h-4 fill-white"></i><span>Assinar</span>';
         }
       });
 
-      // Re-render icons for dynamic content changes
       lucide.createIcons();
 
-      // Show Notification Toast
       showToast(`Plano ${planName} Selecionado`, `Você alterou sua assinatura para o plano ${planName}.`);
     }
 
