@@ -1,11 +1,16 @@
 #body{
     height: 100%;
-    background-color: var(--color-black-deep);
+}
+
+body {
+    position: relative;
+    background-color: var(--color-black-deepest);
+    overflow-x: hidden;
 }
 
 main {
-    background-image: url(/Imagens/Fundo-login.png);
-    background-blend-mode: screen;
+    /* background-image: url(/Imagens/Fundo-login.png);
+    background-blend-mode: screen; */
     height: 100%;
     display: flex;
     justify-content: center;
@@ -20,51 +25,9 @@ main {
             justify-content: center;
             align-items: center;
             padding: 40px 20px;
-            background-color: var(--color-black-deep);
+            /* background-color: var(--color-black-deep); */
         }
 
-    main::before {
-            content: "";
-            position: absolute;
-            inset: -18%;
-            z-index: 0;
-            background-image: url("Imagens/Fundo_animado.png");
-            background-position: center 0;
-            background-size: auto 100vh;
-            background-repeat: repeat-y;
-            transform: perspective(900px) rotateX(10deg) rotateZ(-10deg) scale(2);
-            transform-origin: center center;
-            animation: fundo-descendo 24s linear infinite;
-            animation-delay: var(--fundo-delay, 0ms);
-        }
-
-    main::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            background-image:
-                linear-gradient(
-                    #000000,
-                    #00000000,
-                    #000000
-                ),
-                linear-gradient(
-                    rgba(0, 0, 0, 0.5),
-                    rgba(0, 0, 0, 0.5)
-                );
-            pointer-events: none;
-        }
-
-        @keyframes fundo-descendo {
-            from {
-                background-position: center 0;
-            }
-
-            to {
-                background-position: center 100vh;
-            }
-        }
         .container {
             max-width: 950px;
             margin: 30px auto;
@@ -83,6 +46,7 @@ main {
         }
 
         .card-title {
+            color: var(--color-white);
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 20px;
@@ -146,6 +110,8 @@ main {
         }
 
         .title-row {
+            color: var(--color-white);
+            color: var();
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -156,7 +122,7 @@ main {
         }
 
         .btn-edit {
-            background: var(--color-gray-light);
+            background: var(--color-red);
             border: 1px solid var(--color-gray);
             color: var(--color-white);
             padding: 6px 14px;
@@ -193,6 +159,7 @@ main {
         }
 
         .stat-number {
+            color: var(--color-white);
             font-weight: 700;
             font-size: 1.2rem;
         }
@@ -247,6 +214,7 @@ main {
         }
 
         .rating-number {
+            color: var(--color-white);
             font-size: 2.2rem;
             font-weight: 700;
         }
@@ -339,22 +307,6 @@ main {
         .card-rating span {
             font-weight: bold;
             margin-right: 4px;
-        }
-
-        .footer {
-            margin-top: auto;
-            background-color: var(--color-black-secondary);
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            color: var(--color-gray);
-            border-top: 1px solid var(--color-black-main);
-        }
-
-        .footer a {
-            color: var(--color-gray);
-            text-decoration: none;
         }
 
         .active-pink, .pink { color: #e91e63; }
