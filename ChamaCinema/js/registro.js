@@ -52,7 +52,7 @@ function validarFormulario(event) {
         "email":email,
         "senha":senha,
         "nacionalidade":null,
-        "linkFoto": null,
+        "linkFoto": "../Imagens/Geral_7.png",
         "dataNasc":null,
         "preferencias":[],
         "logado" : true,

@@ -86,10 +86,9 @@ function atualizarOpcaoSairConta() {
   if (getmemoria("usuarioLogado")) {
     usuario.innerHTML = `
     <div id="foto">
-                <img src="../Imagens/Geral_7.png">
+                <img src="${getmemoria("usuarioLogado").linkFoto}">
             </div>
-            <p>${getmemoria("usuarioLogado").usuario}</p>
-      `;
+            <p>${getmemoria("usuarioLogado").usuario}</p>`;
 
     if (!sairConta) {
       tabela.innerHTML += `
@@ -102,7 +101,8 @@ function atualizarOpcaoSairConta() {
           </td>
         </tr>`;
     }
-  } else if (sairConta) {
+  }
+  else if (sairConta) {
     sairConta.remove();
   }
 
@@ -119,4 +119,29 @@ function sairDaConta() {
   window.location.reload();
 }
 
+function Redirecionador() {
+  const titulo = document.getElementById('container-logo');
+
+  if (getmemoria("usuarioLogado")) {
+    let infos = getmemoria("usuarioLogado");
+
+    if (infos["plano"] == "Faísca") {
+      titulo.href = "index.html";
+    }
+
+    else if (infos["plano"] == "Produtor") {
+      titulo.href = "produtor.html";
+    }
+
+    else if (infos["plano"] == "Administrador") {
+      titulo.href = "administrador.html";
+    }
+
+  }
+    else if (!getmemoria("usuarioLogado")) {
+      titulo.href = "index.html";
+  }
+}
+
 document.addEventListener('DOMContentLoaded', atualizarOpcaoSairConta);
+document.addEventListener('DOMContentLoaded', Redirecionador);

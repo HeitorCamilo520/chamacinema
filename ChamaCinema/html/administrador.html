@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/pages/index.css">
     <link rel="stylesheet" href="../css/components/administrador.css">
-    <link rel="shortcut icon" href="../Imagens/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -26,8 +25,19 @@
         <button class="opcoes_header"><i class="fa-solid fa-clapperboard icone-header" id="catalogo-icone"></i><p>Catalogo</p></button>
         <button class="opcoes_header"><i class="fa-solid fa-tag icone-header" id="etiqueta_plano"></i><p>Planos</p></button>
         <button class="opcoes_header"><i class="fa-solid fa-heart icone-header" id="coracao_favoritos"></i><p></p>Favoritos</p></button>
+
         <div id="usuario-login" class="opcoes_header"></div>
-        <button class="opcoes_header"><i class="fas fa-ellipsis-vertical fa-lg" id="dropdown_icon"></i> </button>
+        <button class="opcoes_header" onclick="dropdownMenu()"><i class="fas fa-ellipsis-vertical fa-lg" id="dropdown_icon"></i></button>
+        <div id="dropdown_menu" class="dropdown-menu"">
+            <table>
+                <tr><td>
+                    <p>
+                        <i class="fa-solid fa-gear"></i>
+                        Configurações
+                    </p>
+                </td></tr>
+            </table>
+        </div>
     </header>
 
     <main>
@@ -39,7 +49,7 @@
                             <button class="prev" type="button" aria-label="Filme anterior" onclick="moveSlide(-1)">❮</button>
                             <button class="next" type="button" aria-label="Próximo filme" onclick="moveSlide(1)">❯</button>
               </div>
-              <div id="container-administrador">
+            <div id="container-administrador">
                 <button id="botao-administrador">
                     <i class="fa-solid fa-user-shield icone-administrador"></i>
                     <div id="container-administrador-texto">
@@ -68,8 +78,8 @@
 
     </footer>
     <script src="../js/config.js"></script>
+    <script src="../js/manipulaLS.js"></script>
     <script src="../js/header.js"></script>
     <script src="../js/index.js"></script>
-    <script src="../js/manipulaLS.js"></script>
 </body>
 </html>
