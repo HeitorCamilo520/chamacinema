@@ -24,7 +24,7 @@ main {
             content: "";
             position: absolute;
             inset: -18%;
-            z-index: -6;
+            z-index: 0;
             background-image: url("../../Imagens/Fundo_animado.png");
             background-position: center 0;
             background-size: auto 100vh;
@@ -39,7 +39,7 @@ main {
             content: "";
             position: absolute;
             inset: 0;
-            z-index: -1;
+            z-index: 1;
             background-image:
                 linear-gradient(
                     rgba(0, 0, 0, 0.7),
@@ -55,6 +55,11 @@ main {
             pointer-events: none;
         }
 
+        main > * {
+            position: relative;
+            z-index: 10;
+          }
+
         @keyframes fundo-descendo {
             from {
                 background-position: center 0;
@@ -66,11 +71,11 @@ main {
         }
   
   .card-faisca {
-    background: linear-gradient(160deg, var(--color-gray-smoke) 0%, var(--color-gray) 100%);
+    background: linear-gradient(160deg, var(--color-red) 0%, var(--color-red-dark) 100%);
   }
 
   .card-produtor {
-    background: linear-gradient(160deg, var(--color-orange) 0%, var(--color-orange-dark) 100%);
+    background: linear-gradient(160deg, var(--color-pink) 0%, var(--color-pink-dark) 100%);
   }
 
   .card-hover {
