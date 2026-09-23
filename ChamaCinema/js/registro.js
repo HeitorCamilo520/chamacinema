@@ -59,11 +59,10 @@ function validarFormulario(event) {
         "plano": "Faísca"
     }
 
-
+    setmemoria("usuarioLogado", novoUsuario);
     usuarios.push(novoUsuario);
     setmemoria("usuarios",usuarios);
     window.location.href = 'preferencias.html';
-
 
     }
 
