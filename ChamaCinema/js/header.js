@@ -121,25 +121,30 @@ function sairDaConta() {
 
 function Redirecionador() {
   const titulo = document.getElementById('container-logo');
+  let fundo =  document.getElementById('estampa');
 
   if (getmemoria("usuarioLogado")) {
     let infos = getmemoria("usuarioLogado");
 
     if (infos["plano"] == "Faísca") {
       titulo.href = "index.html";
+      fundo.href = "../css/components/fundo_base.css";
     }
 
     else if (infos["plano"] == "Produtor") {
       titulo.href = "produtor.html";
+      fundo.href = "../css/components/produtor.css";
     }
 
     else if (infos["plano"] == "Administrador") {
       titulo.href = "administrador.html";
+      fundo.href = "../css/components/administrador.css";
     }
 
   }
     else if (!getmemoria("usuarioLogado")) {
       titulo.href = "index.html";
+      fundo.href = "../css/components/fundo_base.css";
   }
 }
 
