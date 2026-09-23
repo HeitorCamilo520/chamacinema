@@ -71,11 +71,11 @@ main {
         }
   
   .card-faisca {
-    background: linear-gradient(160deg, var(--color-red) 0%, var(--color-red-dark) 100%);
+    background: linear-gradient(160deg, var(--color-yellow) 0%, var(--color-orange-dark) 100%);
   }
 
   .card-produtor {
-    background: linear-gradient(160deg, var(--color-pink) 0%, var(--color-pink-dark) 100%);
+    background: linear-gradient(160deg, var(--color-orange) 0%, var(--color-red-dark) 100%);
   }
 
   .card-hover {
