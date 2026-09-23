@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preferencias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/preferencias.css">
+</head>
+<body>
+   <header id="header">
+        <a href="index.html" id="container-logo"><img src="../Imagens/Geral_7.png" alt="Logo do Chama Cinema" id="logo"> ChamaCinema</a>
+
+        <form id="formulario-pesquisa">
+            <div class="barra-pesquisa">
+                <input id="pesquisa" type="text" placeholder="Procure por filmes ou séries...">
+                <i class="fa-solid fa-magnifying-glass" id="lupa"></i>
+            </div>
+            <div id="resultados-pesquisa" class="resultados-pesquisa" aria-live="polite"></div>
+        </form>
+
+        <button class="opcoes_header"><i class="fa-solid fa-clapperboard icone-header" id="catalogo-icone"></i><p>Catalogo</p></button>
+        <button class="opcoes_header"><i class="fa-solid fa-tag icone-header" id="etiqueta_plano"></i><p>Planos</p></button>
+        <button class="opcoes_header"><i class="fa-solid fa-heart icone-header" id="coracao_favoritos"></i><p></p>Favoritos</p></button>
+        <a href="login.html" class="opcoes_header"><i class="fa-solid fa-user icone-header" id="pessoa_login"></i><p>Login</p></a>
+        <button class="opcoes_header"><i class="fas fa-ellipsis-vertical fa-lg" id="dropdown_icon"></i> </button>
+    </header>
+    <main>
+        <div class="preferences-card">
+            <h1>Quais são suas preferências?</h1>
+            <p>Selecione ao menos 4</p>
+
+            <div class="genres-grid">
+                <button class="genre-btn ">Animação</button>
+                <button class="genre-btn">Documentário</button>
+                <button class="genre-btn">Musical</button>
+
+                <button class="genre-btn">Policial</button>
+                <button class="genre-btn">Drama</button>
+                <button class="genre-btn">Terror</button>
+
+                <button class="genre-btn">Crime</button>
+                <button class="genre-btn">Espionagem</button>
+                <button class="genre-btn ">Comédia</button>
+
+                <button class="genre-btn">Guerra</button>
+                <button class="genre-btn">Fantasia</button>
+                <button class="genre-btn">Film Noir</button>
+
+                <button class="genre-btn">Aventura Urbana</button>
+                <button class="genre-btn">Faroeste</button>
+                <button class="genre-btn">Experimental</button>
+
+                <button class="genre-btn ">Ficção Científica</button>
+                <button class="genre-btn ">Super Herói</button>
+                <button class="genre-btn">Chanchada</button>
+
+                <button class="genre-btn">Romance sombrio</button>
+                <button class="genre-btn">Histórico</button>
+                <button class="genre-btn">Docuficção</button>
+
+                <button class="genre-btn">Comédia romântica</button>
+                <button class="genre-btn">Mistério</button>
+                <button class="genre-btn">Suspense</button>
+
+                <button class="genre-btn">Biografia</button>
+                <button class="genre-btn">Catástrofe</button>
+                <button class="genre-btn ">Aventura</button>
+            </div>
+
+            <a href="index.html">
+                <button class="btn-continue">
+                    Continue <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </a>
+        </div>
+    </main>
+
+    <script src="../js/config.js"></script>
+    
+    <script src="../js/header.js"></script>
+    <script>
+        const buttons = document.querySelectorAll('.genre-btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                button.classList.toggle('selected');
+            });
+        });
+    </script>
+
+</body>
+</html>

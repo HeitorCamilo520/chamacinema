@@ -1,0 +1,14 @@
+body::before {
+    content: "";
+    position: fixed;
+    inset: -12% -8% -12% -8%;
+    z-index: -1;
+    background-image: url(../../Imagens/Estampa.png);
+    background-repeat: repeat;
+    background-size: 45% auto;
+    background-position: center;
+    opacity: 0.3;
+    transform: perspective(1400px) rotateZ(-12deg) scale(1.2);
+    transform-origin: center center;
+    pointer-events: none;
+}

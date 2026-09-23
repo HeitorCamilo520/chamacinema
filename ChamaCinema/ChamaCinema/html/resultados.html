@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/resultados.css">
+    <link id="estampa" rel="stylesheet" href="../css/components/estampa_fundo.css">
+</head>
+<body>
+    <header id="header">
+        <a href="index.html" id="container-logo"><img src="../Imagens/Geral_7.png" alt="Logo do Chama Cinema" id="logo"> ChamaCinema</a>
+        <form id="formulario-pesquisa">
+            <div class="barra-pesquisa">
+                <input id="pesquisa" type="text" placeholder="Procure por filmes ou séries...">
+                <i class="fa-solid fa-magnifying-glass" id="lupa"></i>
+            </div>
+            <div id="resultados-pesquisa" class="resultados-pesquisa" aria-live="polite"></div>
+        </form>
+
+        <button class="opcoes_header"><i class="fa-solid fa-clapperboard icone-header" id="catalogo-icone"></i><p>Catalogo</p></button>
+        <button class="opcoes_header"><i class="fa-solid fa-tag icone-header" id="etiqueta_plano"></i><p>Planos</p></button>
+        <button class="opcoes_header"><i class="fa-solid fa-heart icone-header" id="coracao_favoritos"></i><p>Favoritos</p></button>
+        <div id="usuario-login" class="opcoes_header"></div>
+        <button class="opcoes_header" onclick="dropdownMenu()"><i class="fas fa-ellipsis-vertical fa-lg" id="dropdown_icon"></i></button>
+        <div id="dropdown_menu" class="dropdown-menu"">
+            <table>
+                <tr><td>
+                    <p>
+                        <i class="fa-solid fa-gear"></i>
+                        Configurações
+                    </p>
+                </td></tr>
+            </table>
+        </div>
+    </header>
+    <main id="pagina-resultados">
+        <section id="lista-resultados">
+            <p class="mensagem-resultados">Carregando resultados...</p>
+        </section>
+    </main>
+
+    <footer>
+        <div id="footer-container">
+            <p id="footer-texto">© 2024 ChamaCinema. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <script src="../js/config.js"></script>
+    <script src="../js/manipulaLS.js"></script>
+    <script src="../js/header.js"></script>
+    <script src="../js/resultados.js"></script>
+</body>
+</html>
