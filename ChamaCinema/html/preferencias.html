@@ -34,61 +34,64 @@
             <p>Selecione ao menos 4</p>
 
             <div class="genres-grid">
-                <button class="genre-btn ">Animação</button>
-                <button class="genre-btn">Documentário</button>
-                <button class="genre-btn">Musical</button>
+                <button class="genre-btn" onclick="Preferir(this)">Animação</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Documentário</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Musical</button>
 
-                <button class="genre-btn">Policial</button>
-                <button class="genre-btn">Drama</button>
-                <button class="genre-btn">Terror</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Policial</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Drama</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Terror</button>
 
-                <button class="genre-btn">Crime</button>
-                <button class="genre-btn">Espionagem</button>
-                <button class="genre-btn ">Comédia</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Crime</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Espionagem</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Comédia</button>
 
-                <button class="genre-btn">Guerra</button>
-                <button class="genre-btn">Fantasia</button>
-                <button class="genre-btn">Film Noir</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Guerra</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Fantasia</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Film Noir</button>
 
-                <button class="genre-btn">Aventura Urbana</button>
-                <button class="genre-btn">Faroeste</button>
-                <button class="genre-btn">Experimental</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Aventura Urbana</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Faroeste</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Experimental</button>
 
-                <button class="genre-btn ">Ficção Científica</button>
-                <button class="genre-btn ">Super Herói</button>
-                <button class="genre-btn">Chanchada</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Ficção Científica</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Super Herói</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Chanchada</button>
 
-                <button class="genre-btn">Romance sombrio</button>
-                <button class="genre-btn">Histórico</button>
-                <button class="genre-btn">Docuficção</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Romance sombrio</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Histórico</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Docuficção</button>
 
-                <button class="genre-btn">Comédia romântica</button>
-                <button class="genre-btn">Mistério</button>
-                <button class="genre-btn">Suspense</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Comédia romântica</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Mistério</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Suspense</button>
 
-                <button class="genre-btn">Biografia</button>
-                <button class="genre-btn">Catástrofe</button>
-                <button class="genre-btn ">Aventura</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Biografia</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Catástrofe</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Aventura</button>
             </div>
 
             <a href="index.html">
-                <button class="btn-continue">
+                <button class="btn-inativo" id="butao">
                     Continue <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </a>
         </div>
     </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="../js/manipulaLS.js"></script>
     <script src="../js/config.js"></script>
     <script src="../js/header.js"></script>
-    <script>
+    <script src="../js/preferencias.js"></script>
+    <!-- <script>
         const buttons = document.querySelectorAll('.genre-btn');
         buttons.forEach(button => {
             button.addEventListener('click', () => {
                 button.classList.toggle('selected');
             });
         });
-    </script>
+    </script> -->
 
 </body>
 </html>
