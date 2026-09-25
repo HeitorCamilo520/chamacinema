@@ -11,7 +11,6 @@ main {
     justify-content: center;
     align-items: center;
     padding: 40px 20px;
-    background-image: url("../../Imagens/Fundo_animado.png");
     background-position: center 0;
     background-size: auto 100vh;
     background-repeat: repeat-y;
