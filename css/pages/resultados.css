@@ -1,0 +1,138 @@
+#body{
+    height: 100%;
+}
+
+body {
+    position: relative;
+    background-color: var(--color-black-deepest);
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: -12% -8% -12% -8%;
+    z-index: -1;
+    background-image: url(../../Imagens/Estampa.png);
+    background-repeat: repeat;
+    background-size: 45% auto;
+    background-position: center;
+    opacity: 0.3;
+    transform: perspective(1400px) rotateZ(-12deg) scale(1.2);
+    transform-origin: center center;
+    pointer-events: none;
+}
+
+main {
+    position: relative;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+    margin: 1rem auto;
+    width: min(1360px, calc(100% - 2.5rem));
+    border: 1px solid var(--color-gray-deep);
+    border-radius: 28px;
+    background: linear-gradient(180deg,
+        var(--color-black-panel-strong) 0%,
+        var(--color-black-panel) 38%,
+        var(--color-black-deepest) 100%);
+    box-shadow: 0 22px 50px #000000;
+    overflow
+
+#pagina-resultados {
+  min-height: calc(100vh - 80px);
+  padding: 3rem 4%;
+  background-color: var(--color-black-deepest);
+}
+
+#lista-resultados {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+}
+
+#lista-resultados h1 {
+  color: white;
+  margin: 0 0 1.5rem;
+}
+
+.grade-resultados {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.filme-card {
+  overflow: hidden;
+  background: #171717;
+  border-radius: 8px;
+  color: white;
+}
+
+.filme-card img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.filme-info {
+  padding: .75rem;
+}
+
+.filme-info h2 {
+  font-size: 1rem;
+  min-height: 2.4em;
+  margin: 0 0 .4rem;
+}
+
+.filme-info p,
+.mensagem-resultados {
+  color: #c8c8c8;
+  margin: 0;
+}
+
+.paginacao-resultados {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  color: #c8c8c8;
+}
+
+.paginacao-resultados button {
+  padding: .65rem 1rem;
+  border: 1px solid #555;
+  border-radius: 6px;
+  background: #242424;
+  color: white;
+  cursor: pointer;
+}
+
+.paginacao-resultados button:hover:not(:disabled) {
+  background: #3a3a3a;
+}
+
+.paginacao-resultados button:disabled {
+  cursor: not-allowed;
+  opacity: .45;
+}
+
+@media (max-width: 480px) {
+  .grade-resultados {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .75rem;
+  }
+
+  .paginacao-resultados {
+    gap: .6rem;
+    font-size: .9rem;
+  }
+
+  .paginacao-resultados button {
+    padding: .55rem .7rem;
+  }
+}
+}
