@@ -31,7 +31,7 @@
     <main>
         <div class="preferences-card">
             <h1>Quais são suas preferências?</h1>
-            <p>Selecione ao menos 4</p>
+            <p id="aqui">Selecione ao menos 4</p>
 
             <div class="genres-grid">
                 <button class="genre-btn" onclick="Preferir(this)">Animação</button>
@@ -58,11 +58,11 @@
                 <button class="genre-btn"  onclick="Preferir(this)">Super Herói</button>
                 <button class="genre-btn"  onclick="Preferir(this)">Chanchada</button>
 
-                <button class="genre-btn"  onclick="Preferir(this)">Romance sombrio</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Romance Sombrio</button>
                 <button class="genre-btn"  onclick="Preferir(this)">Histórico</button>
                 <button class="genre-btn"  onclick="Preferir(this)">Docuficção</button>
 
-                <button class="genre-btn"  onclick="Preferir(this)">Comédia romântica</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Comédia Romântica</button>
                 <button class="genre-btn"  onclick="Preferir(this)">Mistério</button>
                 <button class="genre-btn"  onclick="Preferir(this)">Suspense</button>
 
@@ -71,11 +71,13 @@
                 <button class="genre-btn"  onclick="Preferir(this)">Aventura</button>
             </div>
 
-            <a href="index.html">
-                <button class="btn-inativo" id="butao">
-                    Continue <i class="fa-solid fa-arrow-right"></i>
-                </button>
-            </a>
+            <div id="redirect">
+                <a>
+                    <button class="btn-inativo" id="butao">
+                        Continue <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </a>
+            </div>
         </div>
     </main>
 

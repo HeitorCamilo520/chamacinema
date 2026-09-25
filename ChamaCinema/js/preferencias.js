@@ -12,15 +12,21 @@ function Preferir(genero){
         $(genero).toggleClass("selected")
     }
 
-    let bot = document.getElementById("butao");
+    let divo = document.getElementById("redirect");
 
     if(prefs.length >= 4){
-        bot.classList.add("btn-continue");
-        bot.classList.remove("btn-inativo");
+        divo.innerHTML = `<a href="index.html">
+                    <button class="btn-continue" id="butao">
+                        Continue <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </a>`;
     }
 
     else{
-        bot.classList.remove("btn-continue");
-        bot.classList.add("btn-inativo");
+        divo.innerHTML = `<a>
+                    <button class="btn-inativo" id="butao">
+                        Continue <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </a>`;
     }
 }

@@ -6,7 +6,7 @@
         "nacionalidade":null,
         "linkFoto":"../Imagens/StanLee.jpg",
         "dataNasc":null,
-        "preferencias":[],
+        "preferencias":["Guerra", "Espionagem", "Catástrofe", "Super Herói", "Policial"],
         "logado":false,
         "plano":"Produtor"
     
@@ -19,7 +19,7 @@
         "nacionalidade":null,
         "linkFoto":"../Imagens/SandraLee.jpg",
         "dataNasc":null,
-        "preferencias":[],
+        "preferencias":["Comédia Romântica","Mistério,Suspense","Romance sombrio","Drama"],
         "logado":false,
         "plano":"Administrador"
     },
@@ -31,7 +31,7 @@
         "nacionalidade":"Brasil",
         "linkFoto":"../Imagens/JoaoCosta.jpg",
         "dataNasc":null,
-        "preferencias":[],
+        "preferencias":["Aventura","Crime","Comédia","Faroeste","Catástrofe"],
         "logado":false,
         "plano":"Faísca"
     },
