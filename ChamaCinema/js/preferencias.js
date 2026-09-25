@@ -14,9 +14,9 @@ function Preferir(genero){
 
     let divo = document.getElementById("redirect");
 
-    if(prefs.length >= 4){
-        divo.innerHTML = `<a href="index.html">
-                    <button class="btn-continue" id="butao">
+    if(prefs.length >= 4){/*  href="index.html" */
+        divo.innerHTML = `<a>
+                    <button class="btn-continue" onclick="Complementa()">
                         Continue <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </a>`;
@@ -24,9 +24,33 @@ function Preferir(genero){
 
     else{
         divo.innerHTML = `<a>
-                    <button class="btn-inativo" id="butao">
+                    <button class="btn-inativo" >
                         Continue <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </a>`;
+    }
+}
+
+function Complementa(){
+    let logado = getmemoria("usuarioLogado");
+    let usuarios = getmemoria("usuarios");
+    let pose = 0;
+
+    let existe = false;
+    for(let i = 0; i < usuarios.length; i++){
+        if(usuarios[i].usuario === logado.usuario || usuarios[i].email === logado.email){
+            pose = i;
+            existe = true;
+            break;
+        }
+    }
+
+    if(existe){
+        logado.preferencias = prefs;
+
+        setmemoria("usuarioLogado", logado);
+        usuarios[pose] = logado
+        setmemoria("usuarios",usuarios);
+        window.location.href = 'index.html';
     }
 }
