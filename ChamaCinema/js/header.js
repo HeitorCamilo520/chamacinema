@@ -121,9 +121,11 @@ function sairDaConta() {
 
 function Redirecionador() {
   let fundo =  document.getElementById('estampa');
+  /* let planos =  document.getElementById('dire_plano'); */
 
   if (getmemoria("usuarioLogado")) {
     let infos = getmemoria("usuarioLogado");
+    $("#dire_plano").attr("href", "planos.html");
 
     if (infos["plano"] == "Faísca") {
       fundo.href = "../css/components/fundo_base.css";
@@ -139,8 +141,8 @@ function Redirecionador() {
 
   }
     else if (!getmemoria("usuarioLogado")) {
-      titulo.href = "index.html";
       fundo.href = "../css/components/fundo_base.css";
+      $("#dire_plano").attr("href", "login.html");
   }
 }
 

@@ -22,8 +22,8 @@
         </form>
 
         <button class="opcoes_header"><i class="fa-solid fa-clapperboard icone-header" id="catalogo-icone"></i><p>Catalogo</p></button>
-        <a href="planos.html" class="opcoes_header"><i class="fa-solid fa-tag icone-header" id="etiqueta_plano"></i><p>Planos</p></a>
-       <button class="opcoes_header"><i class="fa-solid fa-heart icone-header" id="coracao_favoritos"></i><p></p>Favoritos</p></button>
+        <a href="planos.html" class="opcoes_header" id="dire_plano"><i class="fa-solid fa-tag icone-header" id="etiqueta_plano"></i><p>Planos</p></a>
+        <button class="opcoes_header"><i class="fa-solid fa-heart icone-header" id="coracao_favoritos"></i><p></p>Favoritos</p></button>
         <a href="login.html" class="opcoes_header"><i class="fa-solid fa-user icone-header" id="pessoa_login"></i><p>Login</p></a>
         <button class="opcoes_header" onclick="dropdownMenu()"><i class="fas fa-ellipsis-vertical fa-lg" id="dropdown_icon"></i></button>
         <div id="dropdown_menu" class="dropdown-menu"">
@@ -37,6 +37,7 @@
             </table>
         </div>
     </header>
+
     <main class="container">
 
         <section class="card profile-card">
@@ -145,15 +146,17 @@
 
     </main>
 
-    <script src="../js/config.js"></script>
-    <script src="../js/header.js"></script>
-    <script src="../js/manipulaLS.js"></script>
-
     <footer class="footer">
         <a href="#">Ajuda <i class="fa-regular fa-circle-question"></i></a>
         <span>© 2026 - 2026 by ChamaCinema®</span>
         <a href="#">Anuncie aqui <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
     </footer>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../js/manipulaLS.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/header.js"></script>
+
 
 </body>
 </html>
