@@ -4,7 +4,7 @@
     <script>
         (function () {
             var origem = sessionStorage.getItem("cc_origem_pagina");
-            sessionStorage.removeItem("cc_origem_pagina");
+            sessionStorage.removeItem("cc_origem_pagina");  
             if (origem) {
                 document.documentElement.classList.add("transicao-ativa");
                 document.documentElement.dataset.origem = origem;
@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="../css/components/login_transparente.css">
     <link rel="stylesheet" href="../css/components/esqueci_transparente.css">
     <link id="estampa" rel="stylesheet" href="../css/components/fundo_base.css">
+    <link rel="preload" as="image" href="../Imagens/Fundo_animado.png">
 </head>
 
 <body id="body">
@@ -67,7 +68,7 @@
 
     <main>
 
-        <div id="login-main">
+        <div id="login-main2">
 
             <div id="container-login">
 
@@ -106,7 +107,7 @@
                             <span>Lembrar-me</span>
                         </label>
 
-                        <a href="#" id="esqueci-senha">Esqueci minha senha</a>
+                        <p id="link-falso">Esqueci minha senha</p>
 
                     </div>
 
@@ -114,7 +115,9 @@
 
                 </form>
 
-                <p id="texto-cadastro">Não tem uma conta? <a href="#" id="link-cadastro">Cadastre-se</a></p>
+                <div id="texto-levar-site">
+                    <p id="texto-login">Não tem uma conta?</p><p id="link-falso">Cadastre-se</p>
+                </div>
 
             </div>
             

@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="../css/pages/esqueci_senha.css">
     <link id="estampa" rel="stylesheet" href="../css/components/fundo_base.css">
     <link rel="shortcut icon" href="../Imagens/favicon.ico" type="image/x-icon">
+    <link rel="preload" as="image" href="../Imagens/Fundo_animado.png">
 </head>
 
 <body id="body">
@@ -110,7 +111,7 @@
                             <span>Lembrar-me</span>
                         </label>
 
-                        <a href="esqueci_senha.html" id="esqueci-senha">Esqueci minha senha</a>
+                        <p id="link-falso">Esqueci minha senha</p>
 
                     </div>
 
@@ -120,7 +121,9 @@
 
                 </form>
 
-                <p id="texto-cadastro">Não tem uma conta? <a href="registro.html" id="link-cadastro">Cadastre-se</a></p>
+                <div id="texto-levar-site">
+                    <p id="texto-login">Não tem uma conta?</p><p id="link-falso">Cadastre-se</p>
+                </div>
 
             </div>
             
@@ -195,7 +198,9 @@
 
                 </form>
 
-                <p id="texto-esqueci_senha">Ja tem uma conta? <a href="#" id="link-cadastro">Login</a></p>
+                <div id="texto-levar-site">
+                    <p id="texto-login">Ja tem uma conta?</p><p id="link-falso">Login</p>
+                </div>
 
             </div>
         

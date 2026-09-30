@@ -14,7 +14,11 @@
 
     marcarOrigem("#login-main a#esqueci-senha", "login");
 
+    marcarOrigem("#registro-main2", "login");
+
     marcarOrigem("#registro-main a#link-cadastro", "registro");
+
+    marcarOrigem("#login-main2", "registro");
 
     marcarOrigem("#esqueci_senha-main a#link-cadastro", "esqueci_senha");
 })();

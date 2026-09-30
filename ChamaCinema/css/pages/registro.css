@@ -571,3 +571,12 @@ html.transicao-ativa[data-origem="login"] #registro-main {
 #esqueci_senha-main {
     position: absolute !important;
 }
+
+#link-falso {
+    color: var(--color-red);
+}
+
+#texto-levar-site {
+    display: flex;
+    gap: 5px;
+}

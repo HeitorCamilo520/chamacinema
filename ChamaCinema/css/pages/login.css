@@ -101,11 +101,15 @@ html.transicao-ativa[data-origem="registro"] #login-main {
     animation: login-entrando 0.7s ease forwards;
 }
 
+html.transicao-ativa[data-origem="registro"] #registro-main2 {
+    animation: registro-saindo 0.7s ease forwards;
+}
+
 html.transicao-ativa[data-origem="esqueci_senha"] #login-main {
     animation: login-entrando-de-cima 0.7s ease forwards;
 }
 
-html.transicao-ativa[data-origem="esqueci_senha"] #registro-main {
+html.transicao-ativa[data-origem="esqueci_senha"] #registro-main2 {
     animation: registro-entrando 0.7s ease forwards;
 }
 
@@ -118,6 +122,18 @@ html.transicao-ativa[data-origem="esqueci_senha"] #registro-main {
     to {
         transform: translateX(0) scale(1);
         filter: blur(0);
+    }
+}
+
+@keyframes registro-saindo {
+    from {
+        transform: translateX(-100%) scale(1);
+        filter: blur(0);
+    }
+
+    to {
+        transform: translateX(0) scale(0.75);
+        filter: blur(1.5px);
     }
 }
 
@@ -526,53 +542,6 @@ html.transicao-ativa[data-origem="esqueci_senha"] #registro-main {
     background-color: var(--color-gray);
 }
 
-
-/* =========================
-   BOTÕES GOOGLE / FACEBOOK
-   ========================= */
-
-#botoes-continuar {
-    width: 100%;
-
-    display: flex;
-
-    gap: var(--spacing-sm);
-}
-
-#botao-google,
-#botao-facebook {
-    width: 100%;
-
-    padding: var(--spacing-sd);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: var(--spacing-sm);
-
-    border: 1px solid var(--color-gray);
-    border-radius: var(--radius-md);
-
-    background-color: transparent;
-
-    color: var(--color-white);
-
-    font-family: var(--font-primary);
-    font-size: var(--text-md);
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: var(--transition-default);
-}
-
-#botao-google:hover,
-#botao-facebook:hover {
-    background-color: var(--color-black-secondary);
-}
-
-
 /* =========================
    LINK DE CADASTRO
    ========================= */
@@ -597,4 +566,13 @@ html.transicao-ativa[data-origem="esqueci_senha"] #registro-main {
 
 #esqueci_senha-main {
     position: absolute !important;
+}
+
+#link-falso {
+    color: var(--color-red);
+}
+
+#texto-levar-site {
+    display: flex;
+    gap: 5px;
 }

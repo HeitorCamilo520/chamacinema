@@ -2,7 +2,7 @@
    ÁREA PRINCIPAL DO LOGIN
    ========================= */
 
-#login-main {
+#login-main2 {
     width: 100%;
 
     display: flex;
@@ -12,9 +12,11 @@
 
     transform: scale(0.75);
     filter: blur(1.5px);
+    cursor: pointer;
+    user-select: none;
 }
 
-html.transicao-ativa[data-origem="login"] #login-main {
+html.transicao-ativa[data-origem="login"] #login-main2 {
     animation: login-saindo 0.7s ease forwards;
 }
 
@@ -197,6 +199,8 @@ html.transicao-ativa[data-origem="login"] #login-main {
     color: var(--color-white);
 
     font-family: var(--font-primary);
+    cursor: pointer;
+    pointer-events: none;
 }
 
 #login input::placeholder {
@@ -215,9 +219,10 @@ html.transicao-ativa[data-origem="login"] #login-main {
     position: absolute;
     right: 10px;
     transform: translateY(90%);
-    cursor: default;
+    cursor: pointer;
 
     color: var(--color-gray-light);
+    pointer-events: none;
 }
 
 

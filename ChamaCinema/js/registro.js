@@ -107,3 +107,5 @@ function mostrarSenha(a) {
         }
 
 }
+
+document.querySelector('#login-main2')?.addEventListener('click', () => window.location.href = 'login.html');

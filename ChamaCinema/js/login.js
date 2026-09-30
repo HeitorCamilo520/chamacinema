@@ -68,4 +68,4 @@ function mostrarSenha() {
     }
 }
 
-
+document.querySelector('#registro-main2')?.addEventListener('click', () => window.location.href = 'registro.html');

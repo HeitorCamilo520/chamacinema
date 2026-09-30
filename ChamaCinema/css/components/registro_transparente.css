@@ -1,4 +1,4 @@
-#registro-main {
+#registro-main2 {
     width: 100%;
 
     display: flex;
@@ -7,6 +7,9 @@
     align-items: center;
     transform: scale(0.75);
     filter: blur(1.5px);
+    cursor: pointer;
+    transition: var(--transition-default);
+    user-select: none;
 }
 
 html.transicao-ativa[data-origem="registro"] #registro-main {
@@ -192,6 +195,8 @@ html.transicao-ativa[data-origem="registro"] #registro-main {
     color: var(--color-white);
 
     font-family: var(--font-primary);
+    cursor: pointer;
+    pointer-events: none;
 }
 
 #registro input::placeholder {
@@ -212,7 +217,8 @@ html.transicao-ativa[data-origem="registro"] #registro-main {
     right: 10px;
     transform: translateY(90%);
 
-    cursor: default;
+    cursor: pointer;
+    pointer-events: none;
 
     color: var(--color-gray-light);
 }

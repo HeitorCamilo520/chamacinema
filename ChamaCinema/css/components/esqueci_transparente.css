@@ -12,6 +12,8 @@
 
     transform: scale(0.75) translateY(300%);
     filter: blur(1.5px);
+    cursor: none;
+    user-select: none;
 }
 
 html.transicao-ativa[data-origem="esqueci_senha"] #esqueci_senha-main {

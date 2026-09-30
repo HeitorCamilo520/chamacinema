@@ -593,3 +593,12 @@ html.transicao-ativa[data-origem="login"] #login-main {
         filter: blur(1.5px);
     }
 }
+
+#link-falso {
+    color: var(--color-red);
+}
+
+#texto-levar-site {
+    display: flex;
+    gap: 5px;
+}
