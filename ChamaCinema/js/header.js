@@ -99,6 +99,13 @@ function atualizarOpcaoSairConta() {
               Sair da conta
             </p>
           </td>
+          <td>
+            <p>
+              <i class="fa-solid fa-plus"></i>
+              Adicionar conta
+            </p>
+          </td>
+          
         </tr>`;
     }
   }
