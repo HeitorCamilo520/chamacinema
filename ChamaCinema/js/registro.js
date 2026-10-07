@@ -56,6 +56,7 @@ function validarFormulario(event) {
         "dataNasc":null,
         "preferencias":[],
         "logado" : true,
+        "emUso" : true,
         "plano": "Faísca"
     }
 
