@@ -70,7 +70,7 @@ function dropdownMenu() {
   dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
 
     document.addEventListener('click', (evento) => {
-    const botaoDropdown = document.getElementById('usuario-login');
+    const botaoDropdown = document.getElementById('dropdown_icon')?.closest('button');
     if (dropdown && !dropdown.contains(evento.target) && !botaoDropdown?.contains(evento.target)) {
       dropdown.style.display = 'none';
     }
@@ -92,23 +92,6 @@ function atualizarOpcaoSairConta() {
 
     if (!sairConta) {
       tabela.innerHTML += `
-
-        <tr>
-          <td>
-            <p>
-                <i class="fa-solid fa-gear"></i>
-                Configurações
-            </p>
-         </td>
-        </tr>
-        <tr>
-          <td>
-              <p>
-                <i class="fa-solid fa-plus"></i>
-                Adicionar conta
-              </p>
-          </td>
-        </tr>
         <tr id="sair-conta" onclick="sairDaConta()">
           <td>
             <p>
@@ -116,6 +99,13 @@ function atualizarOpcaoSairConta() {
               Sair da conta
             </p>
           </td>
+          <td>
+            <p>
+              <i class="fa-solid fa-plus"></i>
+              Adicionar conta
+            </p>
+          </td>
+          
         </tr>`;
     }
   }
@@ -138,6 +128,7 @@ function sairDaConta() {
 
 function Redirecionador() {
   let fundo =  document.getElementById('estampa');
+  let pref =  document.getElementById('container-principal');
   /* let planos =  document.getElementById('dire_plano'); */
 
   if (getmemoria("usuarioLogado")) {
@@ -146,6 +137,7 @@ function Redirecionador() {
 
     if (infos["plano"] == "Faísca") {
       fundo.href = "../css/components/fundo_base.css";
+      pref.innerHTML+=``
     }
 
     else if (infos["plano"] == "Produtor") {
@@ -155,11 +147,22 @@ function Redirecionador() {
     else if (infos["plano"] == "Administrador") {
       fundo.href = "../css/components/administrador.css";
     }
-
+    
+    pref.innerHTML+=`
+    <div id="container-prefs">
+        <h1>Recomendado para você</h1>
+        <div class="catalogo-faixa">
+            <button class="catalogo-prev" type="button" aria-label="Filmes anteriores">❮</button>
+            <div id="container-prefere">
+                <p class="mensagem-catalogo">Carregando filmes...</p>
+            </div>
+            <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
+        </div>
+    </div>`;
   }
-    else if (!getmemoria("usuarioLogado")) {
-      fundo.href = "../css/components/fundo_base.css";
-      $("#dire_plano").attr("href", "login.html");
+  else if (!getmemoria("usuarioLogado")) {
+    fundo.href = "../css/components/fundo_base.css";
+    $("#dire_plano").attr("href", "login.html");
   }
 }
 
