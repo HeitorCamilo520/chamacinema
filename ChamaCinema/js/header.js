@@ -70,7 +70,7 @@ function dropdownMenu() {
   dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
 
     document.addEventListener('click', (evento) => {
-    const botaoDropdown = document.getElementById('dropdown_icon')?.closest('button');
+    const botaoDropdown = document.getElementById('usuario-login');
     if (dropdown && !dropdown.contains(evento.target) && !botaoDropdown?.contains(evento.target)) {
       dropdown.style.display = 'none';
     }
@@ -92,6 +92,23 @@ function atualizarOpcaoSairConta() {
 
     if (!sairConta) {
       tabela.innerHTML += `
+
+        <tr>
+          <td>
+            <p>
+                <i class="fa-solid fa-gear"></i>
+                Configurações
+            </p>
+         </td>
+        </tr>
+        <tr>
+          <td>
+              <p>
+                <i class="fa-solid fa-plus"></i>
+                Adicionar conta
+              </p>
+          </td>
+        </tr>
         <tr id="sair-conta" onclick="sairDaConta()">
           <td>
             <p>
@@ -99,13 +116,6 @@ function atualizarOpcaoSairConta() {
               Sair da conta
             </p>
           </td>
-          <td>
-            <p>
-              <i class="fa-solid fa-plus"></i>
-              Adicionar conta
-            </p>
-          </td>
-          
         </tr>`;
     }
   }
