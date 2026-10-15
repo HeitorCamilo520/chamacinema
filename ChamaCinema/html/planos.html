@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/planos.css">
+    <link rel="shortcut icon" href="../Imagens/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <header id="header">
+        <a href="index.html" id="container-logo"><img src="../Imagens/Geral_7.png" alt="Logo do Chama Cinema" id="logo"> ChamaCinema</a>
+
+        <form id="formulario-pesquisa">
+            <div class="barra-pesquisa">
+                <input id="pesquisa" type="text" placeholder="Procure por filmes ou séries...">
+                <i class="fa-solid fa-magnifying-glass" id="lupa"></i>
+            </div>
+            <div id="resultados-pesquisa" class="resultados-pesquisa" aria-live="polite"></div>
+        </form>
+
+        <button class="opcoes_header" type="button"><i class="fa-solid fa-clapperboard icone-header" id="catalogo-icone"></i><p>Catalogo</p></button>
+        <a href="planos.html" class="opcoes_header" id="dire_plano" aria-current="page"><i class="fa-solid fa-tag icone-header" id="etiqueta_plano"></i><p>Planos</p></a>
+        <button class="opcoes_header" type="button"><i class="fa-solid fa-heart icone-header" id="coracao_favoritos"></i><p>Favoritos</p></button>
+        <div id="usuario-login" class="opcoes_header">
+        </div>
+        <button class="opcoes_header" type="button" aria-label="Mais opções"><i class="fas fa-ellipsis-vertical fa-lg" id="dropdown_icon"></i></button>
+    </header>
+
+  <main class="principal-planos">
+    <section class="conteudo-planos" aria-labelledby="plans-title">
+      <div class="cabecalho-planos">
+        <span class="destaque-planos"><i class="fa-solid fa-ticket" aria-hidden="true"></i> Planos ChamaCinema</span>
+        <h1 id="plans-title">Mais cinema, do seu jeito.</h1>
+        <p>Escolha como quer viver cada história.</p>
+      </div>
+
+      <div class="grade-planos">
+        <article id="card-faisca" class="cartao-plano cartao-plano-faisca">
+          <h2>Faísca</h2>
+          <p class="resumo-plano">Seu próximo filme favorito começa aqui.</p>
+          <ul class="beneficios-plano">
+            <li><i class="fa-solid fa-check" aria-hidden="true"></i><span>Recomendações baseadas na sua navegação e preferências</span></li>
+            <li><i class="fa-solid fa-check" aria-hidden="true"></i><span>Avalie as obras e compartilhe sua opinião</span></li>
+          </ul>
+          <div class="rodape-plano">
+            <p class="preco-plano"><span class="valor-preco">Gratuito</span><span>para sempre</span></p>
+            <button class="botao-plano" type="button" data-plano="Faísca" aria-pressed="false"><i class="fa-solid fa-tag" aria-hidden="true"></i><span>Assinar</span></button>
+          </div>
+        </article>
+
+        <article id="card-produtor" class="cartao-plano cartao-plano-produtor">
+          <h2>Produtor</h2>
+          <p class="resumo-plano">Leve suas produções para mais perto do público.</p>
+          <ul class="beneficios-plano">
+            <li><i class="fa-solid fa-check" aria-hidden="true"></i><span>Cadastre suas obras no sistema</span></li>
+            <li><i class="fa-solid fa-check" aria-hidden="true"></i><span>Apresente seus projetos à comunidade ChamaCinema</span></li>
+          </ul>
+          <div class="rodape-plano">
+            <p class="preco-plano"><span class="valor-preco">R$ 59,90</span><span>por mês</span></p>
+            <button class="botao-plano" type="button" data-plano="Produtor" aria-pressed="false"><i class="fa-solid fa-tag" aria-hidden="true"></i><span>Assinar</span></button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div id="footer-container">
+      <p id="footer-suporte"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> Suporte e recomendações para sua próxima sessão</p>
+      <p id="footer-texto">© 2024 ChamaCinema. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+    <script src="../js/manipulaLS.js"></script>
+    <script src="../js/fundo_animado.js"></script>
+    <script  src="../js/planos.js"></script>
+    <script src="../js/header.js"></script>
+</body>
+</html>

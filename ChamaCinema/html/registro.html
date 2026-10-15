@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <script>
+        (function () {
+            var origem = sessionStorage.getItem("cc_origem_pagina");
+            sessionStorage.removeItem("cc_origem_pagina");  
+            if (origem) {
+                document.documentElement.classList.add("transicao-ativa");
+                document.documentElement.dataset.origem = origem;
+            }
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/registro.css">
+    <link rel="stylesheet" href="../css/components/login_transparente.css">
+    <link rel="stylesheet" href="../css/components/esqueci_transparente.css">
+    <link id="estampa" rel="stylesheet" href="../css/components/fundo_base.css">
+    <link rel="preload" as="image" href="../Imagens/Fundo_animado.png">
+</head>
+
+<body id="body">
+
+    <header id="header">
+
+        <a href="index.html" id="container-logo">
+            <img src="../Imagens/Geral_7.png" alt="Logo do Chama Cinema" id="logo">
+            ChamaCinema
+        </a>
+
+        <form id="formulario-pesquisa">
+            <div class="barra-pesquisa">
+                <input id="pesquisa" type="text" placeholder="Procure por filmes ou séries...">
+                <i class="fa-solid fa-magnifying-glass" id="lupa"></i>
+            </div>
+            <div id="resultados-pesquisa" class="resultados-pesquisa" aria-live="polite"></div>
+        </form>
+
+        <button class="opcoes_header">
+            <i class="fa-solid fa-clapperboard icone-header" id="catalogo-icone"></i>
+            <p>Catalogo</p>
+        </button>
+
+        <a href="planos.html" class="opcoes_header" id="dire_plano">
+            <i class="fa-solid fa-tag icone-header" id="etiqueta_plano"></i>
+            <p>Planos</p>
+        </a>
+
+        <button class="opcoes_header">
+            <i class="fa-solid fa-heart icone-header" id="coracao_favoritos"></i>
+            <p>Favoritos</p>
+        </button>
+
+        <div id="usuario-login" class="opcoes_header"></div>
+
+        <button class="opcoes_header" onclick="dropdownMenu()"><i class="fas fa-ellipsis-vertical fa-lg" id="dropdown_icon"></i></button>
+        <div id="dropdown_menu" class="dropdown-menu"">
+            <table>
+                <tr><td>
+                    <p>
+                        <i class="fa-solid fa-gear"></i>
+                        Configurações
+                    </p>
+                </td></tr>
+            </table>
+        </div>
+
+    </header>
+
+    <main>
+
+        <div id="login-main2">
+
+            <div id="container-login">
+
+                <div id="logo-titulo-login">
+                    <img src="../Imagens/Geral_7.png" alt="Logo ChamaCinema" id="logo-login">
+                    <p id="texto-logo-login">ChamaCinema</p>
+                </div>
+
+                <p id="subtexto-login">Entre para sua sessão e aproveite para avaliar seus filmes e séries favoritos</p>
+
+            </div>
+
+            <div id="login">
+
+                <h1 id="titulo-login">Login</h1>
+
+                <h2 id="subtitulo-login">Entre com sua conta</h2>
+
+                <form id="form-login">
+
+                    <p id="texto-email">E-mail ou usuário</p>
+                    <input type="email" placeholder="Entre com seu e-mail ou Usuário" id="email-login" disabled>
+
+                    <p id="texto-senha">Senha</p>
+                    <div>
+                        <input type="password" placeholder="Senha" id="senha-login" disabled>
+                        <label id="mostrar-senha">
+                            <i class="fa-solid fa-eye" id="icone-olho" onclick="mostrarSenha()"></i>
+                        </label>
+                    </div>
+
+                    <div id="lembrar-senha-container">
+
+                        <label id="lembrar-senha">
+                            <input type="checkbox" id="senha-checkbox" disabled>
+                            <span>Lembrar-me</span>
+                        </label>
+
+                        <p id="link-falso">Esqueci minha senha</p>
+
+                    </div>
+
+                    <button type="submit" id="botao-login" disabled>Entrar</button>
+
+                </form>
+
+                <div id="texto-levar-site">
+                    <p id="texto-login">Não tem uma conta?</p><p id="link-falso">Cadastre-se</p>
+                </div>
+
+            </div>
+            
+
+        </div>
+
+        <div id="registro-main">
+
+            <div id="registro">
+
+                <h1 id="titulo-registro">Registro</h1>
+
+                <h2 id="subtitulo-registro">Crie sua conta e viva o cinema do seu jeito.</h2>
+
+                <form id="form-registro" onsubmit="return validarFormulario(event)">
+
+                    <p id="texto-email">Usuário </p>
+                    <input type="text" placeholder="Entre com seu usuário" id="usuario-registro">
+
+                    <p id="texto-email">E-mail </p>
+                    <input type="text" inputmode="email" placeholder="Entre com seu e-mail" id="email-registro">
+
+                    <p id="texto-senha">Senha</p>
+                    
+                    <div>
+                        <input type="password" placeholder="Senha" id="senha-registro1">
+                        <label id="mostrar-senha1">
+                            <i class="fa-solid fa-eye icone-olho-confirmar" onclick="mostrarSenha(1)"></i>
+                        </label>
+                    </div>
+
+                    <p id="texto-senha">Confirmar Senha</p>
+
+                    <div>
+                        <input type="password" placeholder="Senha" id="senha-registro2">
+                        <label id="mostrar-senha2">
+                            <i class="fa-solid fa-eye icone-olho-confirmar" onclick="mostrarSenha(2)"></i>
+                        </label>
+                    </div>
+
+                    <p id="mensagem-registro" class="mensagem-formulario" role="alert" aria-live="assertive"></p>
+
+                        <button type="submit" id="botao-registro">Entrar</button>
+                </form>
+
+                <p id="texto-registro">Ja tem uma conta? <a href="login.html" id="link-cadastro">Login</a></p>
+
+            </div>
+            
+
+        </div>
+
+        <div>
+        </div>
+
+    </main>
+
+    <footer>
+
+        <div id="footer-container">
+            <p id="footer-suporte"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> Suporte e recomendações para sua próxima sessão</p>
+            <p id="footer-texto">© 2024 ChamaCinema. Todos os direitos reservados.</p>
+        </div>
+
+    </footer>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/manipulaLS.js"></script>
+    <script src="../js/header.js"></script>
+    <script src="../js/fundo_animado.js"></script>
+    <script src="../js/transicoes.js"></script>
+    <script src="../js/registro.js"></script>
+</body>
+</html>

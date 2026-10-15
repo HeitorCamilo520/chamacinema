@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preferencias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/preferencias.css">
+    <link id="estampa" rel="stylesheet" href="../css/components/fundo_base.css">
+    <link rel="shortcut icon" href="../Imagens/favicon.ico" type="image/x-icon">
+</head>
+<body>
+   <header id="header">
+        <a href="index.html" id="container-logo"><img src="../Imagens/Geral_7.png" alt="Logo do Chama Cinema" id="logo"> ChamaCinema</a>
+
+        <form id="formulario-pesquisa">
+            <div class="barra-pesquisa">
+                <input id="pesquisa" type="text" placeholder="Procure por filmes ou séries...">
+                <i class="fa-solid fa-magnifying-glass" id="lupa"></i>
+            </div>
+            <div id="resultados-pesquisa" class="resultados-pesquisa" aria-live="polite"></div>
+        </form>
+
+        <button class="opcoes_header"><i class="fa-solid fa-clapperboard icone-header" id="catalogo-icone"></i><p>Catalogo</p></button>
+        <a href="planos.html" class="opcoes_header" id="dire_plano"><i class="fa-solid fa-tag icone-header" id="etiqueta_plano"></i><p>Planos</p></a>
+        <button class="opcoes_header"><i class="fa-solid fa-heart icone-header" id="coracao_favoritos"></i><p></p>Favoritos</p></button>
+        <div id="usuario-login" class="opcoes_header">
+        </div>
+        <button class="opcoes_header"><i class="fas fa-ellipsis-vertical fa-lg" id="dropdown_icon"></i> </button>
+    </header>
+    <main>
+        <div class="preferences-card">
+            <h1>Quais são suas preferências?</h1>
+            <p id="aqui">Selecione ao menos 4</p>
+
+            <div class="genres-grid">
+                <button class="genre-btn" onclick="Preferir(this)">Animação</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Documentário</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Musical</button>
+
+                <button class="genre-btn"  onclick="Preferir(this)">Policial</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Drama</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Terror</button>
+
+                <button class="genre-btn"  onclick="Preferir(this)">Crime</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Espionagem</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Comédia</button>
+
+                <button class="genre-btn"  onclick="Preferir(this)">Guerra</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Fantasia</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Film Noir</button>
+
+                <button class="genre-btn"  onclick="Preferir(this)">Aventura Urbana</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Faroeste</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Experimental</button>
+
+                <button class="genre-btn"  onclick="Preferir(this)">Ficção Científica</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Super Herói</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Chanchada</button>
+
+                <button class="genre-btn"  onclick="Preferir(this)">Romance Sombrio</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Histórico</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Docuficção</button>
+
+                <button class="genre-btn"  onclick="Preferir(this)">Comédia Romântica</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Mistério</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Suspense</button>
+
+                <button class="genre-btn"  onclick="Preferir(this)">Biografia</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Catástrofe</button>
+                <button class="genre-btn"  onclick="Preferir(this)">Aventura</button>
+            </div>
+
+            <div id="redirect">
+                <a>
+                    <button class="btn-inativo" onclick="Complementa()">
+                        Continue <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div id="footer-container">
+            <p id="footer-suporte"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> Suporte e recomendações para sua próxima sessão</p>
+            <p id="footer-texto">© 2024 ChamaCinema. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../js/manipulaLS.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/header.js"></script>
+    <script src="../js/preferencias.js"></script>
+
+</body>
+</html>

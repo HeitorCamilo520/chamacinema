@@ -1,0 +1,294 @@
+#body{
+    height: 100%;
+}
+
+body {
+    position: relative;
+    background-color: var(--color-black-deepest);
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: -12% -8% -12% -8%;
+    z-index: -1;
+    background-image: url(../../Imagens/Estampa.png);
+    background-repeat: repeat;
+    background-size: 45% auto;
+    background-position: center;
+    opacity: 0.3;
+    transform: perspective(1400px) rotateZ(-12deg) scale(1.2);
+    transform-origin: center center;
+    pointer-events: none;
+}
+
+main {
+    position: relative;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+    margin: 1rem auto;
+    width: min(1360px, calc(100% - 2.5rem));
+    border: 1px solid var(--color-gray-deep);
+    border-radius: 28px;
+    background: linear-gradient(180deg,
+        var(--color-black-panel-strong) 0%,
+        var(--color-black-panel) 38%,
+        var(--color-black-deepest) 100%);
+    box-shadow: 0 22px 50px #000000;
+    overflow: hidden;
+}
+
+main > * {
+    position: relative;
+    z-index: 1;
+}
+
+#container-principal {
+    width: min(1200px, 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px;
+    padding: .75rem 0 .9rem;
+}
+
+.carousel-container {
+    position: relative;
+    width: min(1200px, 100%);
+    max-width: 1200px;
+    height: 440px;
+    min-height: 440px;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 18px 35px #000000;
+    border: 1px solid var(--color-gray-deep);
+    background: #090909;
+}
+
+.carousel-slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 100%;
+    width: 100%;
+}
+
+.slide {
+    position: relative;
+    min-width: 100%;
+    width: 100%;
+    height: 440px;
+    min-height: 440px;
+    overflow: hidden;
+    background: #090909;
+    flex-shrink: 0;
+}
+
+.slide-imagem {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 62%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    background: #000;
+    filter: saturate(1.08) contrast(1.08);
+}
+
+.slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    left: 38%;
+    width: 62%;
+    z-index: 1;
+    background: linear-gradient(90deg,
+      rgba(0, 0, 0, 0.92) 0%,
+      rgba(0, 0, 0, 0.7) 28%,
+      rgba(0, 0, 0, 0.25) 58%,
+      rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
+}
+
+.slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    background: linear-gradient(90deg,
+      rgba(0,0,0,0.8) 0%,
+      rgba(0,0,0,0.65) 24%,
+      rgba(0,0,0,0.38) 42%,
+      rgba(0,0,0,0.12) 58%,
+      rgba(0,0,0,0.02) 76%,
+      rgba(0,0,0,0) 100%);
+    pointer-events: none;
+}
+
+.slide-conteudo {
+    position: relative;
+    z-index: 2;
+    width: min(54%, 620px);
+    min-width: 320px;
+    max-width: 620px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 2.6rem;
+    color: white;
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.slide-conteudo h1 {
+    font-size: clamp(2.1rem, 3vw, 3.5rem);
+    margin: .35rem 0;
+    line-height: 1.1;
+}
+
+.slide-legenda {
+    color: #e50914;
+    font-weight: bold;
+    letter-spacing: .12rem;
+    margin: 0;
+    font-size: .72rem;
+}
+
+.slide-detalhes {
+    color: #e50914;
+    font-weight: bold;
+    font-size: .78rem;
+}
+
+.slide-sinopse {
+    line-height: 1.5;
+    font-size: .9rem;
+    max-width: 32rem;
+    margin-top: .65rem;
+}
+
+  .mensagem-carousel {
+    color: white;
+    margin: auto;
+  }
+  
+  button.prev, button.next {
+    aspect-ratio: 1 / 1;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--color-black-panel);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: var(--radius-full);
+  }
+  
+  button.prev { left: 10px; }
+  button.next { right: 10px; }
+
+  #planos {
+    width: min(1200px, 100%);
+    padding: 1.2rem 0 0;
+  }
+
+  #container-catalogo {
+    width: min(1200px, 100%);
+    padding: 1.2rem 0 0;
+  }
+
+  #container-catalogo h1 {
+    color: white;
+    margin: 0 0 1rem;
+  }
+
+  .catalogo-faixa {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  #container-em-alta {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding: .5rem .75rem;
+    border-radius: 16px;
+  }
+
+  #container-em-alta::-webkit-scrollbar {
+    display: none;
+  }
+
+  .catalogo-prev,
+  .catalogo-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: var(--radius-full);
+    background-color: var(--color-black-panel);
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .catalogo-prev { left: 10px; }
+  .catalogo-next { right: 10px; }
+
+  .catalogo-prev:hover,
+  .catalogo-next:hover {
+    background-color: var(--color-black-panel-strong);
+  }
+
+  .filme-card {
+    flex: 0 0 180px;
+    overflow: hidden;
+    background: #171717;
+    border-radius: 8px;
+    color: white;
+  }
+
+  .filme-card img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    display: block;
+  }
+
+  .filme-info {
+    padding: .75rem;
+  }
+
+  .filme-info h2 {
+    font-size: 1rem;
+    margin: 0 0 .4rem;
+  }
+
+  .filme-info p,
+  .mensagem-catalogo {
+    color: #c8c8c8;
+    margin: 0;
+  }
+
+
