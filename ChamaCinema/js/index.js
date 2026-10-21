@@ -122,6 +122,12 @@ let fundo =  document.getElementById('estampa');
                         <h2>Descubra novas oportunidades</h2>
                     </div>
                 </button>
+                <div id="container-catalogo">
+                  <h1>Minhas produções</h1>
+                  <div class="catalogo-faixa">
+                  <article class="filme-card botao-produtor"></article>
+                  </div>
+                </div>
             </div>
       `;
     }
@@ -136,7 +142,6 @@ let fundo =  document.getElementById('estampa');
                         <h2>Gerencie usuários e obras</h2>
                     </div>
                 </button>
-            </div>
       `;
     }
 
