@@ -96,6 +96,7 @@ main::after {
     justify-content: center;
     align-items: center;
     padding: var(--spacing-sm);
+    animation: entrada 600ms ease both;
 }
 
 html.transicao-ativa[data-origem="login"] #registro-main {
@@ -150,7 +151,6 @@ html.transicao-ativa[data-origem="login"] #registro-main {
 
 #subtexto-registro {
     color: var(--color-gray-light);
-
     font-size: var(--text-md);
     text-align: center;
 }
@@ -577,6 +577,9 @@ html.transicao-ativa[data-origem="login"] #registro-main {
 }
 
 #texto-levar-site {
+    color: var(--color-gray-light);
+    font-size: var(--text-sm);
+    text-align: center;
     display: flex;
     gap: 5px;
 }

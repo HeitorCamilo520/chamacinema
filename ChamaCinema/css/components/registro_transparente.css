@@ -10,6 +10,7 @@
     cursor: pointer;
     transition: var(--transition-default);
     user-select: none;
+    animation: entrada-menor 700ms ease both;
 }
 
 html.transicao-ativa[data-origem="registro"] #registro-main {

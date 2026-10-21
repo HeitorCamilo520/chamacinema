@@ -95,6 +95,7 @@ main::after {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    animation: entrada 600ms ease both;
 }
 
 html.transicao-ativa[data-origem="registro"] #login-main {
@@ -127,7 +128,7 @@ html.transicao-ativa[data-origem="esqueci_senha"] #registro-main2 {
 
 @keyframes registro-saindo {
     from {
-        transform: translateX(-100%) scale(1);
+        transform: translateY(-100%) scale(1);
         filter: blur(0);
     }
 
@@ -151,7 +152,7 @@ html.transicao-ativa[data-origem="esqueci_senha"] #registro-main2 {
 
 @keyframes registro-entrando {
     from {
-        transform: translateX(100%) scale(0.75);
+        transform: translateY(-200%) scale(0.75);
         filter: blur(1.5px);
     }
 
@@ -573,6 +574,9 @@ html.transicao-ativa[data-origem="esqueci_senha"] #registro-main2 {
 }
 
 #texto-levar-site {
+    color: var(--color-gray-light);
+    font-size: var(--text-sm);
+    text-align: center;
     display: flex;
     gap: 5px;
 }
