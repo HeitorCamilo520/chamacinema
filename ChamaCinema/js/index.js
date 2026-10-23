@@ -2,6 +2,7 @@ const catalogo = document.querySelector('#container-em-alta');
 const slidesContainer = document.querySelector('#carousel-slides');
 let currentIndex = 0;
 
+
 async function buscarComTimeout(url) {
   const controlador = new AbortController();
   const temporizador = setTimeout(() => controlador.abort(), 10000);
@@ -12,13 +13,16 @@ async function buscarComTimeout(url) {
   }
 }
 
+
 function mensagemDeErro(erro) {
   return erro.name === 'AbortError'
     ? 'A TMDB demorou para responder. Tente novamente.'
     : erro.message;
 }
 
+
 // ===== Catálogo (filmes em alta) =====
+
 
 async function buscarFilmes() {
   catalogo.innerHTML = '<p class="mensagem-catalogo">Carregando filmes...</p>';
@@ -32,11 +36,13 @@ async function buscarFilmes() {
   }
 }
 
+
 function renderizarFilmes(filmes) {
   if (!filmes?.length) {
     catalogo.innerHTML = '<p class="mensagem-catalogo">Nenhum filme encontrado.</p>';
     return;
   }
+
 
   catalogo.innerHTML = filmes.map((filme) => `
     <article class="filme-card">
@@ -49,11 +55,14 @@ function renderizarFilmes(filmes) {
   `).join('');
 }
 
+
 function moverCatalogo(direcao) {
   catalogo.scrollBy({ left: direcao * catalogo.clientWidth * 0.8, behavior: 'smooth' });
 }
 
+
 // ===== Carrossel de destaques =====
+
 
 async function buscarDestaques() {
   try {
@@ -65,6 +74,7 @@ async function buscarDestaques() {
     slidesContainer.innerHTML = `<p class="mensagem-carousel">${mensagemDeErro(erro)}</p>`;
   }
 }
+
 
 function renderizarDestaques(filmes) {
   slidesContainer.innerHTML = filmes.map((filme) => {
@@ -82,35 +92,45 @@ function renderizarDestaques(filmes) {
     `;
   }).join('');
 
+
   currentIndex = 0;
   atualizarPosicaoSlide();
 }
+
 
 function moveSlide(direction) {
   const totalSlides = document.querySelectorAll('.slide').length;
   if (!totalSlides) return;
 
+
   currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
   atualizarPosicaoSlide();
 }
+
 
 function atualizarPosicaoSlide() {
   slidesContainer.style.transform = `translateX(${-currentIndex * 100}%)`;
 }
 
+
 // ===== Planos =====
+
 
 function Planos() {
 
+
 let fundo =  document.getElementById('estampa');
+
 
   if (getmemoria("usuarioLogado")) {
     let infos = getmemoria("usuarioLogado");
+
 
     if (infos['plano'] == "Faísca") {
       fundo.href = "../css/components/fundo_base.css";
       document.getElementById("planos").innerHTML = '';
     }
+
 
     else if (infos['plano'] == "Produtor") {
       fundo.href = "../css/components/produtor.css";
@@ -125,12 +145,21 @@ let fundo =  document.getElementById('estampa');
                 <div id="container-catalogo">
                   <h1>Minhas produções</h1>
                   <div class="catalogo-faixa">
-                  <article class="filme-card botao-produtor"></article>
+                  <button class="produtor-card">
+                    <div id="container-produtor-texto">
+                      <h1><i class="fa-solid fa-plus"></i></h1>
+                      <h2>Criar nova produção</h2>
+                    </div>
+                  </button>
+                  <article class="filme-card">
+                    <img>
+                  </article>
                   </div>
-                </div>
+                </div>                                                      
             </div>
       `;
     }
+
 
     else if (infos['plano'] == "Administrador") {
       fundo.href = "../css/components/administrador.css";
@@ -145,23 +174,29 @@ let fundo =  document.getElementById('estampa');
       `;
     }
 
+
   }
     else if (!getmemoria("usuarioLogado")) {
       fundo.href = "../css/components/fundo_base.css";
 }
 }
 
+
 // ===== Eventos =====
+
 
 document.querySelector('.prev')?.addEventListener('click', () => moveSlide(-1));
 document.querySelector('.next')?.addEventListener('click', () => moveSlide(1));
 document.querySelector('.catalogo-prev')?.addEventListener('click', () => moverCatalogo(-1));
 document.querySelector('.catalogo-next')?.addEventListener('click', () => moverCatalogo(1));
 
+
 // ===== Início =====
+
 
 buscarFilmes();
 buscarDestaques();
+
 
 Planos();
 document.addEventListener('DOMContentLoaded', Planos);
