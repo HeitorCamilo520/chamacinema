@@ -1,0 +1,251 @@
+#body{
+    height: 100%;
+}
+
+body {
+    position: relative;
+    background-color: var(--color-black-deepest);
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: -12% -8% -12% -8%;
+    z-index: -1;
+    background-image: url(../../Imagens/Estampa.png);
+    background-repeat: repeat;
+    background-size: 45% auto;
+    background-position: center;
+    opacity: 0.3;
+    transform: perspective(1400px) rotateZ(-12deg) scale(1.2);
+    transform-origin: center center;
+    pointer-events: none;
+}
+
+main {
+    position: relative;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+    margin: 1rem auto;
+    width: min(1360px, calc(100% - 2.5rem));
+    border: 1px solid var(--color-gray-deep);
+    border-radius: 28px;
+    background: linear-gradient(180deg,
+        var(--color-black-panel-strong) 0%,
+        var(--color-black-panel) 38%,
+        var(--color-black-deepest) 100%);
+    box-shadow: 0 22px 50px #000000;
+    overflow: hidden;
+}
+
+main > * {
+    position: relative;
+    z-index: 1;
+}
+
+#container-principal {
+    width: min(1200px, 100%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px;
+    padding: .75rem 0 .9rem;
+    overflow: hidden;
+}
+
+#parte-1 {
+    padding-right: 60px;
+    flex: 6;
+    color: var(--color-white);
+}
+
+#opcoes-container {
+    padding-top: 10px;
+    gap: 20px;
+    display: flex;
+}
+
+.opcoes-pagamento {
+    flex: 1;
+    padding: var(--spacing-sd);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: var(--radius-md);
+
+    background-color: var(--color-red);
+
+    color: var(--color-white);
+
+    font-family: var(--font-primary);
+    font-size: var(--text-md);
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: var(--transition-default);
+}
+
+.opcoes-pagamento:hover {
+    background-color: var(--color-red-dark);
+}
+
+.opcoes-pagamento:active {
+    transform: scale(0.98);
+}
+
+#parte-2 {
+    flex: 7;
+    color: var(--color-white);
+    padding-left: 30px;
+    border-left: 2px solid var(--color-gray);
+}
+
+#parte-2 input {
+    width: 100%;
+
+    padding: var(--spacing-sd);
+
+    border: 1px solid var(--color-gray-deep);
+    border-radius: var(--radius-md);
+
+    background-color: var(--color-black-panel-strong);
+
+    color: var(--color-white);
+
+    font-family: var(--font-primary);
+    margin-bottom: 10px;
+}
+
+#parte-2 input::placeholder {
+    color: var(--color-gray-smoke);
+    opacity: 1;
+}
+
+#parte-2 input:focus {
+    outline: none;
+
+    border-color: var(--color-red);
+    background-color: var(--color-black-panel-strong);
+}
+
+#termos {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: var(--spacing-sm);
+
+    font-size: var(--text-sm);
+}
+
+#aceitar {
+    display: flex;
+    align-items: center;
+
+    gap: var(--spacing-sm);
+
+    color: var(--color-gray-light);
+
+    cursor: pointer;
+}
+
+#termos-checkbox {
+    appearance: none;
+
+    width: 18px !important;
+    height: 18px;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    flex-shrink: 0;
+
+    border: 2px solid var(--color-gray) !important;
+    border-radius: 5px !important;
+
+    background-color: transparent !important;
+
+    cursor: pointer;
+
+    position: relative;
+}
+
+#termos-checkbox:checked {
+    background-color: var(--color-red) !important;
+    border-color: var(--color-red) !important;
+}
+
+#termos-checkbox:checked::after {
+    content: "✓";
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    color: var(--color-white);
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+#botao-pagamento {
+    width: 100%;
+
+    padding: var(--spacing-sd);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: var(--radius-md);
+
+    background-color: var(--color-red);
+
+    color: var(--color-white);
+
+    font-family: var(--font-primary);
+    font-size: var(--text-md);
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: var(--transition-default);
+}
+
+#botao-pagamento:hover {
+    background-color: var(--color-red-dark);
+}
+
+#botao-pagamento:active {
+    transform: scale(0.98);
+}
+
+.form-pagamento2{
+    position: absolute;
+    transform: translateY(200%);
+}
