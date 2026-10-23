@@ -11,6 +11,7 @@
     transition: var(--transition-default);
     user-select: none;
     animation: entrada-menor 700ms ease both;
+    animation-delay: 100ms;
 }
 
 html.transicao-ativa[data-origem="registro"] #registro-main {
