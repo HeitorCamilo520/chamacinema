@@ -49,6 +49,31 @@ function renderizarFilmes(filmes) {
   `).join('');
 }
 
+
+function renderizarPrefs(filmes) {
+  if (!filmes?.length) {
+    catalogo.innerHTML = '<p class="mensagem-catalogo">Nenhum filme encontrado.</p>';
+    return;
+  }
+
+  let usu = getmemoria("usuarioLogado");
+
+  filmes.forEach(i => {
+    if (i.genre_ids.some(elemento => usu.preferencias.includes(elemento))) {
+      catalogo.innerHTML += `
+        <article class="filme-card">
+          <img src="${i.poster_path ? `${TMDB_IMAGE_URL}${i.poster_path}` : 'Imagens/Geral_1.png'}" alt="Pôster de ${i.title}">
+          <div class="filme-info">
+            <h2>${i.title}</h2>
+            <p>${i.release_date?.slice(0, 4) || 'Ano não informado'} | Nota ${i.vote_average?.toFixed(1) || 'N/A'}</p>
+          </div>
+        </article>`
+    }
+  
+  });
+}
+
+
 function moverCatalogo(direcao) {
   catalogo.scrollBy({ left: direcao * catalogo.clientWidth * 0.8, behavior: 'smooth' });
 }
