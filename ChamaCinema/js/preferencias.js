@@ -1,18 +1,94 @@
 let prefs = [];
+const generos = [
+    {
+      "id": 28,
+      "name": "Ação"
+    },
+    {
+      "id": 12,
+      "name": "Aventura"
+    },
+    {
+      "id": 16,
+      "name": "Animação"
+    },
+    {
+      "id": 35,
+      "name": "Comédia"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 99,
+      "name": "Documentário"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 10751,
+      "name": "Família"
+    },
+    {
+      "id": 14,
+      "name": "Fantasia"
+    },
+    {
+      "id": 36,
+      "name": "História"
+    },
+    {
+      "id": 27,
+      "name": "Terror"
+    },
+    {
+      "id": 10402,
+      "name": "Música"
+    },
+    {
+      "id": 9648,
+      "name": "Mistério"
+    },
+    {
+      "id": 10749,
+      "name": "Romance"
+    },
+    {
+      "id": 878,
+      "name": "Ficção científica"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 10752,
+      "name": "Guerra"
+    },
+    {
+      "id": 37,
+      "name": "Faroeste"
+    }
+  ]
 
-function Preferir(genero){
+
+function Preferir(genero, numero){
+    let divo = document.getElementById("redirect");
+    let aqui = document.getElementById("aqui");
+    
     if (!$(genero).hasClass("selected")){
-        prefs.push($(genero).text())
+        prefs.push(numero)
         $(genero).toggleClass("selected")
     }
     else if ($(genero).hasClass("selected")){
         for (let i = 0; i < prefs.length; i++) {
-            if(prefs[i] == $(genero).text()) prefs.splice(i, 1);
+            if(prefs[i] == numero) prefs.splice(i, 1);
         }
         $(genero).toggleClass("selected")
     }
-
-    let divo = document.getElementById("redirect");
 
     if(prefs.length >= 4){/*  href="index.html" */
         divo.innerHTML = `<a>
@@ -29,6 +105,13 @@ function Preferir(genero){
                     </button>
                 </a>`;
     }
+    /* generos.forEach(x => {
+        prefs.forEach(y => {
+            if (x.id == y) {
+                aqui.innerHTML += x.name + "(" + y + "), "
+            }
+        });
+    }); */
 }
 
 function Complementa(){
