@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Chama Cinema</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/pagamento.css">
+    <link id="estampa" rel="stylesheet" href="../css/components/fundo_base.css">
+    <link rel="shortcut icon" href="../Imagens/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header id="header">
@@ -24,5 +29,83 @@
         </div>
         <button class="opcoes_header" type="button" aria-label="Mais opções"><i class="fas fa-ellipsis-vertical fa-lg" id="dropdown_icon"></i></button>
     </header>
+
+    <main>
+        <div id="container-principal">
+            <div id="parte-1">
+                <h1>Assine já</h1>
+                <h2>Escolha o método de pagamento</h2>
+                <div id="opcoes-container">
+                    <button class="opcoes-pagamento" id="pix"><i class="fa-brands fa-pix"></i>Pix</button>
+                    <button class="opcoes-pagamento" id="debito"><i class="fa-solid fa-credit-card"></i>Débito</button>
+                    <button class="opcoes-pagamento" id="credito"><i class="fa-solid fa-credit-card"></i>Crédito</button>
+                </div>
+            </div>
+            <div id="parte-2">
+                <h1>Faça o pagamento</h1>
+                <form class="form-pagamento">
+                    <p id="texto-email">Nome</p>
+                    <input type="text" placeholder="Nome" id="email-login">
+                    <p id="texto-email">Sobrenome</p>
+                    <input type="text" placeholder="Sobrenome" id="email-login">
+                    <p id="texto-email">CPF(opicional)</p>
+                    <input type="number" placeholder="CPF" id="email-login">
+                    <p id="texto-email">Data de Validade</p>
+                    <input type="month" placeholder="Data de Validade" id="email-login">
+                    <p id="texto-email">Código de segurança (CVV)</p>
+                    <input type="number" placeholder="CVV" id="email-login">
+
+                    <div id="termos">
+
+                        <label id="aceitar">
+                            <input type="checkbox" id="termos-checkbox">
+                            <span>Aceitar Termos e condições</span>
+                        </label>
+
+                    </div>
+
+                    <button type="submit" id="botao-pagamento">Efetuar o pagamento</button>
+
+                    </form>
+
+                    <form class="form-pagamento2">
+                    <p id="texto-email">Nome</p>
+                    <input type="text" placeholder="Nome" id="email-login">
+                    <p id="texto-email">Sobrenome</p>
+                    <input type="text" placeholder="Sobrenome" id="email-login">
+                    <p id="texto-email">CPF(opicional)</p>
+                    <input type="number" placeholder="CPF" id="email-login">
+                    <p id="texto-email">Data de Validade</p>
+                    <input type="month" placeholder="Data de Validade" id="email-login">
+                    <p id="texto-email">Código de segurança (CVV)</p>
+                    <input type="number" placeholder="CVV" id="email-login">
+
+                    <div id="termos">
+
+                        <label id="aceitar">
+                            <input type="checkbox" id="termos-checkbox">
+                            <span>Aceitar Termos e condições</span>
+                        </label>
+
+                    </div>
+
+                    <button type="submit" id="botao-pagamento">Efetuar o pagamento</button>
+
+                    </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+
+        <div id="footer-container">
+            <p id="footer-suporte"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> Suporte e recomendações para sua próxima sessão</p>
+            <p id="footer-texto">© 2024 ChamaCinema. Todos os direitos reservados.</p>
+        </div>
+
+    </footer>
+
+    <script src="../js/header.js"></script>
+    <script src="../js/pagamento.js"></script>
 </body>
 </html>
