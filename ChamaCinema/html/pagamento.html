@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,67 +32,77 @@
 
     <main>
         <div id="container-principal">
-            <div id="parte-1">
-                <h1>Assine já</h1>
-                <h2>Escolha o método de pagamento</h2>
-                <div id="opcoes-container">
-                    <button class="opcoes-pagamento" id="pix"><i class="fa-brands fa-pix"></i>Pix</button>
-                    <button class="opcoes-pagamento" id="debito"><i class="fa-solid fa-credit-card"></i>Débito</button>
-                    <button class="opcoes-pagamento" id="credito"><i class="fa-solid fa-credit-card"></i>Crédito</button>
+            <section id="parte-1" aria-labelledby="titulo-pagamento">
+                <p class="etiqueta-pagamento"><i class="fa-solid fa-lock" aria-hidden="true"></i> Pagamento seguro</p>
+                <h1 id="titulo-pagamento">Assine já</h1>
+                <p class="introducao-pagamento">Escolha como deseja pagar e conclua sua assinatura.</p>
+                <h2>Forma de pagamento</h2>
+                <fieldset id="opcoes-container" aria-label="Forma de pagamento">
+                    <button class="opcoes-pagamento" id="pix" type="button" aria-pressed="false">
+                        <i class="fa-brands fa-pix" aria-hidden="true"></i><span>Pix</span>
+                    </button>
+                    <button class="opcoes-pagamento" id="debito" type="button" aria-pressed="false">
+                        <i class="fa-regular fa-credit-card" aria-hidden="true"></i><span>Débito</span>
+                    </button>
+                    <button class="opcoes-pagamento selecionado" id="credito" type="button" aria-pressed="true">
+                        <i class="fa-regular fa-credit-card" aria-hidden="true"></i><span>Crédito</span>
+                    </button>
+                </fieldset>
+                <p class="nota-seguranca"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Seus dados são protegidos durante o pagamento.</p>
+            </section>
+
+            <section id="parte-2" aria-labelledby="titulo-forma-pagamento">
+                <div class="cabecalho-forma">
+                    <div>
+                        <p class="rotulo-forma">PAGAMENTO</p>
+                        <h2 id="titulo-forma-pagamento">Cartão de crédito</h2>
+                    </div>
                 </div>
-            </div>
-            <div id="parte-2">
-                <h1>Faça o pagamento</h1>
-                <form class="form-pagamento">
-                    <p id="texto-email">Nome</p>
-                    <input type="text" placeholder="Nome" id="email-login">
-                    <p id="texto-email">Sobrenome</p>
-                    <input type="text" placeholder="Sobrenome" id="email-login">
-                    <p id="texto-email">CPF(opicional)</p>
-                    <input type="number" placeholder="CPF" id="email-login">
-                    <p id="texto-email">Data de Validade</p>
-                    <input type="month" placeholder="Data de Validade" id="email-login">
-                    <p id="texto-email">Código de segurança (CVV)</p>
-                    <input type="number" placeholder="CVV" id="email-login">
 
-                    <div id="termos">
-
-                        <label id="aceitar">
-                            <input type="checkbox" id="termos-checkbox">
-                            <span>Aceitar Termos e condições</span>
-                        </label>
-
+                <form class="form-pagamento" id="form-cartao">
+                    <div class="campo-pagamento campo-completo">
+                        <label for="numero-cartao">Número do cartão</label>
+                        <input type="text" id="numero-cartao" name="numero-cartao" inputmode="numeric" autocomplete="cc-number" placeholder="0000 0000 0000 0000">
                     </div>
-
-                    <button type="submit" id="botao-pagamento">Efetuar o pagamento</button>
-
-                    </form>
-
-                    <form class="form-pagamento2">
-                    <p id="texto-email">Nome</p>
-                    <input type="text" placeholder="Nome" id="email-login">
-                    <p id="texto-email">Sobrenome</p>
-                    <input type="text" placeholder="Sobrenome" id="email-login">
-                    <p id="texto-email">CPF(opicional)</p>
-                    <input type="number" placeholder="CPF" id="email-login">
-                    <p id="texto-email">Data de Validade</p>
-                    <input type="month" placeholder="Data de Validade" id="email-login">
-                    <p id="texto-email">Código de segurança (CVV)</p>
-                    <input type="number" placeholder="CVV" id="email-login">
-
-                    <div id="termos">
-
-                        <label id="aceitar">
-                            <input type="checkbox" id="termos-checkbox">
-                            <span>Aceitar Termos e condições</span>
-                        </label>
-
+                    <div class="campo-pagamento">
+                        <label for="nome-cartao">Nome no cartão</label>
+                        <input type="text" id="nome-cartao" name="nome-cartao" autocomplete="cc-name" placeholder="Como está no cartão">
                     </div>
+                    <div class="campo-pagamento">
+                        <label for="cpf">CPF <span>(opcional)</span></label>
+                        <input type="text" id="cpf" name="cpf" inputmode="numeric" autocomplete="off" placeholder="000.000.000-00">
+                    </div>
+                    <div class="campo-pagamento">
+                        <label for="validade">Validade</label>
+                        <input type="text" id="validade" name="validade" autocomplete="cc-exp" placeholder="MM/AA">
+                    </div>
+                    <div class="campo-pagamento">
+                        <label for="cvv">Código de segurança</label>
+                        <input type="password" id="cvv" name="cvv" inputmode="numeric" placeholder="CVV">
+                    </div>
+                    <label class="aceitar-termos" for="termos-cartao">
+                        <input type="checkbox" id="termos-cartao" name="termos">
+                        <span>Aceito os termos e condições</span>
+                    </label>
+                    <button type="submit" class="botao-pagamento">Continuar com cartão</button>
+                    <output class="mensagem-pagamento" id="mensagem-pagamento" aria-live="polite" hidden>O processamento do cartão ainda não está conectado nesta versão.</output>
+                </form>
 
-                    <button type="submit" id="botao-pagamento">Efetuar o pagamento</button>
-
-                    </form>
-            </div>
+                <div class="conteudo-pix" id="conteudo-pix" hidden>
+                    <div class="pix-destaque">
+                        <div>
+                            <h3>Pague com Pix</h3>
+                            <p>Uma forma rápida de confirmar sua assinatura.</p>
+                        </div>
+                    </div>
+                    <ol class="passos-pix">
+                        <li><span>1</span>Após a integração do pagamento, o QR Code será gerado nesta etapa.</li>
+                        <li><span>2</span>Abra o aplicativo do seu banco e escolha pagar com Pix.</li>
+                        <li><span>3</span>Confirme o pagamento para ativar sua assinatura.</li>
+                    </ol>
+                    <p class="aviso-pix"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> O recebimento via Pix ainda não está conectado nesta versão.</p>
+                </div>
+            </section>
         </div>
     </main>
 
@@ -105,6 +115,7 @@
 
     </footer>
 
+    <script src="../js/manipulaLS.js"></script>
     <script src="../js/header.js"></script>
     <script src="../js/pagamento.js"></script>
 </body>
