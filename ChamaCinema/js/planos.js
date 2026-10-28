@@ -1,25 +1,39 @@
 
 
 function verificarPlano() {
-    faisca = document.getElementById("faisca");
-    produtor = document.getElementById("produtor"); 
+    cprodutor = document.getElementById("container-produtor");
+    cfaisca = document.getElementById("container-faisca"); 
 
 if (getmemoria("usuarioLogado")) {
     let infos = getmemoria("usuarioLogado");
 
     if (infos['plano'] == "Faísca") {
-      faisca.classList.add("selecionado");
-      faisca.innerHTML = `<i class="fa-solid fa-check"></i></i><span>Selecionado</span>`
+      cfaisca.innerHTML = `
+        <p class="preco-plano"><span class="valor-preco">Gratuito</span><span>para sempre</span></p>
+        <button class="botao-plano selecionado" type="button" id="faisca"><i class="fa-solid fa-check"></i><span>Selecionado</span></button>`
+      cprodutor.innerHTML = `
+        <p class="preco-plano"><span class="valor-preco">R$ 59,90</span><span>por mês</span></p>
+        <a href="pagamento.html">
+        <button class="botao-plano" type="button" id="produtor"><i class="fa-solid fa-tag" aria-hidden="true"></i><span>Assinar</span></button>
+        </a>`
     }
 
     else if (infos['plano'] == "Produtor") {
-      produtor.classList.add("selecionado");
-      faisca.classList.add("selecionado");
-      produtor.innerHTML = `<i class="fa-solid fa-check"></i></i><span>Selecionado</span>`
-      faisca.innerHTML = `<i class="fa-solid fa-check"></i></i><span>Não disponivel</span>`
+      cprodutor.innerHTML = `
+        <p class="preco-plano"><span class="valor-preco">R$ 59,90</span><span>por mês</span></p>
+        <button class="botao-plano selecionado" type="button" id="produtor"><i class="fa-solid fa-tag" aria-hidden="true"></i><span>Selecionado</span></button>`
+      cfaisca.innerHTML = `
+        <p class="preco-plano"><span class="valor-preco">Gratuito</span><span>para sempre</span></p>
+        <button class="botao-plano selecionado" type="button" id="faisca"><i class="fa-solid fa-ban"></i><span>Não disponivel</span></button>`
     }
 
     else if (infos['plano'] == "Administrador") {
+      cprodutor.innerHTML = `
+        <p class="preco-plano"><span class="valor-preco">R$ 59,90</span><span>por mês</span></p>
+        <button class="botao-plano selecionado" type="button" id="produtor"><i class="fa-solid fa-ban"></i><span>Não disponivel</span></button>`
+      cfaisca.innerHTML = `
+        <p class="preco-plano"><span class="valor-preco">Gratuito</span><span>para sempre</span></p>
+        <button class="botao-plano selecionado" type="button" id="faisca"><i class="fa-solid fa-ban"></i><span>Não disponivel</span></button>`
     }
 
   }
