@@ -42,7 +42,34 @@
   </script>
 </head>
 <body class="selection:bg-cinema-pink selection:text-white flex flex-col justify-between">
+  <header id="header">
+        <a href="index.html" id="container-logo"><img src="../Imagens/Geral_7.png" alt="Logo do Chama Cinema" id="logo"> ChamaCinema</a>
 
+        <form id="formulario-pesquisa">
+            <div class="barra-pesquisa">
+                <input id="pesquisa" type="text" placeholder="Procure por filmes ou séries...">
+                <i class="fa-solid fa-magnifying-glass" id="lupa"></i>
+            </div>
+            <div id="resultados-pesquisa" class="resultados-pesquisa" aria-live="polite"></div>
+        </form>
+
+        <button class="opcoes_header"><i class="fa-solid fa-clapperboard icone-header" id="catalogo-icone"></i><p>Catalogo</p></button>
+        <a href="planos.html" class="opcoes_header" id="dire_plano"><i class="fa-solid fa-tag icone-header" id="etiqueta_plano"></i><p>Planos</p></a>
+        <button class="opcoes_header"><i class="fa-solid fa-heart icone-header" id="coracao_favoritos"></i><p>Favoritos</p></button>
+        <div id="usuario-login" class="opcoes_header">
+        </div>
+        <button class="opcoes_header" onclick="dropdownMenu()"><i class="fas fa-ellipsis-vertical fa-lg" id="dropdown_icon"></i></button>
+        <div id="dropdown_menu" class="dropdown-menu"">
+            <table>
+                <tr><td>
+                    <p>
+                        <i class="fa-solid fa-gear"></i>
+                        Configurações
+                    </p>
+                </td></tr>
+            </table>
+        </div>
+    </header>
   <!-- ================= CONTEÚDO PRINCIPAL ================= -->
   <main class="max-w-6xl w-full mx-auto px-4 py-6 space-y-6 flex-grow">
 
@@ -51,13 +78,11 @@
       <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
         
         <!-- Avatar com Anel de Gradiente de Chamas -->
-        <div class="relative group flex-shrink-0">
+        <div id="foto" class="w-28 h-28 md:w-32 md:h-32 rounded-full p-[3px] bg-gradient-to-tr from-cinema-pink via-cinema-orange to-cinema-yellow shadow-xl shadow-cinema-pink/10">
           <div class="w-28 h-28 md:w-32 md:h-32 rounded-full p-[3px] bg-gradient-to-tr from-cinema-pink via-cinema-orange to-cinema-yellow shadow-xl shadow-cinema-pink/10">
             <div class="w-full h-full rounded-full bg-[#0a0b12] flex items-center justify-center relative overflow-hidden">
               <div class="w-16 h-16 rounded-full bg-gradient-to-t from-cinema-pink/20 to-transparent flex items-center justify-center">
-                <svg class="w-12 h-12 fill-white drop-shadow-[0_0_10px_rgba(255,0,122,0.8)]" viewBox="0 0 24 24">
-                  <path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/>
-                </svg>
+                  <img src="../Imagens/StanLee.jpg">
               </div>
             </div>
           </div>
@@ -230,7 +255,7 @@
 
       </div>
 
-          <!-- Botão Favoritar (Coração Rosa) -->
+          <!-- Botão Favoritar (Coração Rosa)
           <button 
             onclick="toggleFavorite(this, event)" 
             class="favorite-btn active absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-20"
@@ -239,7 +264,7 @@
             <svg class="w-4 h-4 fill-cinema-pink transition-colors" viewBox="0 0 24 24">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
             </svg>
-          </button>
+          </button> -->
          
     </section>
     
@@ -332,99 +357,6 @@
 
   <!-- Container de Toasts -->
   <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
-
-  <!-- ================= JAVASCRIPT ================= -->
-  <script>
-    // Mostrar Mensagem Toast
-    function showToast(message) {
-      const toastContainer = document.getElementById('toastContainer');
-      const toast = document.createElement('div');
-      toast.className = 'toast-anim bg-[#1f2130] border border-cinema-cardBorder text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-xl flex items-center gap-2 pointer-events-auto';
-      toast.innerHTML = `<span>️️️</span> <span>${message}</span>`;
-      
-      toastContainer.appendChild(toast);
-      setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transition = 'opacity 0.3s ease';
-        setTimeout(() => toast.remove(), 300);
-      }, 2500);
-    }
-
-    // Modal Editar Perfil
-    function openEditModal() {
-      const name = document.getElementById('userNameDisplay').innerText;
-      const bio = document.getElementById('userBioDisplay').innerText;
-      const date = document.getElementById('userDateDisplay').innerText;
-
-      document.getElementById('inputName').value = name;
-      document.getElementById('inputBio').value = bio;
-      document.getElementById('inputDate').value = date;
-
-      document.getElementById('editProfileModal').classList.remove('hidden');
-    }
-
-    function closeEditModal() {
-      document.getElementById('editProfileModal').classList.add('hidden');
-    }
-
-    function saveProfile(e) {
-      e.preventDefault();
-      const newName = document.getElementById('inputName').value.trim();
-      const newBio = document.getElementById('inputBio').value.trim();
-      const newDate = document.getElementById('inputDate').value.trim();
-
-      if (newName) document.getElementById('userNameDisplay').innerText = newName;
-      if (newBio) document.getElementById('userBioDisplay').innerText = newBio;
-      if (newDate) document.getElementById('userDateDisplay').innerText = newDate;
-
-      closeEditModal();
-      showToast('Perfil atualizado com sucesso!');
-    }
-
-    // Toggle Favorito (Coração Rosa / Cinza)
-    function toggleFavorite(btn, event) {
-      event.stopPropagation();
-      const svg = btn.querySelector('svg');
-      const isCurrentlyActive = btn.classList.contains('active');
-
-      if (isCurrentlyActive) {
-        btn.classList.remove('active');
-        svg.setAttribute('fill', '#4b5563');
-        showToast('Removido dos favoritos');
-      } else {
-        btn.classList.add('active');
-        svg.setAttribute('fill', '#ff007a');
-        showToast('Adicionado aos favoritos!');
-      }
-    }
-
-    // Toggle Tag de Preferência
-    function toggleTag(tagElement) {
-      const isSelected = tagElement.classList.contains('bg-cinema-pink');
-      if (isSelected) {
-        tagElement.classList.remove('bg-cinema-pink', 'text-white', 'border-cinema-pink');
-        tagElement.classList.add('bg-[#1a1c28]', 'text-gray-300', 'border-cinema-cardBorder');
-      } else {
-        tagElement.classList.add('bg-cinema-pink', 'text-white', 'border-cinema-pink');
-        tagElement.classList.remove('bg-[#1a1c28]', 'text-gray-300', 'border-cinema-cardBorder');
-      }
-    }
-
-    // Filtro de Busca de Filmes
-    function filterMovies() {
-      const query = document.getElementById('searchInput').value.toLowerCase().trim();
-      const movieCards = document.querySelectorAll('.movie-card-item');
-
-      movieCards.forEach(card => {
-        const title = card.getAttribute('data-title') || '';
-        if (title.includes(query)) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-  </script>
 
 </body>
 </html>
