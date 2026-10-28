@@ -53,3 +53,24 @@ body::before {
   #botao-produtor:hover {
     background-color: var(--color-black-panel-strong);
   }
+
+  .pop-up-produzir{
+    background-color: white;
+    border-radius: var(--radius-lg);
+
+
+  }
+
+  .pop-up-produzir form{
+    width: 100%;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  .pop-up-produzir input{
+    display: block;
+  }
