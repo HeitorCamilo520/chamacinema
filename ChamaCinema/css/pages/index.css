@@ -231,14 +231,19 @@ main > * {
     margin: 0 0 1rem;
   }
 
+  .container-catalogo h2 {
+    color: white;
+    margin: 0 0 1rem;
+    padding: 1%;
+  }
   
-  #container-prefs {
+  .container-prefs {
     width: min(1200px, 100%);
     padding: 1.2rem 0 0;
   }
 
 
-  #container-prefs h1 {
+  .container-prefs h1 {
     color: white;
     margin: 0 0 1rem;
   }
