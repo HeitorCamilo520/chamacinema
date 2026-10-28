@@ -1,5 +1,4 @@
 const catalogo = document.querySelector('#container-em-alta');
-const CatalogoP = document.querySelector('#container-prefs');
 const slidesContainer = document.querySelector('#carousel-slides');
 let currentIndex = 0;
 
@@ -58,45 +57,50 @@ function renderizarFilmes(filmes) {
 
 // ===== Catálogo (preferencias) =====
 async function buscarPrefs() {
-  let pag = Math.floor(Math.random() * (20 - 2 + 1)) + 2;
-  
-  CatalogoP.innerHTML = '<p class="mensagem-catalogo">Carregando filmes...</p>';
+  let pag = Math.floor(Math.random() * (20 - 1 + 1)) + 1;
+async function buscarFilmes() {
+  catalogo.innerHTML = '<p class="mensagem-catalogo">Carregando filmes...</p>';
   try {
     const resposta = await buscarComTimeout(`${TMDB_API_URL}/movie/popular?language=pt-BR&page=${pag}&api_key=${TMDB_API_KEY}`);
-
     if (!resposta.ok) throw new Error('Não foi possível acessar a TMDB.');
     const { results } = await resposta.json();
-    renderizarPrefs(results);
+    renderizarFilmes(results);
   } catch (erro) {
-    CatalogoP.innerHTML = `<p class="mensagem-catalogo">${mensagemDeErro(erro)}</p>`;
+    catalogo.innerHTML = `<p class="mensagem-catalogo">${mensagemDeErro(erro)}</p>`;
   }
-
+}
+  catalogo.innerHTML = '<p class="mensagem-catalogo">Carregando filmes...</p>';
+  try {
+    const resposta = await buscarComTimeout(`${TMDB_API_URL}/movie/popular?language=pt-BR&page=1&api_key=${TMDB_API_KEY}`);
+    if (!resposta.ok) throw new Error('Não foi possível acessar a TMDB.');
+    const { results } = await resposta.json();
+    renderizarFilmes(results);
+  } catch (erro) {
+    catalogo.innerHTML = `<p class="mensagem-catalogo">${mensagemDeErro(erro)}</p>`;
+  }
 }
 
 function renderizarPrefs(filmes) {
   if (!filmes?.length) {
-    CatalogoP.innerHTML = '<p class="mensagem-catalogo">Nenhum filme encontrado.</p>';
+    catalogo.innerHTML = '<p class="mensagem-catalogo">Nenhum filme encontrado.</p>';
     return;
   }
-  CatalogoP.innerHTML = "";
 
   let usu = getmemoria("usuarioLogado");
 
-  if (usu) {
-    filmes.forEach(i => {
-      if (i.genre_ids.some(elemento => usu.preferencias.includes(elemento))) {
-        CatalogoP.innerHTML += `
-          <article class="filme-card">
-            <img src="${i.poster_path ? `${TMDB_IMAGE_URL}${i.poster_path}` : 'Imagens/Geral_1.png'}" alt="Pôster de ${i.title}">
-            <div class="filme-info">
-              <h2>${i.title}</h2>
-              <p>${i.release_date?.slice(0, 4) || 'Ano não informado'} | Nota ${i.vote_average?.toFixed(1) || 'N/A'}</p>
-            </div>
-          </article>`
-      }
-    
-    });
-  }
+  filmes.forEach(i => {
+    if (i.genre_ids.some(elemento => usu.preferencias.includes(elemento))) {
+      catalogo.innerHTML += `
+        <article class="filme-card">
+          <img src="${i.poster_path ? `${TMDB_IMAGE_URL}${i.poster_path}` : 'Imagens/Geral_1.png'}" alt="Pôster de ${i.title}">
+          <div class="filme-info">
+            <h2>${i.title}</h2>
+            <p>${i.release_date?.slice(0, 4) || 'Ano não informado'} | Nota ${i.vote_average?.toFixed(1) || 'N/A'}</p>
+          </div>
+        </article>`
+    }
+  
+  });
 }
 
 function moverCatalogo(direcao) {
@@ -188,15 +192,33 @@ let fundo =  document.getElementById('estampa');
                 <div id="container-catalogo">
                   <h1>Minhas produções</h1>
                   <div class="catalogo-faixa">
-                  <button class="produtor-card">
-                    <div id="container-produtor-texto">
-                      <h1><i class="fa-solid fa-plus"></i></h1>
-                      <h2>Criar nova produção</h2>
-                    </div>
-                  </button>
-                  <article class="filme-card">
-                    <img>
-                  </article>
+                    <button class="produtor-card" onclick="produzir()">
+                      <div id="container-produtor-texto">
+                        <h1><i class="fa-solid fa-plus"></i></h1>
+                        <h2>Criar nova produção</h2>
+                      </div>
+                    </button>
+                    <article class="filme-card">
+                      <img src="../Imagens/ArthPLeo.png">
+                    </article>
+                    <article class="filme-card">
+                      <img src="../Imagens/ArthPLeo.png">
+                    </article>
+                    <article class="filme-card">
+                      <img src="../Imagens/ArthPLeo.png">
+                    </article>
+                    <article class="filme-card">
+                      <img src="../Imagens/ArthPLeo.png">
+                    </article>
+                  </div>
+                  <div class="pop-up-produzir">
+                    <form>
+                      <input>
+                      <input> 
+                      <input> 
+                      <input> 
+                      <input> 
+                    </form>
                   </div>
                 </div>                                                      
             </div>
@@ -238,7 +260,6 @@ document.querySelector('.catalogo-next')?.addEventListener('click', () => moverC
 
 
 buscarFilmes();
-buscarPrefs();
 buscarDestaques();
 
 
