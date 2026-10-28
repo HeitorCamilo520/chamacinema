@@ -193,12 +193,35 @@ body {
     font-size: 12px;
 }
 
+#aparece {
+    position: fixed;
+    z-index: 9999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#pop {
+    width: 1200px;
+    height: 500px;
+    background-color: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
 .rodape-plano {
     display: grid;
     gap: 18px;
     margin-top: auto;
     padding-top: 20px;
     border-top: 1px solid rgb(255 255 255 / 9%);
+}
+
+.rodape-plano a{
+    text-decoration: none;
 }
 
 .preco-plano {
