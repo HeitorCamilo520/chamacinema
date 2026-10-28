@@ -220,17 +220,28 @@ main > * {
   }
 
 
-  #container-catalogo {
+  .container-catalogo {
     width: min(1200px, 100%);
     padding: 1.2rem 0 0;
   }
 
 
-  #container-catalogo h1 {
+  .container-catalogo h1 {
     color: white;
     margin: 0 0 1rem;
   }
 
+  
+  #container-prefs {
+    width: min(1200px, 100%);
+    padding: 1.2rem 0 0;
+  }
+
+
+  #container-prefs h1 {
+    color: white;
+    margin: 0 0 1rem;
+  }
 
   .catalogo-faixa {
     position: relative;
@@ -261,6 +272,24 @@ main > * {
     display: none;
   }
 
+  
+  #container-prefs {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding: .5rem .75rem;
+    border-radius: 16px;
+  }
+
+
+  #container-prefs::-webkit-scrollbar {
+    display: none;
+  }
 
   .catalogo-prev,
   .catalogo-next {
