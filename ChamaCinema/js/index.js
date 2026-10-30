@@ -98,7 +98,7 @@ async function buscarPrefs() {
                     <p class="mensagem-catalogo">${mensagemDeErro(erro)}</p>
                     </div>
                     <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
-                </div>```;
+                </div>`;
   }
 }
 
