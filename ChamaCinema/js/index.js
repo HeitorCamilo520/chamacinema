@@ -20,7 +20,7 @@ const generos = {
 };
 
 const catalogo = document.querySelector('#container-em-alta');
-const CatalogoP = document.querySelector('#container-prefs');
+const prefs = document.querySelector("#prefs");
 const slidesContainer = document.querySelector('#carousel-slides');
 let currentIndex = 0;
 
@@ -79,46 +79,54 @@ function renderizarFilmes(filmes) {
 
 // ===== Catálogo (preferencias) =====
 async function buscarPrefs() {
-  let pag = Math.floor(Math.random() * (20 - 1 + 1)) + 1;
-async function buscarFilmes() {
-  catalogo.innerHTML = '<p class="mensagem-catalogo">Carregando filmes...</p>';
+  alert("ai");
+  let pag = Math.floor(Math.random() * (30 - 2 + 1)) + 2;
+  /* prefs.innerHTML = `<div class="catalogo-faixa">
+                    <button class="catalogo-prev" type="button" aria-label="Filmes anteriores">❮</button>
+                    <div id="container-prefs"></div>
+                    <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
+                </div>`; */
   try {
     const resposta = await buscarComTimeout(`${TMDB_API_URL}/movie/popular?language=pt-BR&page=${pag}&api_key=${TMDB_API_KEY}`);
     if (!resposta.ok) throw new Error('Não foi possível acessar a TMDB.');
     const { results } = await resposta.json();
-    renderizarFilmes(results);
+    renderizarPrefs(results);
   } catch (erro) {
-    catalogo.innerHTML = `<p class="mensagem-catalogo">${mensagemDeErro(erro)}</p>`;
+    prefs.innerHTML = `<div class="catalogo-faixa">
+                    <button class="catalogo-prev" type="button" aria-label="Filmes anteriores">❮</button>
+                    <div id="container-prefs">
+                    <p class="mensagem-catalogo">${mensagemDeErro(erro)}</p>
+                    </div>
+                    <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
+                </div>```;
   }
 }
-  catalogo.innerHTML = '<p class="mensagem-catalogo">Carregando filmes...</p>';
-  try {
-    const resposta = await buscarComTimeout(`${TMDB_API_URL}/movie/popular?language=pt-BR&page=1&api_key=${TMDB_API_KEY}`);
-    if (!resposta.ok) throw new Error('Não foi possível acessar a TMDB.');
-    const { results } = await resposta.json();
-    renderizarFilmes(results);
-  } catch (erro) {
-    catalogo.innerHTML = `<p class="mensagem-catalogo">${mensagemDeErro(erro)}</p>`;
-  }
-}
+
 
 function renderizarPrefs(filmes) {
+  let usu = getmemoria("usuarioLogado");
+
   if (!filmes?.length) {
-    catalogo.innerHTML = '<p class="mensagem-catalogo">Nenhum filme encontrado.</p>';
+    prefs.innerHTML = `<div class="catalogo-faixa">
+                    <button class="catalogo-prev" type="button" aria-label="Filmes anteriores">❮</button>
+                      <div id="container-prefs">
+                        <p class="mensagem-catalogo">Nenhum filme encontrado.</p>
+                      </div>
+                    <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
+                </div>`;
     return;
   }
-
-  let usu = getmemoria("usuarioLogado");
+  
 /* 
   if (usu) {
+    catalogop.innerHTML = "";
     filmes.forEach(i => {
       if (i.genre_ids.some(elemento => usu.preferencias.includes(elemento))) {
-        CatalogoP.innerHTML += `
+        catalogop.innerHTML += `
           <article class="filme-card">
             <img src="${i.poster_path ? `${TMDB_IMAGE_URL}${i.poster_path}` : 'Imagens/Geral_1.png'}" alt="Pôster de ${i.title}">
             <div class="filme-info">
               <h2>${i.title}</h2>
-              //h2 class="escondido">"id"</h2>
               <p>${i.release_date?.slice(0, 4) || 'Ano não informado'} | Nota ${i.vote_average?.toFixed(1) || 'N/A'}</p>
             </div>
           </article>`
@@ -126,14 +134,21 @@ function renderizarPrefs(filmes) {
     
     });
   } */
+
+    alert(generos[0]);
+    alert(usu);
+ 
   if (usu) {
-    let faixa = document.getElementById("faixa")
     usu.preferencias.forEach(i => {
-      faixa.innerHTML += "<h2>" + generos[i] + "</h2>";
+      alert(i);
+      prefs.innerHTML += `<h2> ${generos[i]} </h2>
+      <div class="catalogo-faixa">
+      <button class="catalogo-prev" type="button" aria-label="Filmes anteriores">❮</button>
+      <div id="container-prefs">`;
       
       filmes.forEach(j => {
       if (j.genre_ids.includes(i)) {
-        CatalogoP.innerHTML += `
+        prefs.innerHTML += `
           <article class="filme-card">
             <img src="${j.poster_path ? `${TMDB_IMAGE_URL}${j.poster_path}` : 'Imagens/Geral_1.png'}" alt="Pôster de ${j.title}">
             <div class="filme-info">
@@ -144,7 +159,9 @@ function renderizarPrefs(filmes) {
       }
 
       });
-    
+      prefs.innerHTML += `</div>
+                    <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
+                </div>`;
     });
   }
 }
@@ -306,6 +323,7 @@ document.querySelector('.catalogo-next')?.addEventListener('click', () => moverC
 
 
 buscarFilmes();
+buscarPrefs();
 buscarDestaques();
 
 
