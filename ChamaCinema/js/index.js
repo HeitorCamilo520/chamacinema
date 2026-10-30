@@ -79,13 +79,13 @@ function renderizarFilmes(filmes) {
 
 // ===== Catálogo (preferencias) =====
 async function buscarPrefs() {
-  alert("ai");
   let pag = Math.floor(Math.random() * (30 - 2 + 1)) + 2;
   /* prefs.innerHTML = `<div class="catalogo-faixa">
                     <button class="catalogo-prev" type="button" aria-label="Filmes anteriores">❮</button>
                     <div id="container-prefs"></div>
                     <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
                 </div>`; */
+                /* alert(`${TMDB_API_URL}/movie/popular?language=pt-BR&page=${pag}&api_key=${TMDB_API_KEY}`); */
   try {
     const resposta = await buscarComTimeout(`${TMDB_API_URL}/movie/popular?language=pt-BR&page=${pag}&api_key=${TMDB_API_KEY}`);
     if (!resposta.ok) throw new Error('Não foi possível acessar a TMDB.');
@@ -104,7 +104,15 @@ async function buscarPrefs() {
 
 
 function renderizarPrefs(filmes) {
-  let usu = getmemoria("usuarioLogado");
+  /*alert("ai!"); 
+  prefs.innerHTML = `<div class="catalogo-faixa">
+                    <button class="catalogo-prev" type="button" aria-label="Filmes anteriores">❮</button>
+                      <div id="container-prefs">
+                        <p class="mensagem-catalogo">Por enquanto nada.</p>
+                      </div>
+                    <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
+                </div>` */
+  const usu = getmemoria("usuarioLogado");
 
   if (!filmes?.length) {
     prefs.innerHTML = `<div class="catalogo-faixa">
@@ -117,53 +125,59 @@ function renderizarPrefs(filmes) {
     return;
   }
   
-/* 
+
   if (usu) {
-    catalogop.innerHTML = "";
+    let texto = "";
     filmes.forEach(i => {
       if (i.genre_ids.some(elemento => usu.preferencias.includes(elemento))) {
-        catalogop.innerHTML += `
+        texto += `
           <article class="filme-card">
             <img src="${i.poster_path ? `${TMDB_IMAGE_URL}${i.poster_path}` : 'Imagens/Geral_1.png'}" alt="Pôster de ${i.title}">
             <div class="filme-info">
               <h2>${i.title}</h2>
               <p>${i.release_date?.slice(0, 4) || 'Ano não informado'} | Nota ${i.vote_average?.toFixed(1) || 'N/A'}</p>
             </div>
-          </article>`
+          </article>`;
       }
     
     });
-  } */
+    prefs.innerHTML =`<div class="catalogo-faixa">
+                    <button class="catalogo-prev" type="button" aria-label="Filmes anteriores">❮</button>
+                        <div id="container-prefs"> ` + texto + `</div>
+                    <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
+                </div>`;
+  }
 
-    alert(generos[0]);
-    alert(usu);
- 
-  if (usu) {
+/* 
+    alert("ai2!");
     usu.preferencias.forEach(i => {
-      alert(i);
-      prefs.innerHTML += `<h2> ${generos[i]} </h2>
+alert("usu");
+        prefs.innerHTML +=`<h2> ${generos[i]} </h2>
       <div class="catalogo-faixa">
       <button class="catalogo-prev" type="button" aria-label="Filmes anteriores">❮</button>
-      <div id="container-prefs">`;
+      <div id="container-prefs">`
+        prefs.innerHTML = filmes.map((filme) => {
+  return filme.genre_ids.includes(i) ? prefs.innerHTML += `
+          <article class="filme-card">
+            <img src="${filme.poster_path ? `${TMDB_IMAGE_URL}${filme.poster_path}` : 'Imagens/Geral_1.png'}" alt="Pôster de ${filme.title}">
+            <div class="filme-info">
+              <h2>${filme.title}</h2>
+              <p>${filme.release_date?.slice(0, 4) || 'Ano não informado'} | Nota ${filme.vote_average?.toFixed(1) || 'N/A'}</p>
+            </div>
+          </article>` : prefs.innerHTML += ` `;
+}).join('');
+      ;
       
       filmes.forEach(j => {
       if (j.genre_ids.includes(i)) {
-        prefs.innerHTML += `
-          <article class="filme-card">
-            <img src="${j.poster_path ? `${TMDB_IMAGE_URL}${j.poster_path}` : 'Imagens/Geral_1.png'}" alt="Pôster de ${j.title}">
-            <div class="filme-info">
-              <h2>${j.title}</h2>
-              <p>${j.release_date?.slice(0, 4) || 'Ano não informado'} | Nota ${j.vote_average?.toFixed(1) || 'N/A'}</p>
-            </div>
-          </article>`
+        prefs.innerHTML += 
       }
 
       });
       prefs.innerHTML += `</div>
                     <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
                 </div>`;
-    });
-  }
+    }); */
 }
 
 function moverCatalogo(direcao) {
