@@ -22,6 +22,7 @@ const generos = {
 const catalogo = document.querySelector('#container-em-alta');
 const prefs = document.querySelector("#prefs");
 const slidesContainer = document.querySelector('#carousel-slides');
+const usu = getmemoria("usuarioLogado");
 let currentIndex = 0;
 
 
@@ -34,7 +35,6 @@ async function buscarComTimeout(url) {
     clearTimeout(temporizador);
   }
 }
-
 
 function mensagemDeErro(erro) {
   return erro.name === 'AbortError'
@@ -78,42 +78,27 @@ function renderizarFilmes(filmes) {
 }
 
 // ===== Catálogo (preferencias) =====
-async function buscarPrefs() {
-  let pag = Math.floor(Math.random() * (30 - 2 + 1)) + 2;
-  /* prefs.innerHTML = `<div class="catalogo-faixa">
-                    <button class="catalogo-prev" type="button" aria-label="Filmes anteriores">❮</button>
-                    <div id="container-prefs"></div>
-                    <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
-                </div>`; */
-                /* alert(`${TMDB_API_URL}/movie/popular?language=pt-BR&page=${pag}&api_key=${TMDB_API_KEY}`); */
+async function buscarPrefs(pag, num = 12) {  
   try {
     const resposta = await buscarComTimeout(`${TMDB_API_URL}/movie/popular?language=pt-BR&page=${pag}&api_key=${TMDB_API_KEY}`);
     if (!resposta.ok) throw new Error('Não foi possível acessar a TMDB.');
     const { results } = await resposta.json();
-    renderizarPrefs(results);
+    renderizarPrefs(results, num);
   } catch (erro) {
     prefs.innerHTML = `<div class="catalogo-faixa">
-                    <button class="catalogo-prev" type="button" aria-label="Filmes anteriores">❮</button>
-                    <div id="container-prefs">
-                    <p class="mensagem-catalogo">${mensagemDeErro(erro)}</p>
-                    </div>
-                    <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
-                </div>`;
+                        <button class="catalogo-prev" type="button" aria-label="Filmes anteriores">❮</button>
+                          <div id="container-prefs">
+                            <p class="mensagem-catalogo">${mensagemDeErro(erro)}</p>
+                          </div>
+                        <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
+                       </div>`;
   }
+  
+  
 }
 
 
-function renderizarPrefs(filmes) {
-  /*alert("ai!"); 
-  prefs.innerHTML = `<div class="catalogo-faixa">
-                    <button class="catalogo-prev" type="button" aria-label="Filmes anteriores">❮</button>
-                      <div id="container-prefs">
-                        <p class="mensagem-catalogo">Por enquanto nada.</p>
-                      </div>
-                    <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
-                </div>` */
-  const usu = getmemoria("usuarioLogado");
-
+function renderizarPrefs(filmes, num = 12) {
   if (!filmes?.length) {
     prefs.innerHTML = `<div class="catalogo-faixa">
                     <button class="catalogo-prev" type="button" aria-label="Filmes anteriores">❮</button>
@@ -124,8 +109,7 @@ function renderizarPrefs(filmes) {
                 </div>`;
     return;
   }
-  
-
+/* 
   if (usu) {
     let texto = "";
     filmes.forEach(i => {
@@ -146,42 +130,37 @@ function renderizarPrefs(filmes) {
                         <div id="container-prefs"> ` + texto + `</div>
                     <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
                 </div>`;
-  }
-
-/* 
-    alert("ai2!");
-    usu.preferencias.forEach(i => {
-alert("usu");
-        prefs.innerHTML +=`<h2> ${generos[i]} </h2>
+  } */
+ 
+      let texto = "";
+        texto += `<h2> ${generos[num]} </h2>
       <div class="catalogo-faixa">
-      <button class="catalogo-prev" type="button" aria-label="Filmes anteriores">❮</button>
-      <div id="container-prefs">`
-        prefs.innerHTML = filmes.map((filme) => {
-  return filme.genre_ids.includes(i) ? prefs.innerHTML += `
-          <article class="filme-card">
-            <img src="${filme.poster_path ? `${TMDB_IMAGE_URL}${filme.poster_path}` : 'Imagens/Geral_1.png'}" alt="Pôster de ${filme.title}">
-            <div class="filme-info">
-              <h2>${filme.title}</h2>
-              <p>${filme.release_date?.slice(0, 4) || 'Ano não informado'} | Nota ${filme.vote_average?.toFixed(1) || 'N/A'}</p>
-            </div>
-          </article>` : prefs.innerHTML += ` `;
-}).join('');
-      ;
-      
-      filmes.forEach(j => {
-      if (j.genre_ids.includes(i)) {
-        prefs.innerHTML += 
-      }
-
-      });
-      prefs.innerHTML += `</div>
-                    <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
+      <button class="catalogo-prev" type="button" aria-label="Filmes anteriores" onclick="moverPrefs(this, -1)">❮</button>
+      <div id="container-prefs">`;
+       filmes.forEach(j => {
+        if (j.genre_ids.includes(num)) {
+          texto += `
+            <article class="filme-card">
+              <img src="${j.poster_path ? `${TMDB_IMAGE_URL}${j.poster_path}` : 'Imagens/Geral_1.png'}" alt="Pôster de ${j.title}">
+              <div class="filme-info">
+                <h2>${j.title}</h2>
+                <p>${j.release_date?.slice(0, 4) || 'Ano não informado'} | Nota ${j.vote_average?.toFixed(1) || 'N/A'}</p>
+              </div>
+            </article>`;
+        }
+});
+    texto += `</div>
+                    <button class="catalogo-next" type="button" aria-label="Próximos filmes" onclick="moverPrefs(this, 1)">❯</button>
                 </div>`;
-    }); */
+    prefs.innerHTML += texto;
 }
 
 function moverCatalogo(direcao) {
   catalogo.scrollBy({ left: direcao * catalogo.clientWidth * 0.8, behavior: 'smooth' });
+}
+function moverPrefs(obj, direcao) {
+  let faixa = obj.parentNode.children[1];
+  faixa.scrollBy({ left: direcao * faixa.clientWidth * 0.8, behavior: 'smooth' });
 }
 
 
@@ -337,7 +316,10 @@ document.querySelector('.catalogo-next')?.addEventListener('click', () => moverC
 
 
 buscarFilmes();
-buscarPrefs();
+usu.preferencias.forEach(i =>{
+  let pag = Math.floor(Math.random() * (30 - 2 + 1)) + 2;
+  buscarPrefs(pag, i);
+});
 buscarDestaques();
 
 
