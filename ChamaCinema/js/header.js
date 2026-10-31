@@ -2,6 +2,7 @@ const pesquisa = document.querySelector('#pesquisa');
 const formularioPesquisa = pesquisa?.closest('form');
 const resultadosPesquisa = document.querySelector('#resultados-pesquisa');
 const dropdown = document.getElementById('dropdown_menu');
+const usuario = document.getElementById('usuario-login');
 let temporizadorPesquisa;
 
 if(!getmemoria("usuarios")){
@@ -67,24 +68,29 @@ document.addEventListener('click', (evento) => {
 });
 
 function dropdownMenu() {
-  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+  
+  if(usuario.parentNode.classList.contains('drop')){
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
 
     document.addEventListener('click', (evento) => {
-    const botaoDropdown = document.getElementById('dropdown_icon')?.closest('button');
-    if (dropdown && !dropdown.contains(evento.target) && !botaoDropdown?.contains(evento.target)) {
-      dropdown.style.display = 'none';
-    }
-  });
+      const botaoDropdown = document.getElementById('dropdown_icon')?.closest('button');
+
+      if (dropdown && !dropdown.contains(evento.target) && !botaoDropdown?.contains(evento.target)) {
+        dropdown.style.display = 'none';
+      }
+    });
+
+  }
 }
 
 
 function atualizarOpcaoSairConta() {
   const tabela = document.querySelector('#dropdown_menu table');
   const sairConta = document.getElementById('sair-conta');
-  const usuario = document.getElementById('usuario-login');
 
   if (getmemoria("usuarioLogado")) {
     usuario.classList.add('opcoes_header');
+    usuario.parentNode.classList.add('drop');
     usuario.innerHTML = `
     <div id="foto">
                 <img src="${getmemoria("usuarioLogado").linkFoto}">
@@ -117,6 +123,7 @@ function atualizarOpcaoSairConta() {
 
   if (!getmemoria("usuarioLogado")) {
     usuario.classList.remove('opcoes_header');
+    usuario.parentNode.classList.remove('drop');
     usuario.innerHTML = `<a href="login.html" class="opcoes_header"><i class="fa-solid fa-user icone-header" id="pessoa_login"></i><p>Login</p></a>`;
   }
 

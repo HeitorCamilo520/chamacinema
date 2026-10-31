@@ -304,17 +304,3 @@
 }
 
 
-/* =========================
-   BOTÃO DE MENU
-========================= */
-
-#dropdown_icon {
-    font-size: 18px;
-}
-
-#header > button.opcoes_header:last-of-type {
-    width: 48px;
-    height: 48px;
-    padding: 0;
-}
-

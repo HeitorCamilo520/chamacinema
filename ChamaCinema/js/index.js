@@ -220,13 +220,14 @@ function atualizarPosicaoSlide() {
 
 
 function Planos() {
-
-
+  alert("ai!");
+      alert(prefs.children[0].innerHTML);
 let fundo =  document.getElementById('estampa');
 
 
   if (getmemoria("usuarioLogado")) {
     let infos = getmemoria("usuarioLogado");
+    prefs.children[0].textContent = "Recomendados para você";
 
 
     if (infos['plano'] == "Faísca") {
@@ -237,6 +238,7 @@ let fundo =  document.getElementById('estampa');
 
     else if (infos['plano'] == "Produtor") {
       fundo.href = "../css/components/produtor.css";
+      prefs.children[0].textContent = "Baseados em suas preferências";
       document.getElementById("planos").innerHTML = `<div id="container-produtor">
                 <button id="botao-produtor">
                     <i class="fa-solid fa-video icone-produtor"></i>
@@ -284,6 +286,7 @@ let fundo =  document.getElementById('estampa');
 
     else if (infos['plano'] == "Administrador") {
       fundo.href = "../css/components/administrador.css";
+      prefs.children[0].textContent = "Com base em seu gosto por";
       document.getElementById("planos").innerHTML = `<div id="container-administrador">
                 <button id="botao-administrador">
                     <i class="fa-solid fa-user-shield icone-administrador"></i>
@@ -299,6 +302,7 @@ let fundo =  document.getElementById('estampa');
   }
     else if (!getmemoria("usuarioLogado")) {
       fundo.href = "../css/components/fundo_base.css";
+      /*  = ""; */
 }
 }
 
@@ -316,10 +320,14 @@ document.querySelector('.catalogo-next')?.addEventListener('click', () => moverC
 
 
 buscarFilmes();
-usu.preferencias.forEach(i =>{
-  let pag = Math.floor(Math.random() * (30 - 2 + 1)) + 2;
-  buscarPrefs(pag, i);
-});
+if (usu){
+  prefs.innerHTML = `<h1>Recomendados para você</h1>`;
+  usu.preferencias.forEach(i =>{
+    let pag = Math.floor(Math.random() * (30 - 2 + 1)) + 2;
+    buscarPrefs(pag, i);
+  });
+
+}
 buscarDestaques();
 
 
