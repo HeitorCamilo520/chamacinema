@@ -3,8 +3,8 @@ const generos = {
     12: "Aventura",
     16: "Animação",
     35: "Comédia",
-    80: "Crime",
-    99: "Documentário",
+    80: "Crime",/* 
+    99: "Documentário", */
     18: "Drama",
     10751: "Família",
     14: "Fantasia",
@@ -18,6 +18,7 @@ const generos = {
     10752: "Guerra",
     37: "Faroeste"
 };
+let nums = 0;
 
 const catalogo = document.querySelector('#container-em-alta');
 const prefs = document.querySelector("#prefs");
@@ -109,11 +110,12 @@ function renderizarPrefs(filmes, num = 12) {
                 </div>`;
     return;
   }
-/* 
+
   if (usu) {
     let texto = "";
     filmes.forEach(i => {
-      if (i.genre_ids.some(elemento => usu.preferencias.includes(elemento))) {
+      if (i.genre_ids.some(elemento => usu.preferencias.includes(elemento)) && nums < 20) {
+        nums+=1;
         texto += `
           <article class="filme-card">
             <img src="${i.poster_path ? `${TMDB_IMAGE_URL}${i.poster_path}` : 'Imagens/Geral_1.png'}" alt="Pôster de ${i.title}">
@@ -130,8 +132,8 @@ function renderizarPrefs(filmes, num = 12) {
                         <div id="container-prefs"> ` + texto + `</div>
                     <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
                 </div>`;
-  } */
- 
+  }
+ /* 
       let texto = "";
         texto += `<h2> ${generos[num]} </h2>
       <div class="catalogo-faixa">
@@ -152,7 +154,7 @@ function renderizarPrefs(filmes, num = 12) {
     texto += `</div>
                     <button class="catalogo-next" type="button" aria-label="Próximos filmes" onclick="moverPrefs(this, 1)">❯</button>
                 </div>`;
-    prefs.innerHTML += texto;
+    prefs.innerHTML += texto; */
 }
 
 function moverCatalogo(direcao) {
@@ -220,10 +222,7 @@ function atualizarPosicaoSlide() {
 
 
 function Planos() {
-  alert("ai!");
-      alert(prefs.children[0].innerHTML);
 let fundo =  document.getElementById('estampa');
-
 
   if (getmemoria("usuarioLogado")) {
     let infos = getmemoria("usuarioLogado");
@@ -320,12 +319,23 @@ document.querySelector('.catalogo-next')?.addEventListener('click', () => moverC
 
 
 buscarFilmes();
-if (usu){
+/* if (usu){
   prefs.innerHTML = `<h1>Recomendados para você</h1>`;
   usu.preferencias.forEach(i =>{
     let pag = Math.floor(Math.random() * (30 - 2 + 1)) + 2;
     buscarPrefs(pag, i);
   });
+
+} */
+if (usu){
+  prefs.innerHTML = `<h1>Recomendados para você</h1>`;
+      buscarPrefs(2);
+  for (let i = 1; i < 3; i++) {
+    while(nums <= 20){
+      let pag = Math.floor(Math.random() * (30 - 3 + 1)) + 3;
+      buscarPrefs(pag);
+    }
+  }
 
 }
 buscarDestaques();
