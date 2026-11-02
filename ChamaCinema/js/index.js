@@ -335,6 +335,7 @@ if (usu){
       let pag = Math.floor(Math.random() * (30 - 3 + 1)) + 3;
       buscarPrefs(pag);
     }
+    nums = 0;
   }
 
 }
