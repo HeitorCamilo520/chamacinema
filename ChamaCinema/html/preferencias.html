@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="../Imagens/favicon.ico" type="image/x-icon">
 </head>
 <body>
-   <header id="header">
+    <header id="header">
         <a href="index.html" id="container-logo"><img src="../Imagens/Geral_7.png" alt="Logo do Chama Cinema" id="logo"> ChamaCinema</a>
 
         <form id="formulario-pesquisa">
@@ -23,12 +23,28 @@
         </form>
 
         <button class="opcoes_header"><i class="fa-solid fa-clapperboard icone-header" id="catalogo-icone"></i><p>Catalogo</p></button>
+
         <a href="planos.html" class="opcoes_header" id="dire_plano"><i class="fa-solid fa-tag icone-header" id="etiqueta_plano"></i><p>Planos</p></a>
-        <button class="opcoes_header"><i class="fa-solid fa-heart icone-header" id="coracao_favoritos"></i><p></p>Favoritos</p></button>
-        <div id="usuario-login" class="opcoes_header">
+
+        <button class="opcoes_header"><i class="fa-solid fa-heart icone-header" id="coracao_favoritos"></i><p>Favoritos</p></button>
+
+        <button class="opcoes_header drop" onclick="dropdownMenu()" id="dropdown_icon" >
+            <div id="usuario-login" class="opcoes_header"></div>
+        </button>
+        
+        
+        <div id="dropdown_menu" class="dropdown-menu">
+            <table>
+                <tr><td>
+                    <p>
+                        <i class="fa-solid fa-gear"></i>
+                        Configurações
+                    </p>
+                </td></tr>
+            </table>
         </div>
-        <button class="opcoes_header"><i class="fas fa-ellipsis-vertical fa-lg" id="dropdown_icon"></i> </button>
     </header>
+    
     <main>
         <div class="preferences-card">
             <h1>Quais são suas preferências?</h1>
