@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/pages/filme.css">
     <link id="estampa" rel="stylesheet" href="../css/components/fundo_base.css">
     <link rel="shortcut icon" href="../Imagens/favicon.ico" type="image/x-icon">
-    <title>Document</title>
+    <title>Filme | ChamaCinema</title>
 </head>
 <body>
     <header id="header">
@@ -47,7 +47,9 @@
 
     <main>
         <div id="container-principal">
-            <div id="detalhes-filme"></div>
+            <section id="detalhes-filme" aria-live="polite">
+                <p class="mensagem-filme">Carregando detalhes do filme...</p>
+            </section>
         </div>
     </main>
     <div id="footer-container">
@@ -55,10 +57,10 @@
         <p id="footer-texto">© 2024 ChamaCinema. Todos os direitos reservados.</p>
     </div>
 
-    <script src="../js/filme.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="../js/manipulaLS.js"></script>
     <script src="../js/config.js"></script>
+    <script src="../js/manipulaLS.js"></script>
     <script src="../js/header.js"></script>
+    <script src="../js/filme.js"></script>
 </body>
 </html>

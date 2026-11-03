@@ -95,7 +95,14 @@ main > * {
     overflow: hidden;
     background: #090909;
     flex-shrink: 0;
+    color: inherit;
+    text-decoration: none;
 }
+
+  .slide:focus-visible {
+    outline: 2px solid var(--color-orange);
+    outline-offset: -3px;
+  }
 
 
 .slide-imagem {
@@ -155,7 +162,7 @@ main > * {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 2rem 2.6rem;
+    padding: 2rem 2.6rem 2rem 4rem;
     color: white;
     background: rgba(0, 0, 0, 0.06);
 }
@@ -197,17 +204,32 @@ main > * {
     margin: auto;
   }
  
+  button.prev,
+  button.next,
+  .catalogo-prev,
+  .catalogo-next {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    flex-shrink: 0;
+    padding: 0;
+    place-items: center;
+    border: 1px solid var(--color-gray-deep);
+    border-radius: var(--radius-full);
+    background-color: var(--color-black-panel);
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+  }
+
   button.prev, button.next {
-    aspect-ratio: 1 / 1;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: var(--color-black-panel);
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: var(--radius-full);
   }
  
   button.prev { left: 10px; }
@@ -268,7 +290,7 @@ main > * {
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
-    padding: .5rem .75rem;
+    padding: .5rem .75rem .5rem 0;
     border-radius: 16px;
   }
 
@@ -287,7 +309,7 @@ main > * {
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
-    padding: .5rem .75rem;
+    padding: .5rem .75rem .5rem 0;
     border-radius: 16px;
   }
 
@@ -302,14 +324,6 @@ main > * {
     top: 50%;
     transform: translateY(-50%);
     z-index: 2;
-    width: 42px;
-    height: 42px;
-    border: none;
-    border-radius: var(--radius-full);
-    background-color: var(--color-black-panel);
-    color: white;
-    cursor: pointer;
-    font-size: 1rem;
   }
 
 
@@ -317,9 +331,17 @@ main > * {
   .catalogo-next { right: 10px; }
 
 
+  button.prev:hover,
+  button.next:hover,
   .catalogo-prev:hover,
-  .catalogo-next:hover {
+  .catalogo-next:hover,
+  button.prev:focus-visible,
+  button.next:focus-visible,
+  .catalogo-prev:focus-visible,
+  .catalogo-next:focus-visible {
     background-color: var(--color-black-panel-strong);
+    border-color: var(--color-gray-smoke);
+    color: white;
   }
 
 
@@ -338,11 +360,18 @@ main > * {
 
 
   .filme-card {
+    display: block;
     flex: 0 0 180px;
     overflow: hidden;
     background: #171717;
     border-radius: 8px;
     color: white;
+    text-decoration: none;
+  }
+
+  .filme-card:focus-visible {
+    outline: 2px solid var(--color-orange);
+    outline-offset: 2px;
   }
 
 

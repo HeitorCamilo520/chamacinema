@@ -31,13 +31,13 @@ async function carregarResultados(pagina = 1) {
       <h1>Resultados para “${termo}”</h1>
       <div class="grade-resultados">
         ${filmes.length ? filmes.map((filme) => `
-          <article class="filme-card">
+          <a class="filme-card" href="filme.html?id=${encodeURIComponent(filme.id)}">
             <img src="${filme.poster_path ? `${TMDB_IMAGE_URL}${filme.poster_path}` : '../Imagens/Geral_1.png'}" alt="Pôster de ${filme.title}">
             <div class="filme-info">
               <h2>${filme.title}</h2>
               <p>${filme.release_date?.slice(0, 4) || 'Ano não informado'} | Nota ${filme.vote_average?.toFixed(1) || 'N/A'}</p>
             </div>
-          </article>
+          </a>
         `).join('') : '<p class="mensagem-resultados">Nenhum filme encontrado.</p>'}
       </div>
       ${filmes.length ? `

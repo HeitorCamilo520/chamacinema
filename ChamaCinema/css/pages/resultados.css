@@ -64,10 +64,17 @@ main {
 }
 
 .filme-card {
+  display: block;
   overflow: hidden;
   background: #171717;
   border-radius: 8px;
   color: white;
+  text-decoration: none;
+}
+
+.filme-card:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 2px;
 }
 
 .filme-card img {

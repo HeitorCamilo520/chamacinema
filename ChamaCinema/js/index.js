@@ -68,13 +68,13 @@ function renderizarFilmes(filmes) {
 
 
   catalogo.innerHTML = filmes.map((filme) => `
-    <article class="filme-card">
+    <a class="filme-card" href="filme.html?id=${encodeURIComponent(filme.id)}">
       <img src="${filme.poster_path ? `${TMDB_IMAGE_URL}${filme.poster_path}` : 'Imagens/Geral_1.png'}" alt="Pôster de ${filme.title}">
       <div class="filme-info">
         <h2>${filme.title}</h2>
         <p>${filme.release_date?.slice(0, 4) || 'Ano não informado'} | Nota ${filme.vote_average?.toFixed(1) || 'N/A'}</p>
       </div>
-    </article>
+    </a>
   `).join('');
 }
 
@@ -87,11 +87,11 @@ async function buscarPrefs(pag, num = 12) {
     renderizarPrefs(results, num);
   } catch (erro) {
     prefs.innerHTML = `<div class="catalogo-faixa">
-                        <button class="catalogo-prev" type="button" aria-label="Filmes anteriores">❮</button>
+                        <button class="catalogo-prev" type="button" aria-label="Filmes anteriores"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
                           <div id="container-prefs">
                             <p class="mensagem-catalogo">${mensagemDeErro(erro)}</p>
                           </div>
-                        <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
+                        <button class="catalogo-next" type="button" aria-label="Próximos filmes"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
                        </div>`;
   }
   
@@ -101,11 +101,11 @@ async function buscarPrefs(pag, num = 12) {
 function renderizarPrefs(filmes, num = 12) {
   if (!filmes?.length) {
     prefs.innerHTML = `<div class="catalogo-faixa">
-                    <button class="catalogo-prev" type="button" aria-label="Filmes anteriores">❮</button>
+                    <button class="catalogo-prev" type="button" aria-label="Filmes anteriores"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
                       <div id="container-prefs">
                         <p class="mensagem-catalogo">Nenhum filme encontrado.</p>
                       </div>
-                    <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
+                    <button class="catalogo-next" type="button" aria-label="Próximos filmes"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
                 </div>`;
     return;
   }
@@ -116,20 +116,20 @@ function renderizarPrefs(filmes, num = 12) {
       if (i.genre_ids.some(elemento => usu.preferencias.includes(elemento))) {/*  && nums < 20) */
         nums+=1;
         texto += `
-          <article class="filme-card">
+          <a class="filme-card" href="filme.html?id=${encodeURIComponent(i.id)}">
             <img src="${i.poster_path ? `${TMDB_IMAGE_URL}${i.poster_path}` : 'Imagens/Geral_1.png'}" alt="Pôster de ${i.title}">
             <div class="filme-info">
               <h2>${i.title}</h2>
               <p>${i.release_date?.slice(0, 4) || 'Ano não informado'} | Nota ${i.vote_average?.toFixed(1) || 'N/A'}</p>
             </div>
-          </article>`;
+          </a>`;
       }
     
     });
     prefs.innerHTML +=`<div class="catalogo-faixa">
-    <button class="catalogo-prev" type="button" aria-label="Filmes anteriores" onclick="moverPrefs(this, -1)">❮</button>
+    <button class="catalogo-prev" type="button" aria-label="Filmes anteriores" onclick="moverPrefs(this, -1)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
     <div id="container-prefs">` + texto + `</div>
-                        <button class="catalogo-next" type="button" aria-label="Próximos filmes" onclick="moverPrefs(this, 1)">❯</button>
+                        <button class="catalogo-next" type="button" aria-label="Próximos filmes" onclick="moverPrefs(this, 1)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
                     </div>`;
   }
  /* 
@@ -184,7 +184,7 @@ function renderizarDestaques(filmes) {
   slidesContainer.innerHTML = filmes.map((filme) => {
     const imagem = filme.backdrop_path ? `${TMDB_BACKDROP_URL}${filme.backdrop_path}` : 'Imagens/Geral_6.png';
     return `
-      <article class="slide">
+      <a class="slide" href="filme.html?id=${encodeURIComponent(filme.id)}">
         <img class="slide-imagem" src="${imagem}" alt="${filme.title}">
         <div class="slide-conteudo">
           <p class="slide-legenda">EM DESTAQUE</p>
@@ -192,7 +192,7 @@ function renderizarDestaques(filmes) {
           <p class="slide-detalhes">${filme.release_date?.slice(0, 4) || 'Ano não informado'} &nbsp; | &nbsp; Nota ${filme.vote_average?.toFixed(1) || 'N/A'}</p>
           <p class="slide-sinopse">${filme.overview || 'Sinopse não disponível.'}</p>
         </div>
-      </article>
+      </a>
     `;
   }).join('');
 
