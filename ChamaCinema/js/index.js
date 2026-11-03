@@ -95,7 +95,6 @@ async function buscarPrefs(pag, num = 12) {
                        </div>`;
   }
   
-  
 }
 
 
@@ -114,7 +113,7 @@ function renderizarPrefs(filmes, num = 12) {
   if (usu) {
     let texto = "";
     filmes.forEach(i => {
-      if (i.genre_ids.some(elemento => usu.preferencias.includes(elemento)) && nums < 20) {
+      if (i.genre_ids.some(elemento => usu.preferencias.includes(elemento))) {/*  && nums < 20) */
         nums+=1;
         texto += `
           <article class="filme-card">
@@ -127,11 +126,11 @@ function renderizarPrefs(filmes, num = 12) {
       }
     
     });
-    prefs.innerHTML =`<div class="catalogo-faixa">
-                    <button class="catalogo-prev" type="button" aria-label="Filmes anteriores">❮</button>
-                        <div id="container-prefs"> ` + texto + `</div>
-                    <button class="catalogo-next" type="button" aria-label="Próximos filmes">❯</button>
-                </div>`;
+    prefs.innerHTML +=`<div class="catalogo-faixa">
+    <button class="catalogo-prev" type="button" aria-label="Filmes anteriores" onclick="moverPrefs(this, -1)">❮</button>
+    <div id="container-prefs">` + texto + `</div>
+                        <button class="catalogo-next" type="button" aria-label="Próximos filmes" onclick="moverPrefs(this, 1)">❯</button>
+                    </div>`;
   }
  /* 
       let texto = "";
@@ -319,17 +318,19 @@ document.querySelector('.catalogo-next')?.addEventListener('click', () => moverC
 
 
 buscarFilmes();
-/* if (usu){
-  prefs.innerHTML = `<h1>Recomendados para você</h1>`;
-  usu.preferencias.forEach(i =>{
-    let pag = Math.floor(Math.random() * (30 - 2 + 1)) + 2;
-    buscarPrefs(pag, i);
-  });
-
-} */
 if (usu){
   prefs.innerHTML = `<h1>Recomendados para você</h1>`;
       buscarPrefs(2);
+      for (let i = 1; i < 3; i++) {
+        let pag = Math.floor(Math.random() * (30 - 3 + 1)) + 3;
+        buscarPrefs(pag, i);/* 
+        nums = 0; */
+      };
+
+}
+/* 
+if (usu){
+  prefs.innerHTML = `<h1>Recomendados para você</h1>`;
   for (let i = 1; i < 3; i++) {
     while(nums <= 20){
       let pag = Math.floor(Math.random() * (30 - 3 + 1)) + 3;
@@ -338,7 +339,9 @@ if (usu){
     nums = 0;
   }
 
-}
+} */
+
+
 buscarDestaques();
 
 
