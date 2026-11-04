@@ -7,21 +7,10 @@
         "linkFoto":"../Imagens/StanLee.jpg",
         "dataNasc":null,
         "preferencias":[16, 12, 35, 14, 878],
+        "favoritos": [],
         "logado":false,
         "plano":"Produtor"
     
-    },
-
-    {
-        "usuario":"SandraLee02",
-        "email":"sandralee@gmail.com",
-        "senha" : "7654321",
-        "nacionalidade":null,
-        "linkFoto":"../Imagens/SandraLee.jpg",
-        "dataNasc":null,
-        "preferencias":[16, 12, 35, 14, 878],
-        "logado":false,
-        "plano":"Administrador"
     },
 
     {
@@ -32,6 +21,7 @@
         "linkFoto":"../Imagens/JoaoCosta.jpg",
         "dataNasc":null,
         "preferencias":[16, 12, 35, 14, 878],
+        "favoritos": [],
         "logado":false,
         "plano":"Faísca"
     },
@@ -44,6 +34,7 @@
         "linkFoto":"../Imagens/ArthPLeo.png",
         "dataNasc":"25/05/2010",
         "preferencias":[28,12,16,35,80,18,10751,14,36,27,10402,9648,10749,878,53,10752,37],
+        "favoritos": [],
         "logado":false,
         "plano":"Administrador"
     }
