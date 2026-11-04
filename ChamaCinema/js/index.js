@@ -284,7 +284,7 @@ let fundo =  document.getElementById('estampa');
 
     else if (infos['plano'] == "Administrador") {
       fundo.href = "../css/components/administrador.css";
-      prefs.children[0].textContent = "Com base em seu gosto por";
+      prefs.children[0].textContent = "Baseados em suas preferências";
       document.getElementById("planos").innerHTML = `<div id="container-administrador">
                 <button id="botao-administrador">
                     <i class="fa-solid fa-user-shield icone-administrador"></i>

@@ -282,6 +282,12 @@
     padding: var(--spacing-md);
 }
 
+#dropdown_menu a {
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
+}
+
 /* =========================
    ÍCONES
 ========================= */
