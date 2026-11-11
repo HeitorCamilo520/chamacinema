@@ -3,8 +3,8 @@ const generos = {
     12: "Aventura",
     16: "Animação",
     35: "Comédia",
-    80: "Crime",/* 
-    99: "Documentário", */
+    80: "Crime",
+    99: "Documentário",
     18: "Drama",
     10751: "Família",
     14: "Fantasia",
@@ -79,12 +79,12 @@ function renderizarFilmes(filmes) {
 }
 
 // ===== Catálogo (preferencias) =====
-async function buscarPrefs(pag, num = 12) {  
+async function buscarPrefs(id = 16) {  
   try {
-    const resposta = await buscarComTimeout(`${TMDB_API_URL}/movie/popular?language=pt-BR&page=${pag}&api_key=${TMDB_API_KEY}`);
+    const resposta = await buscarComTimeout(`${TMDB_API_URL}/discover/movie?api_key=${TMDB_API_KEY}&with_genres=${id}&language=pt-BR`);
     if (!resposta.ok) throw new Error('Não foi possível acessar a TMDB.');
     const { results } = await resposta.json();
-    renderizarPrefs(results, num);
+    renderizarPrefs(results, id);
   } catch (erro) {
     prefs.innerHTML = `<div class="catalogo-faixa">
                         <button class="catalogo-prev" type="button" aria-label="Filmes anteriores"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
@@ -98,7 +98,7 @@ async function buscarPrefs(pag, num = 12) {
 }
 
 
-function renderizarPrefs(filmes, num = 12) {
+function renderizarPrefs(filmes, id = 16) {
   if (!filmes?.length) {
     prefs.innerHTML = `<div class="catalogo-faixa">
                     <button class="catalogo-prev" type="button" aria-label="Filmes anteriores"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
@@ -111,10 +111,9 @@ function renderizarPrefs(filmes, num = 12) {
   }
 
   if (usu) {
+    prefs.innerHTML += `<h2>${generos[id]}</h2>`;
     let texto = "";
     filmes.forEach(i => {
-      if (i.genre_ids.some(elemento => usu.preferencias.includes(elemento))) {/*  && nums < 20) */
-        nums+=1;
         texto += `
           <a class="filme-card" href="filme.html?id=${encodeURIComponent(i.id)}">
             <img src="${i.poster_path ? `${TMDB_IMAGE_URL}${i.poster_path}` : 'Imagens/Geral_1.png'}" alt="Pôster de ${i.title}">
@@ -123,8 +122,6 @@ function renderizarPrefs(filmes, num = 12) {
               <p>${i.release_date?.slice(0, 4) || 'Ano não informado'} | Nota ${i.vote_average?.toFixed(1) || 'N/A'}</p>
             </div>
           </a>`;
-      }
-    
     });
     prefs.innerHTML +=`<div class="catalogo-faixa">
     <button class="catalogo-prev" type="button" aria-label="Filmes anteriores" onclick="moverPrefs(this, -1)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
@@ -318,18 +315,16 @@ document.querySelector('.catalogo-next')?.addEventListener('click', () => moverC
 
 
 buscarFilmes();
-if (usu){
+/* if (usu){
   prefs.innerHTML = `<h1>Recomendados para você</h1>`;
       buscarPrefs(2);
       for (let i = 1; i < 3; i++) {
         let pag = Math.floor(Math.random() * (30 - 3 + 1)) + 3;
         buscarPrefs(pag, i);/* 
-        nums = 0; */
+        nums = 0; 
       };
 
 }
-/* 
-if (usu){
   prefs.innerHTML = `<h1>Recomendados para você</h1>`;
   for (let i = 1; i < 3; i++) {
     while(nums <= 20){
@@ -340,6 +335,14 @@ if (usu){
   }
 
 } */
+
+
+if (usu){
+  prefs.innerHTML = `<h1>Recomendados para você</h1>`;
+  usu.preferencias.forEach(i => {
+    buscarPrefs(i);
+  });
+}
 
 
 buscarDestaques();
