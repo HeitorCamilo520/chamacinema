@@ -1,0 +1,150 @@
+#body{
+    height: 100%;
+}
+
+body {
+    position: relative;
+    background-color: var(--color-black-deepest);
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: -12% -8% -12% -8%;
+    z-index: -1;
+    background-image: url(../../Imagens/Estampa.png);
+    background-repeat: repeat;
+    background-size: 45% auto;
+    background-position: center;
+    opacity: 0.3;
+    transform: perspective(1400px) rotateZ(-12deg) scale(1.2);
+    transform-origin: center center;
+    pointer-events: none;
+}
+
+.dados{
+  position: relative;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  margin: 1rem auto;
+  width: min(1360px, calc(100% - 2.5rem));
+  border: 1px solid var(--color-gray-deep);
+  border-radius: 28px;
+  background: linear-gradient(180deg,
+      var(--color-black-panel-strong) 0%,
+      var(--color-black-panel) 38%,
+      var(--color-black-deepest) 100%);
+  box-shadow: 0 22px 50px #000000;
+  overflow: hidden;
+}
+
+#foto{
+  width: 20%;
+  height: 20%;
+  margin: 2%;
+}
+
+#infos{
+  width: 60%;
+  align-self: flex-start;
+  margin-top: 2%;
+}
+
+.textos {
+  color: var(--color-white);
+}
+
+table.soma {/* 
+  background-color: var(--color-black-panel-strong); */
+  background-color: transparent;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2%;
+}
+/* table.soma tr{
+  align-items: center;
+  justify-content: center;
+} */
+table.soma th{
+  color: var(--color-white);
+  padding: 5px;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+table.soma td{
+  color: var(--color-white);/* 
+  background-color: var(--color-gray); */
+  align-items: center;
+  justify-content: center;
+}
+
+.idade{
+  background-color: var(--color-black-main);
+  width: fit-content;
+  padding: 1%;
+  margin-top: 1%;
+  margin-left: 8%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  border: 3px solid var(--color-gray-deep);
+}
+.idade p{
+  margin-left: 10px;
+}
+
+.desc{
+  padding-left: 1.3%;
+  margin-top: 5%;
+}
+
+.editar {
+  background-color: var(--color-black-main);
+  width: 19%;
+  padding: 1%;
+  margin-right: 2%;
+  border-radius: 15px;
+  border: 3px solid var(--color-gray-deep);
+  align-self: flex-start;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.btn_editar {
+  text-decoration: none;
+  font-size: 120%;
+}
+
+.linha_1 {
+  align-items: center;
+  display: flex;
+}
+
+
+/*============ Fógos ============*/
+#mediador {
+  width: 40%;
+}
+
+#tabelinha {
+  width: 60%;
+}
+
+.contador {
+  width: 20%;
+}
+
+.barra{
+  background-color: var(--color-white);
+  width: 100%;
+}
+
+.fogos {
+  width: 60%;
+}
