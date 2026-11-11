@@ -23,7 +23,21 @@ formularioPesquisa?.addEventListener('submit', (evento) => {
   redirecionarParaResultados();
 });
 
+function redirecionarParaFavoritos() {
+  if (getmemoria("usuarioLogado")) {
+    window.location.href = 'favoritos.html';
+  } else {
+    window.location.href = 'login.html';
+  }
+}
+
+function redirecionarParaCatalogo() {
+  window.location.href = 'catalogo.html';
+}
+
 document.querySelector('#lupa')?.addEventListener('click', redirecionarParaResultados);
+document.getElementById('favoritos').addEventListener('click', redirecionarParaFavoritos);
+document.getElementById('catalogo').addEventListener('click', redirecionarParaCatalogo);
 
 pesquisa?.addEventListener('input', () => {
   clearTimeout(temporizadorPesquisa);
