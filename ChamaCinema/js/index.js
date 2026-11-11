@@ -245,7 +245,7 @@ let fundo =  document.getElementById('estampa');
                 <div id="container-catalogo">
                   <h1>Minhas produções</h1>
                   <div class="catalogo-faixa">
-                    <button class="produtor-card" onclick="produzir()">
+                    <button class="produtor-card" id="botao-produzir" onclick="produzir()">
                       <div id="container-produtor-texto">
                         <h1><i class="fa-solid fa-plus"></i></h1>
                         <h2>Criar nova produção</h2>
@@ -264,13 +264,19 @@ let fundo =  document.getElementById('estampa');
                       <img src="../Imagens/ArthPLeo.png">
                     </article>
                   </div>
-                  <div class="pop-up-produzir">
+                  <div class="pop-up-produzir" id="form-producao" display="none">
                     <form>
-                      <input>
-                      <input> 
-                      <input> 
-                      <input> 
-                      <input> 
+                      <p>Nome do filme</p>
+                        <input>
+                      <p>Ano de lançamento</p>
+                        <input>
+                      <p>Ano de lançamento</p>
+                        <input>
+                      <p>Ano de lançamento</p>
+                        <input>
+                      <p>Ano de lançamento</p>
+                        <input>
+                      <button type="submit">Oi</button>
                     </form>
                   </div>
                 </div>                                                      
