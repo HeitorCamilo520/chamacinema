@@ -55,22 +55,59 @@ body::before {
   }
 
   .pop-up-produzir{
-    background-color: white;
-    border-radius: var(--radius-lg);
-
-
-  }
-
-  .pop-up-produzir form{
     width: 100%;
-    width: fit-content;
+    max-width: 500px;
+
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
+    gap: var(--spacing-sm);
+
+    padding: var(--spacing-lg);
+
+    color: var(--color-white);
+
+    background: linear-gradient(135deg,
+        var(--color-black-panel) 0%,
+        var(--color-black-panel-alt) 42%,
+        var(--color-black-deepest) 100%);
+    border: 1px solid var(--color-gray-deep);
+    border-radius: var(--radius-lg);
+    isolation: isolate;
+    box-shadow: 0 20px 40px #000000;
+  }
+
+  .pop-up-produzir form{
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+
+  }
+
+  .pop-up-produzir p{
+    font-size: var(--text-sm);
+
+
   }
 
   .pop-up-produzir input{
-    display: block;
+    width: 100%;
+
+    padding: var(--spacing-sd);
+
+    border: 1px solid var(--color-gray-deep);
+    border-radius: var(--radius-md);
+
+    background-color: var(--color-black-panel-strong);
+
+    color: var(--color-white);
+
+    font-family: var(--font-primary);
   }
