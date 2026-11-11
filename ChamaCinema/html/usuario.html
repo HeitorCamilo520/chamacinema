@@ -3,365 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuario</title>
+    <title>Perfil de Usuário | ChamaCinema</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/pages/usuario.css">
     <link id="estampa" rel="stylesheet" href="../css/components/fundo_base.css">
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          },
-          colors: {
-            cinema: {
-              bg: '#0e0f17',
-              card: '#151722',
-              cardBorder: '#232636',
-              input: '#191b26',
-              pink: '#ff007a',
-              pinkHover: '#e0006c',
-              red: '#ff1a1a',
-              orange: '#ff7700',
-              yellow: '#ffbb00',
-              muted: '#8e91a2',
-              flameDark: '#292c3d'
-            }
-          }
-        }
-      }
-    }
-  </script>
+    <link rel="shortcut icon" href="../Imagens/favicon.ico" type="image/x-icon">
 </head>
-<body class="selection:bg-cinema-pink selection:text-white flex flex-col justify-between">
-  <header id="header">
-    <a href="index.html" id="container-logo"><img src="../Imagens/Geral_7.png" alt="Logo do Chama Cinema" id="logo"> ChamaCinema</a>
 
-    <form id="formulario-pesquisa">
-        <div class="barra-pesquisa">
-            <input id="pesquisa" type="text" placeholder="Procure por filmes ou séries...">
-            <i class="fa-solid fa-magnifying-glass" id="lupa"></i>
-        </div>
-        <div id="resultados-pesquisa" class="resultados-pesquisa" aria-live="polite"></div>
-    </form>
+<body>
+    <header id="header">
+        <a href="index.html" id="container-logo"><img src="../Imagens/Geral_7.png" alt="Logo do Chama Cinema" id="logo"> ChamaCinema</a>
 
-    <button class="opcoes_header"><i class="fa-solid fa-clapperboard icone-header" id="catalogo-icone"></i><p>Catalogo</p></button>
-
-    <a href="planos.html" class="opcoes_header" id="dire_plano"><i class="fa-solid fa-tag icone-header" id="etiqueta_plano"></i><p>Planos</p></a>
-
-    <button class="opcoes_header"><i class="fa-solid fa-heart icone-header" id="coracao_favoritos"></i><p>Favoritos</p></button>
-
-    <button class="opcoes_header drop" onclick="dropdownMenu()" id="dropdown_icon" >
-        <div id="usuario-login" class="opcoes_header"></div>
-    </button>
-    
-    
-    <div id="dropdown_menu" class="dropdown-menu">
-        <table>
-            <tr><td>
-                <p>
-                    <i class="fa-solid fa-gear"></i>
-                    Configurações
-                </p>
-            </td></tr>
-        </table>
-    </div>
-</header>
-  <!-- ================= CONTEÚDO PRINCIPAL ================= -->
-  <main class="max-w-6xl w-full mx-auto px-4 py-6 space-y-6 flex-grow">
-
-    <!-- 1. CARTÃO DE PERFIL DO USUÁRIO -->
-    <section class="cinema-card p-6 md:p-8 relative overflow-hidden">
-      <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
-        
-        <!-- Avatar com Anel de Gradiente de Chamas -->
-        <div id="foto" class="w-28 h-28 md:w-32 md:h-32 rounded-full p-[3px] bg-gradient-to-tr from-cinema-pink via-cinema-orange to-cinema-yellow shadow-xl shadow-cinema-pink/10">
-          <div class="w-28 h-28 md:w-32 md:h-32 rounded-full p-[3px] bg-gradient-to-tr from-cinema-pink via-cinema-orange to-cinema-yellow shadow-xl shadow-cinema-pink/10">
-            <div class="w-full h-full rounded-full bg-[#0a0b12] flex items-center justify-center relative overflow-hidden">
-              <div class="w-16 h-16 rounded-full bg-gradient-to-t from-cinema-pink/20 to-transparent flex items-center justify-center">
-                  <img src="../Imagens/StanLee.jpg">
-              </div>
+        <form id="formulario-pesquisa">
+            <div class="barra-pesquisa">
+                <input id="pesquisa" type="text" placeholder="Procure por filmes ou séries...">
+                <i class="fa-solid fa-magnifying-glass" id="lupa"></i>
             </div>
-          </div>
-        </div>
+            <div id="resultados-pesquisa" class="resultados-pesquisa" aria-live="polite"></div>
+        </form>
 
-        <!-- Informações do Perfil -->
-        <div class="flex-1 text-center md:text-left space-y-4 w-full">
-          
-          <!-- Nome, Data e Botão de Editar -->
-          <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
-            <div class="flex flex-wrap items-center justify-center md:justify-start gap-2.5">
-              <h1 id="userNameDisplay" class="text-2xl md:text-3xl font-black text-white tracking-tight">Stan Lee</h1>
-              
-              <!-- Badge de Data -->
-              <div class="inline-flex items-center gap-1.5 bg-[#1b1d2a] text-gray-400 text-xs px-3 py-1 rounded-full border border-cinema-cardBorder font-medium">
-                <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                </svg>
-                <span id="userDateDisplay">Desde Abril de 2026</span>
-              </div>
-            </div>
+        <button class="opcoes_header"><i class="fa-solid fa-clapperboard icone-header" id="catalogo-icone"></i><p>Catalogo</p></button>
+        <a href="planos.html" class="opcoes_header" id="dire_plano"><i class="fa-solid fa-tag icone-header" id="etiqueta_plano"></i><p>Planos</p></a>
+        <button class="opcoes_header"><i class="fa-solid fa-heart icone-header" id="coracao_favoritos"></i><p>Favoritos</p></button>
 
-            <!-- Botão Editar Perfil -->
-            <button 
-              onclick="openEditModal()"
-              class="flex items-center gap-2 bg-[#1d1f2c] hover:bg-cinema-cardBorder text-gray-200 hover:text-white border border-cinema-cardBorder text-xs font-semibold px-4 py-2 rounded-xl transition-all shadow-sm active:scale-95"
-            >
-              Editar Perfil
-              <svg class="w-3.5 h-3.5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
-              </svg>
-            </button>
-          </div>
-
-          <!-- Biografia -->
-          <p id="userBioDisplay" class="text-xs md:text-sm text-gray-300 font-normal">
-            Apaixonado por filme de super herói.
-          </p>
-
-          <!-- Estatísticas do Usuário -->
-          <div class="flex items-center justify-center md:justify-start gap-8 py-2 border-t border-b border-cinema-cardBorder/60 my-2">
-            <div class="text-center md:text-left">
-              <span id="statFilmes" class="block text-2xl font-black text-white leading-tight">21</span>
-              <span class="text-[11px] text-cinema-muted font-medium">Filmes avaliados</span>
-            </div>
-            <div class="text-center md:text-left">
-              <span id="statSeries" class="block text-2xl font-black text-white leading-tight">10</span>
-              <span class="text-[11px] text-cinema-muted font-medium">Séries avaliadas</span>
-            </div>
-            <div class="text-center md:text-left">
-              <span id="statFavoritos" class="block text-2xl font-black text-white leading-tight">2</span>
-              <span class="text-[11px] text-cinema-muted font-medium">Obras Favoritadas</span>
-            </div>
-          </div>
-
-          <!-- Tags de Preferências -->
-          <div class="flex flex-wrap items-center gap-2 pt-1">
-            <span class="text-xs font-bold text-white mr-1 border-r border-cinema-cardBorder pr-3">Minhas Preferências</span>
-            <div id="preferencesContainer" class="flex flex-wrap gap-2">
-              <span onclick="toggleTag(this)" class="tag-pill text-[11px] bg-[#1a1c28] text-gray-300 border border-cinema-cardBorder px-3.5 py-1 rounded-full cursor-pointer hover:border-cinema-pink hover:text-white transition-all select-none">Animação</span>
-              <span onclick="toggleTag(this)" class="tag-pill text-[11px] bg-[#1a1c28] text-gray-300 border border-cinema-cardBorder px-3.5 py-1 rounded-full cursor-pointer hover:border-cinema-pink hover:text-white transition-all select-none">Comédia</span>
-              <span onclick="toggleTag(this)" class="tag-pill text-[11px] bg-[#1a1c28] text-gray-300 border border-cinema-cardBorder px-3.5 py-1 rounded-full cursor-pointer hover:border-cinema-pink hover:text-white transition-all select-none">Aventura</span>
-              <span onclick="toggleTag(this)" class="tag-pill text-[11px] bg-[#1a1c28] text-gray-300 border border-cinema-cardBorder px-3.5 py-1 rounded-full cursor-pointer hover:border-cinema-pink hover:text-white transition-all select-none">Super Herói</span>
-              <span onclick="toggleTag(this)" class="tag-pill text-[11px] bg-[#1a1c28] text-gray-300 border border-cinema-cardBorder px-3.5 py-1 rounded-full cursor-pointer hover:border-cinema-pink hover:text-white transition-all select-none">Ficção Científica</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. SEÇÃO MINHAS AVALIAÇÕES -->
-    <section class="cinema-card p-6 md:p-8 space-y-6">
-      
-      <!-- Título da Seção -->
-      <div class="flex items-center gap-2">
-        <svg class="w-5 h-5 fill-cinema-pink" viewBox="0 0 24 24">
-          <path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/>
-        </svg>
-        <h2 class="text-base font-bold text-white tracking-wide">Minhas avaliações</h2>
-      </div>
-
-      <!-- Quadro de Média & Barras de Avaliação -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-[#101119] p-5 rounded-2xl border border-cinema-cardBorder/80">
-        
-        <!-- Média Geral (Esquerda) -->
-        <div class="md:col-span-4 flex flex-col items-center justify-center text-center md:border-r border-cinema-cardBorder pr-0 md:pr-6 py-2">
-          <span class="text-4xl md:text-5xl font-black text-white tracking-tight">4.0</span>
-          
-          <!-- Chamas da Média Geral (4 Rosas, 1 Escura) -->
-          <div class="flex items-center gap-1 my-2">
-            <svg class="w-5 h-5 fill-cinema-pink" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-            <svg class="w-5 h-5 fill-cinema-pink" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-            <svg class="w-5 h-5 fill-cinema-pink" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-            <svg class="w-5 h-5 fill-cinema-pink" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-            <svg class="w-5 h-5 fill-cinema-flameDark" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-          </div>
-          <span class="text-xs text-cinema-muted font-medium">Média geral</span>
-        </div>
-
-        <!-- Distribuição de Notas (Direita) -->
-        <div class="md:col-span-8 space-y-2.5">
-          
-          <!-- Linha 5 Chamas Rosas -->
-          <div class="flex items-center gap-3">
-            <div class="flex items-center gap-0.5 w-24 justify-end flex-shrink-0">
-              <svg class="w-3.5 h-3.5 fill-cinema-pink" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-              <svg class="w-3.5 h-3.5 fill-cinema-pink" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-              <svg class="w-3.5 h-3.5 fill-cinema-pink" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-              <svg class="w-3.5 h-3.5 fill-cinema-pink" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-              <svg class="w-3.5 h-3.5 fill-cinema-pink" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-            </div>
-            <div class="flex-1 bg-[#1e202d] h-2.5 rounded-full overflow-hidden">
-              <div class="bg-cinema-pink h-full rounded-full" style="width: 50%;"></div>
-            </div>
-            <span class="text-xs text-cinema-muted font-semibold w-8 text-right">50%</span>
-          </div>
-
-          <!-- Linha 4 Chamas Vermelhas -->
-          <div class="flex items-center gap-3">
-            <div class="flex items-center gap-0.5 w-24 justify-end flex-shrink-0">
-              <svg class="w-3.5 h-3.5 fill-cinema-red" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-              <svg class="w-3.5 h-3.5 fill-cinema-red" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-              <svg class="w-3.5 h-3.5 fill-cinema-red" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-              <svg class="w-3.5 h-3.5 fill-cinema-red" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-            </div>
-            <div class="flex-1 bg-[#1e202d] h-2.5 rounded-full overflow-hidden">
-              <div class="bg-cinema-red h-full rounded-full" style="width: 50%;"></div>
-            </div>
-            <span class="text-xs text-cinema-muted font-semibold w-8 text-right">50%</span>
-          </div>
-
-          <!-- Linha 3 Chamas Laranjas -->
-          <div class="flex items-center gap-3">
-            <div class="flex items-center gap-0.5 w-24 justify-end flex-shrink-0">
-              <svg class="w-3.5 h-3.5 fill-cinema-orange" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-              <svg class="w-3.5 h-3.5 fill-cinema-orange" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-              <svg class="w-3.5 h-3.5 fill-cinema-orange" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-            </div>
-            <div class="flex-1 bg-[#1e202d] h-2.5 rounded-full overflow-hidden">
-              <div class="bg-[#1e202d] h-full rounded-full" style="width: 0%;"></div>
-            </div>
-            <span class="text-xs text-cinema-muted font-semibold w-8 text-right">0%</span>
-          </div>
-
-          <!-- Linha 2 Chamas Amarelas -->
-          <div class="flex items-center gap-3">
-            <div class="flex items-center gap-0.5 w-24 justify-end flex-shrink-0">
-              <svg class="w-3.5 h-3.5 fill-cinema-yellow" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-              <svg class="w-3.5 h-3.5 fill-cinema-yellow" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-            </div>
-            <div class="flex-1 bg-[#1e202d] h-2.5 rounded-full overflow-hidden">
-              <div class="bg-[#1e202d] h-full rounded-full" style="width: 0%;"></div>
-            </div>
-            <span class="text-xs text-cinema-muted font-semibold w-8 text-right">0%</span>
-          </div>
-
-          <!-- Linha 1 Chama Branca -->
-          <div class="flex items-center gap-3">
-            <div class="flex items-center gap-0.5 w-24 justify-end flex-shrink-0">
-              <svg class="w-3.5 h-3.5 fill-white" viewBox="0 0 24 24"><path d="M12 2C10 6 7 9.7 7 13.5C7 17.09 9.91 20 13.5 20C17.09 20 20 17.09 20 13.5C20 9.5 17 7 15 5C15 8 13 9.5 12 8C11 6.5 12 4 12 2Z"/></svg>
-            </div>
-            <div class="flex-1 bg-[#1e202d] h-2.5 rounded-full overflow-hidden">
-              <div class="bg-[#1e202d] h-full rounded-full" style="width: 0%;"></div>
-            </div>
-            <span class="text-xs text-cinema-muted font-semibold w-8 text-right">0%</span>
-          </div>
-
-        </div>
-
-      </div>
-
-          <!-- Botão Favoritar (Coração Rosa)
-          <button 
-            onclick="toggleFavorite(this, event)" 
-            class="favorite-btn active absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-20"
-            aria-label="Favoritar"
-          >
-            <svg class="w-4 h-4 fill-cinema-pink transition-colors" viewBox="0 0 24 24">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            </svg>
-          </button> -->
-         
-    </section>
-    
-    <section class="cinema-card p-6 md:p-8 space-y-6">
-        
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <svg class="w-5 h-5 fill-cinema-pink" viewBox="0 0 24 24">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-          </svg>
-          <h2 class="text-base font-bold text-white tracking-wide">Meus Favoritos</h2>
-        </div>
-        <a href="#" class="text-xs text-gray-400 hover:text-cinema-pink underline transition-colors">Ver todos</a>
-      </div>
-      
-    </section>
-    
-  </main>
-
-
-
-  <!-- ================= MODAL DE EDITAR PERFIL ================= -->
-  <div id="editProfileModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="cinema-card modal-animate w-full max-w-md p-6 space-y-5 relative shadow-2xl">
-      
-      <!-- Modal Header -->
-      <div class="flex items-center justify-between border-b border-cinema-cardBorder pb-3">
-        <h3 class="text-sm font-bold text-white flex items-center gap-2">
-          <span>✏️</span> Editar Perfil
-        </h3>
-        <button onclick="closeEditModal()" class="text-gray-400 hover:text-white text-xl leading-none">
-          &times;
+        <button class="opcoes_header drop" onclick="dropdownMenu()" id="dropdown_icon">
+            <div id="usuario-login" class="opcoes_header"></div>
         </button>
-      </div>
-
-      <!-- Modal Form -->
-      <form id="editProfileForm" onsubmit="saveProfile(event)" class="space-y-4">
         
-        <div>
-          <label class="block text-xs font-semibold text-gray-300 mb-1">Nome de Usuário</label>
-          <input 
-            type="text" 
-            id="inputName" 
-            value="Stan Lee" 
-            required 
-            class="w-full bg-cinema-input border border-cinema-cardBorder text-xs text-white rounded-xl p-3 focus:outline-none focus:border-cinema-pink transition-colors"
-          />
+        <div id="dropdown_menu" class="dropdown-menu">
+            <table>
+                <tr><td>
+                    <p>
+                        <a href="usuario.html">
+                            <i class="fa-solid fa-gear"></i>
+                            Configurações
+                        </a>
+                    </p>
+                </td></tr>
+            </table>
         </div>
+    </header>
 
-        <div>
-          <label class="block text-xs font-semibold text-gray-300 mb-1">Biografia</label>
-          <textarea 
-            id="inputBio" 
-            rows="2" 
-            class="w-full bg-cinema-input border border-cinema-cardBorder text-xs text-white rounded-xl p-3 focus:outline-none focus:border-cinema-pink resize-none transition-colors"
-          >Apaixonado por filme de super herói.</textarea>
+    <main>
+        <div id="container-principal" class="perfil-container">
+            
+            <!-- CARTÃO DE PERFIL -->
+            <section class="card-perfil">
+                <div class="avatar-area">
+                    <div class="avatar-circulo" id="usr-avatar-moldura">
+                        <img id="usr-foto" src="../Imagens/foguin_branco.png" alt="Foto do usuário">
+                    </div>
+                </div>
+
+                <div class="info-perfil">
+                    <div class="perfil-cabecalho-linha">
+                        <h1 class="nome-usuario" id="usr-nome">StanLee01</h1>
+                        <button type="button" class="btn-editar-perfil" id="btn-abrir-modal">Editar Perfil</button>
+                    </div>
+
+                    <div class="data-registro">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span id="usr-registro">Desde Abril de 2026</span>
+                    </div>
+
+                    <p class="bio-texto" id="usr-bio">Apaixonado por filme de super herói.</p>
+
+                    <div class="estatisticas-grid">
+                        <div class="stat-item">
+                            <span class="stat-numero" id="stat-avaliados">0</span>
+                            <span class="stat-label">Filmes avaliados</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-numero" id="stat-series">0</span>
+                            <span class="stat-label">Séries avaliadas</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-numero" id="stat-favoritos">0</span>
+                            <span class="stat-label">Obras Favoritadas</span>
+                        </div>
+                    </div>
+
+                    <div class="secao-preferencias">
+                        <span class="titulo-preferencias">Minhas Preferências</span>
+                        <div class="tags-container" id="usr-tags"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AVALIAÇÕES -->
+            <section class="card-secao">
+                <h2 class="titulo-secao">Minhas avaliações</h2>
+
+                <div class="painel-avaliacoes">
+                    <div class="bloco-media-geral">
+                        <span class="nota-grande">4.0</span>
+                        <div class="linha-chamas-media">
+                            <img src="../Imagens/foguin_rosa.png" alt="Chama rosa">
+                            <img src="../Imagens/foguin_rosa.png" alt="Chama rosa">
+                            <img src="../Imagens/foguin_rosa.png" alt="Chama rosa">
+                            <img src="../Imagens/foguin_rosa.png" alt="Chama rosa">
+                            <img src="../Imagens/foguin_branco.png" alt="Chama inativa" class="chama-escura">
+                        </div>
+                        <span class="rotulo-media">Média geral</span>
+                    </div>
+
+                    <div class="distribuicao-barras">
+                        <div class="linha-barra">
+                            <div class="chamas-grupo">
+                                <img src="../Imagens/foguin_rosa.png" alt="Chama"><img src="../Imagens/foguin_rosa.png" alt="Chama"><img src="../Imagens/foguin_rosa.png" alt="Chama"><img src="../Imagens/foguin_rosa.png" alt="Chama"><img src="../Imagens/foguin_rosa.png" alt="Chama">
+                            </div>
+                            <div class="trilho-barra"><div class="preenchimento-barra rosa" style="width: 50%;"></div></div>
+                            <span class="porcentagem-texto">50%</span>
+                        </div>
+                        <div class="linha-barra">
+                            <div class="chamas-grupo">
+                                <img src="../Imagens/foguin_vermelho.png" alt="Chama"><img src="../Imagens/foguin_vermelho.png" alt="Chama"><img src="../Imagens/foguin_vermelho.png" alt="Chama"><img src="../Imagens/foguin_vermelho.png" alt="Chama">
+                            </div>
+                            <div class="trilho-barra"><div class="preenchimento-barra vermelho" style="width: 50%;"></div></div>
+                            <span class="porcentagem-texto">50%</span>
+                        </div>
+                        <div class="linha-barra">
+                            <div class="chamas-grupo">
+                                <img src="../Imagens/foguin_naranja.png" alt="Chama"><img src="../Imagens/foguin_naranja.png" alt="Chama"><img src="../Imagens/foguin_naranja.png" alt="Chama">
+                            </div>
+                            <div class="trilho-barra"><div class="preenchimento-barra laranja" style="width: 0%;"></div></div>
+                            <span class="porcentagem-texto">0%</span>
+                        </div>
+                        <div class="linha-barra">
+                            <div class="chamas-grupo">
+                                <img src="../Imagens/foguin_marelo.png" alt="Chama"><img src="../Imagens/foguin_marelo.png" alt="Chama">
+                            </div>
+                            <div class="trilho-barra"><div class="preenchimento-barra amarelo" style="width: 0%;"></div></div>
+                            <span class="porcentagem-texto">0%</span>
+                        </div>
+                        <div class="linha-barra">
+                            <div class="chamas-grupo">
+                                <img src="../Imagens/foguin_branco.png" alt="Chama">
+                            </div>
+                            <div class="trilho-barra"><div class="preenchimento-barra branco" style="width: 0%;"></div></div>
+                            <span class="porcentagem-texto">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-obras" id="grid-avaliacoes"></div>
+            </section>
+
+            <!-- FAVORITOS -->
+            <section class="card-secao">
+                <div class="cabecalho-favoritos">
+                    <h2 class="titulo-secao"><i class="fa-regular fa-heart"></i> Meus Favoritos</h2>
+                    <a href="#" class="link-ver-todos">Ver todos</a>
+                </div>
+                <div class="grid-obras" id="grid-favoritos"></div>
+            </section>
+
         </div>
+    </main>
 
-        <div>
-          <label class="block text-xs font-semibold text-gray-300 mb-1">Data do Cadastro</label>
-          <input 
-            type="text" 
-            id="inputDate" 
-            value="Desde Abril de 2026" 
-            class="w-full bg-cinema-input border border-cinema-cardBorder text-xs text-white rounded-xl p-3 focus:outline-none focus:border-cinema-pink transition-colors"
-          />
+    <!-- MODAL DE EDIÇÃO DE PERFIL CENTRALIZADO -->
+    <dialog id="modal-editar" class="modal-perfil">
+        <div class="conteudo-modal">
+            <h2>Editar Perfil</h2>
+            <form id="form-editar-perfil">
+                <label for="edit-nome">Nome de Usuário</label>
+                <input type="text" id="edit-nome" required>
+
+                <label for="edit-bio">Biografia</label>
+                <textarea id="edit-bio" rows="2"></textarea>
+
+                <label for="edit-foto">URL da Foto de Perfil</label>
+                <input type="text" id="edit-foto" placeholder="../Imagens/StanLee.jpg">
+
+                <label>Editar Minhas Preferências</label>
+                <div id="edit-generos-grid" class="edit-generos-grid"></div>
+
+                <div class="acoes-modal">
+                    <button type="button" id="btn-cancelar-modal" class="btn-secundario">Cancelar</button>
+                    <button type="submit" class="btn-primario">Salvar</button>
+                </div>
+            </form>
         </div>
+    </dialog>
 
-        <!-- Buttons -->
-        <div class="flex items-center justify-end gap-3 pt-2">
-          <button 
-            type="button" 
-            onclick="closeEditModal()" 
-            class="px-4 py-2 rounded-xl text-xs font-semibold text-gray-400 hover:text-white bg-cinema-input hover:bg-cinema-cardBorder border border-cinema-cardBorder transition-colors"
-          >
-            Cancelar
-          </button>
-          <button 
-            type="submit" 
-            class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-cinema-pink hover:bg-cinema-pinkHover shadow-md transition-all active:scale-95"
-          >
-            Salvar Alterações
-          </button>
+    <!-- CONTAINER NOTIFICAÇÃO TOAST COM BORDA COLORIDA -->
+    <div id="toast-notificacao" class="toast-notificacao" aria-live="polite"></div>
+
+    <footer>
+        <div id="footer-container">
+            <p id="footer-suporte"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> Suporte e recomendações para sua próxima sessão</p>
+            <p id="footer-texto">© 2024 ChamaCinema. Todos os direitos reservados.</p>
         </div>
+    </footer>
 
-      </form>
-
-    </div>
-  </div>
-
-  <!-- Container de Toasts -->
-  <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../js/manipulaLS.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/header.js"></script>
+    <script src="../js/usuario.js"></script>
 </body>
 </html>
