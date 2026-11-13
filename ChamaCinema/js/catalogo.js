@@ -1,12 +1,32 @@
-async function imagemFilme(idgen) {
+let containerfilmes = document.getElementById('container-filmes');
 
-    let containerfilmes = document.getElementById('container-filmes');
+async function imagemFilme() {
+
+    let idgen = document.querySelector('#opcoes').value;
+    let ano = document.querySelector('#ano').value;
+    let nota = document.querySelector('#nota').value;
+    
+    console.log(ano);
 
     try {
+        let url = (`${TMDB_API_URL}/discover/movie?api_key=${TMDB_API_KEY}&language=pt-BR`);
 
-        const resposta = await fetch(`${TMDB_API_URL}/discover/movie?api_key=${TMDB_API_KEY}&with_genres=${idgen}&language=pt-BR`);
+        if (idgen) {
+            url += `&with_genres=${idgen}`;
+        }
+
+        if (ano) {
+        url += `&primary_release_year=${ano}`;
+        }
+
+        if (nota) {
+            url += `&vote_average.gte=${nota}`;
+        }
+
+        const resposta = await fetch(url);
 
         if (!resposta.ok) throw new Error('Não foi possível carregar os filmes.');
+
 
         const dados = await resposta.json();
         const filmes = dados.results.slice(0, 18);
@@ -26,34 +46,11 @@ async function imagemFilme(idgen) {
     }
 }
 
-async function fundoimagem() {
-
-    const generos = [28, 12, 16, 35, 80, 99, 18, 10751, 14, 36, 27, 10402, 9648, 10749, 878, 53, 10752, 37];
-
-    for (const idgen of generos) {
-
-        try {
-
-            const resposta = await fetch(`${TMDB_API_URL}/discover/movie?api_key=${TMDB_API_KEY}&with_genres=${idgen}&language=pt-BR`);
-
-            if (!resposta.ok) throw new Error('Erro ao carregar filme.');
-
-            const dados = await resposta.json();
-
-            const filme = dados.results[0];
-
-            if (filme && filme.backdrop_path) {
-
-                const botao = document.getElementById(`genero-${idgen}`);
-
-                botao.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('${TMDB_IMAGE_URL}${filme.backdrop_path}')`;
-
-            }
-
-        } catch (erro) {
-            console.error(`Erro no gênero ${idgen}:`, erro);
-        }
-    }
+function VoltarPadrão() {
+    document.querySelector('#opcoes').selectedIndex = 0;
+    document.querySelector('#ano').selectedIndex = 0;
+    document.querySelector('#nota').selectedIndex = 0;
+    imagemFilme();
 }
 
-fundoimagem();
+imagemFilme();
