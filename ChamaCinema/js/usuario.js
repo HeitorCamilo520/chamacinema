@@ -64,10 +64,11 @@ function renderizarDadosUsuario(usu) {
 
     // Moldura do Avatar dinâmico pelo plano
     const avatarMoldura = document.getElementById('usr-avatar-moldura');
-    if (avatarMoldura && usu.plano) {
+    const plano = obterPlanoUsuario(usu);
+    if (avatarMoldura && plano) {
         avatarMoldura.className = 'avatar-circulo';
-        if (usu.plano === 'Produtor') avatarMoldura.classList.add('plano-produtor');
-        else if (usu.plano === 'Administrador') avatarMoldura.classList.add('plano-administrador');
+        if (plano === 'Produtor') avatarMoldura.classList.add('plano-produtor');
+        else if (plano === 'Administrador') avatarMoldura.classList.add('plano-administrador');
         else avatarMoldura.classList.add('plano-faisca');
     }
 
@@ -86,11 +87,9 @@ function renderizarDadosUsuario(usu) {
     // Contadores Dinâmicos
     const listaAvaliacoes = (usu.avaliacoes && Array.isArray(usu.avaliacoes)) ? usu.avaliacoes : avaliacoesPadrao;
     const qtdFilmes = listaAvaliacoes.filter(a => a.tipo !== 'serie').length || 21;
-    const qtdSeries = listaAvaliacoes.filter(a => a.tipo === 'serie').length || 10;
     const qtdFavoritos = (usu.favoritos && Array.isArray(usu.favoritos)) ? usu.favoritos.length : 0;
 
     document.getElementById('stat-avaliados').textContent = qtdFilmes;
-    document.getElementById('stat-series').textContent = qtdSeries;
     document.getElementById('stat-favoritos').textContent = qtdFavoritos;
 }
 
@@ -148,88 +147,23 @@ async function renderizarSecaoFavoritos(idsFavoritos) {
 }
 
 function criarCardObraHTML(filme, eFavorito) {
-    const posterUrl = filme.poster_path ? `${TMDB_IMAGE_URL}${filme.poster_path}` : '../Imagens/Geral_1.png';
-    const ano = filme.release_date ? filme.release_date.slice(0, 4) : '2008';
-    const genero = (filme.genres && filme.genres.length) ? filme.genres[0].name : 'Super herói';
-    const nota = filme.vote_average ? (filme.vote_average / 2).toFixed(1) : '4.0';
-    const tituloEscapado = String(filme.title).replace(/'/g, "\\'");
-
-    return `
-        <article class="card-obra" data-id="${filme.id}">
-            <div class="poster-container">
-                <img src="${posterUrl}" alt="${filme.title}" class="poster-midia">
-                <button type="button" class="btn-favorito-card ${eFavorito ? 'ativo' : ''}" data-filme-id="${filme.id}" onclick="cliqueFavoritar(event, ${filme.id}, '${tituloEscapado}')">
-                    <i class="fa-solid fa-heart"></i>
-                </button>
-            </div>
-            <div class="info-obra">
-                <h3 class="titulo-obra">${filme.title}</h3>
-                <p class="detalhe-obra">${genero} • ${ano}</p>
-                <div class="linha-nota-card">
-                    <span class="nota-card">${nota}</span>
-                    <div class="chamas-mini">
-                        <img src="../Imagens/foguin_rosa.png" alt="Chama">
-                        <img src="../Imagens/foguin_rosa.png" alt="Chama">
-                        <img src="../Imagens/foguin_rosa.png" alt="Chama">
-                        <img src="../Imagens/foguin_rosa.png" alt="Chama">
-                        <img src="../Imagens/foguin_rosa.png" alt="Chama" class="meia-chama">
-                    </div>
-                </div>
-            </div>
-        </article>
-    `;
+    return criarCartaoFilme(filme, { permitirFavoritar: true, favorito: eFavorito });
 }
 
-function cliqueFavoritar(event, idFilme, tituloFilme) {
-    event.preventDefault();
-    
-    let usu = getmemoria("usuarioLogado");
-    if (!usu) return;
+document.addEventListener('favorito:alterado', (evento) => {
+    const { favorito, usuario, titulo } = evento.detail;
+    const contador = document.getElementById('stat-favoritos');
+    if (!contador) return;
 
-    if (!Array.isArray(usu.favoritos)) {
-        usu.favoritos = [];
-    }
+    contador.textContent = usuario.favoritos.length;
+    const idsFavoritos = usuario.favoritos.map(item => Number(typeof item === 'object' ? item.id : item));
+    void renderizarSecaoFavoritos(idsFavoritos);
 
-    const indice = usu.favoritos.indexOf(idFilme);
-    let adicionado = false;
-
-    if (indice === -1) {
-        usu.favoritos.push(idFilme);
-        adicionado = true;
-    } else {
-        usu.favoritos.splice(indice, 1);
-        adicionado = false;
-    }
-
-    // Salvar no localStorage
-    let usus = getmemoria("usuarios") || [];
-    for (let i = 0; i < usus.length; i++) {
-        if (usus[i].usuario === usu.usuario || usus[i].email === usu.email) {
-            usus[i] = usu;
-            break;
-        }
-    }
-    setmemoria("usuarioLogado", usu);
-    setmemoria("usuarios", usus);
-
-    // 1. Atualiza visualmente todos os botões de coração deste filme na página sem recarregar a grade de avaliados
-    const botoesCoracao = document.querySelectorAll(`button[data-filme-id="${idFilme}"]`);
-    botoesCoracao.forEach(btn => {
-        btn.classList.toggle('ativo', adicionado);
-    });
-
-    // 2. Atualiza os contadores
-    document.getElementById('stat-favoritos').textContent = usu.favoritos.length;
-
-    // 3. Atualiza exclusivamente a seção Meus Favoritos
-    renderizarSecaoFavoritos(usu.favoritos);
-
-    // 4. Dispara a mensagem Toast com caixa preta e borda colorida
-    const mensagem = adicionado 
-        ? `"${tituloFilme}" foi adicionado aos seus favoritos!`
-        : `"${tituloFilme}" foi removido dos seus favoritos.`;
+    const mensagem = favorito
+        ? `"${titulo}" foi adicionado aos seus favoritos!`
+        : `"${titulo}" foi removido dos seus favoritos.`;
     exibirToast(mensagem);
-}
+});
 
 function exibirToast(mensagem) {
     const toast = document.getElementById('toast-notificacao');

@@ -67,15 +67,7 @@ function renderizarFilmes(filmes) {
   }
 
 
-  catalogo.innerHTML = filmes.map((filme) => `
-    <a class="filme-card" href="filme.html?id=${encodeURIComponent(filme.id)}">
-      <img src="${filme.poster_path ? `${TMDB_IMAGE_URL}${filme.poster_path}` : 'Imagens/Geral_1.png'}" alt="Pôster de ${filme.title}">
-      <div class="filme-info">
-        <h2>${filme.title}</h2>
-        <p>${filme.release_date?.slice(0, 4) || 'Ano não informado'} | Nota ${filme.vote_average?.toFixed(1) || 'N/A'}</p>
-      </div>
-    </a>
-  `).join('');
+  catalogo.innerHTML = filmes.map((filme) => criarCartaoFilme(filme)).join('');
 }
 
 // ===== Catálogo (preferencias) =====
@@ -113,15 +105,8 @@ function renderizarPrefs(filmes, id = 16) {
   if (usu) {
     prefs.innerHTML += `<h2>${generos[id]}</h2>`;
     let texto = "";
-    filmes.forEach(i => {
-        texto += `
-          <a class="filme-card" href="filme.html?id=${encodeURIComponent(i.id)}">
-            <img src="${i.poster_path ? `${TMDB_IMAGE_URL}${i.poster_path}` : 'Imagens/Geral_1.png'}" alt="Pôster de ${i.title}">
-            <div class="filme-info">
-              <h2>${i.title}</h2>
-              <p>${i.release_date?.slice(0, 4) || 'Ano não informado'} | Nota ${i.vote_average?.toFixed(1) || 'N/A'}</p>
-            </div>
-          </a>`;
+    filmes.forEach(filme => {
+        texto += criarCartaoFilme(filme);
     });
     prefs.innerHTML +=`<div class="catalogo-faixa">
     <button class="catalogo-prev" type="button" aria-label="Filmes anteriores" onclick="moverPrefs(this, -1)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
@@ -129,28 +114,6 @@ function renderizarPrefs(filmes, id = 16) {
                         <button class="catalogo-next" type="button" aria-label="Próximos filmes" onclick="moverPrefs(this, 1)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
                     </div>`;
   }
- /* 
-      let texto = "";
-        texto += `<h2> ${generos[num]} </h2>
-      <div class="catalogo-faixa">
-      <button class="catalogo-prev" type="button" aria-label="Filmes anteriores" onclick="moverPrefs(this, -1)">❮</button>
-      <div id="container-prefs">`;
-       filmes.forEach(j => {
-        if (j.genre_ids.includes(num)) {
-          texto += `
-            <article class="filme-card">
-              <img src="${j.poster_path ? `${TMDB_IMAGE_URL}${j.poster_path}` : 'Imagens/Geral_1.png'}" alt="Pôster de ${j.title}">
-              <div class="filme-info">
-                <h2>${j.title}</h2>
-                <p>${j.release_date?.slice(0, 4) || 'Ano não informado'} | Nota ${j.vote_average?.toFixed(1) || 'N/A'}</p>
-              </div>
-            </article>`;
-        }
-});
-    texto += `</div>
-                    <button class="catalogo-next" type="button" aria-label="Próximos filmes" onclick="moverPrefs(this, 1)">❯</button>
-                </div>`;
-    prefs.innerHTML += texto; */
 }
 
 function moverCatalogo(direcao) {
@@ -180,14 +143,17 @@ async function buscarDestaques() {
 function renderizarDestaques(filmes) {
   slidesContainer.innerHTML = filmes.map((filme) => {
     const imagem = filme.backdrop_path ? `${TMDB_BACKDROP_URL}${filme.backdrop_path}` : 'Imagens/Geral_6.png';
+    const ano = filme.release_date?.slice(0, 4) || 'Ano não informado';
+    const genero = escaparTextoCartao(obterGeneroPrincipal(filme));
+    const nota = obterNotaCartao(filme);
     return `
       <a class="slide" href="filme.html?id=${encodeURIComponent(filme.id)}">
-        <img class="slide-imagem" src="${imagem}" alt="${filme.title}">
+        <img class="slide-imagem" src="${imagem}" alt="${escaparTextoCartao(filme.title)}">
         <div class="slide-conteudo">
           <p class="slide-legenda">EM DESTAQUE</p>
-          <h1>${filme.title}</h1>
-          <p class="slide-detalhes">${filme.release_date?.slice(0, 4) || 'Ano não informado'} &nbsp; | &nbsp; Nota ${filme.vote_average?.toFixed(1) || 'N/A'}</p>
-          <p class="slide-sinopse">${filme.overview || 'Sinopse não disponível.'}</p>
+          <h1>${escaparTextoCartao(filme.title)}</h1>
+          <p class="slide-detalhes">${genero} · ${ano} · Nota ${nota}/5</p>
+          <p class="slide-sinopse">${escaparTextoCartao(filme.overview || 'Sinopse não disponível.')}</p>
         </div>
       </a>
     `;
@@ -222,70 +188,88 @@ let fundo =  document.getElementById('estampa');
 
   if (getmemoria("usuarioLogado")) {
     let infos = getmemoria("usuarioLogado");
+    const plano = obterPlanoUsuario(infos);
     prefs.children[0].textContent = "Recomendados para você";
 
 
-    if (infos['plano'] == "Faísca") {
+    if (plano === "Faísca") {
       fundo.href = "../css/components/fundo_base.css";
       document.getElementById("planos").innerHTML = '';
     }
 
 
-    else if (infos['plano'] == "Produtor") {
-      fundo.href = "../css/components/produtor.css";
+    else if (plano === "Produtor") {
+      fundo.href = "../css/components/produtor.css?v=20261114-3";
       prefs.children[0].textContent = "Baseados em suas preferências";
       document.getElementById("planos").innerHTML = `<div id="container-produtor">
-                <button id="botao-produtor">
+                <button id="botao-produtor" type="button" onclick="produzir()" aria-controls="form-producao" aria-expanded="false">
                     <i class="fa-solid fa-video icone-produtor"></i>
                     <div id="container-produtor-texto">
                         <h1>Comece sua produção</h1>
                         <h2>Descubra novas oportunidades</h2>
                     </div>
                 </button>
-                <div id="container-catalogo">
+                <section id="container-catalogo" class="area-producoes">
                   <h1>Minhas produções</h1>
-                  <div class="catalogo-faixa">
-                    <button class="produtor-card" id="botao-produzir" onclick="produzir()">
-                      <div id="container-produtor-texto">
-                        <h1><i class="fa-solid fa-plus"></i></h1>
-                        <h2>Criar nova produção</h2>
+                  <button class="produtor-card" id="botao-produzir" type="button" onclick="produzir()" aria-haspopup="dialog" aria-controls="form-producao">
+                    <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                    <span>Criar nova produção</span>
+                  </button>
+                  <div class="lista-producoes" id="lista-producoes"></div>
+
+                  <dialog class="modal-producao" id="form-producao" aria-labelledby="titulo-form-producao">
+                    <div class="modal-producao-cabecalho">
+                      <div>
+                        <p class="modal-producao-sobretitulo">NOVA PRODUÇÃO</p>
+                        <h2 id="titulo-form-producao">Informações do filme</h2>
                       </div>
-                    </button>
-                    <article class="filme-card">
-                      <img src="../Imagens/ArthPLeo.png">
-                    </article>
-                    <article class="filme-card">
-                      <img src="../Imagens/ArthPLeo.png">
-                    </article>
-                    <article class="filme-card">
-                      <img src="../Imagens/ArthPLeo.png">
-                    </article>
-                    <article class="filme-card">
-                      <img src="../Imagens/ArthPLeo.png">
-                    </article>
-                  </div>
-                  <div class="pop-up-produzir" id="form-producao" display="none">
-                    <form>
-                      <p>Nome do filme</p>
-                        <input>
-                      <p>Ano de lançamento</p>
-                        <input>
-                      <p>Ano de lançamento</p>
-                        <input>
-                      <p>Ano de lançamento</p>
-                        <input>
-                      <p>Ano de lançamento</p>
-                        <input>
-                      <button type="submit">Oi</button>
+                      <button class="fechar-modal-producao" type="button" onclick="fecharProducao()" aria-label="Fechar formulário">
+                        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    <form id="formulario-producao">
+                      <div class="campo-producao">
+                        <label for="titulo-producao">Nome do filme</label>
+                        <input id="titulo-producao" name="titulo" type="text" maxlength="120" required>
+                      </div>
+                      <div class="grade-campos-producao">
+                        <div class="campo-producao">
+                          <label for="genero-producao">Gênero principal</label>
+                          <select id="genero-producao" name="genero" required>
+                            <option value="">Selecione um gênero</option>
+                            <option>Ação</option><option>Aventura</option><option>Animação</option>
+                            <option>Comédia</option><option>Crime</option><option>Documentário</option>
+                            <option>Drama</option><option>Fantasia</option><option>Ficção científica</option>
+                            <option>Romance</option><option>Suspense</option><option>Terror</option>
+                          </select>
+                        </div>
+                        <div class="campo-producao">
+                          <label for="ano-producao">Ano de lançamento</label>
+                          <input id="ano-producao" name="ano" type="number" min="1888" max="2100" required>
+                        </div>
+                      </div>
+                      <div class="campo-producao">
+                        <label for="sinopse-producao">Sinopse</label>
+                        <textarea id="sinopse-producao" name="sinopse" rows="4" maxlength="800" placeholder="Conte um pouco sobre o filme"></textarea>
+                      </div>
+                      <div class="campo-producao">
+                        <label for="poster-producao">Link do pôster <span>(opcional)</span></label>
+                        <input id="poster-producao" name="poster" type="url" placeholder="https://">
+                      </div>
+                      <p class="mensagem-producao" id="mensagem-producao" aria-live="polite"></p>
+                      <div class="acoes-modal-producao">
+                        <button class="cancelar-producao" type="button" onclick="fecharProducao()">Cancelar</button>
+                        <button class="salvar-producao" type="submit">Salvar produção</button>
+                      </div>
                     </form>
-                  </div>
-                </div>                                                      
+                  </dialog>
+                </section>
             </div>
       `;
     }
 
 
-    else if (infos['plano'] == "Administrador") {
+    else if (plano === "Administrador") {
       fundo.href = "../css/components/administrador.css";
       prefs.children[0].textContent = "Baseados em suas preferências";
       document.getElementById("planos").innerHTML = `<div id="container-administrador">

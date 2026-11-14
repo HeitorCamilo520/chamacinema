@@ -1,0 +1,224 @@
+body {
+    position: relative;
+    overflow-x: hidden;
+    background: var(--color-black-deepest);
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: -12% -8%;
+    z-index: -1;
+    background: url(../../Imagens/Estampa.png) center / 45% auto repeat;
+    opacity: .3;
+    transform: perspective(1400px) rotateZ(-12deg) scale(1.2);
+    pointer-events: none;
+}
+
+main {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: min(1360px, calc(100% - 2.5rem));
+    margin: 1rem auto;
+    padding: 1.25rem;
+    border: 1px solid var(--color-gray-deep);
+    border-radius: 28px;
+    background: linear-gradient(180deg, var(--color-black-panel-strong), var(--color-black-panel) 38%, var(--color-black-deepest));
+    box-shadow: 0 22px 50px #000000;
+}
+
+#container-principal {
+    width: min(1240px, 100%);
+    color: var(--color-white);
+    animation: entrada 600ms ease both;
+}
+
+#detalhes-ator {
+    display: grid;
+    gap: 1rem;
+}
+
+.hero-ator {
+    display: grid;
+    grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+    padding: 1rem;
+    border: 1px solid var(--color-gray-deep);
+    border-radius: 16px;
+    background: var(--color-black-panel);
+}
+
+.ator-retrato {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--color-black-main);
+    box-shadow: 0 12px 30px rgb(0 0 0 / 40%);
+}
+
+.ator-retrato img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+}
+
+.ator-resumo {
+    min-width: 0;
+    padding: .5rem 0;
+}
+
+.ator-sobretitulo {
+    margin: 0 0 .4rem;
+    color: var(--color-orange);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.ator-resumo h1 {
+    margin: 0 0 1rem;
+    font-size: 2rem;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+}
+
+.dados-ator {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .6rem;
+    margin: 0 0 1.25rem;
+}
+
+.dados-ator > div {
+    display: grid;
+    align-content: start;
+    gap: .25rem;
+    min-width: 0;
+    min-height: 66px;
+    padding: .65rem .75rem;
+    border: 1px solid var(--color-gray-deep);
+    border-radius: 8px;
+    background: var(--color-black-panel-alt);
+}
+
+.dados-ator dt {
+    color: var(--color-gray-smoke);
+    font-size: .68rem;
+}
+
+.dados-ator dd {
+    overflow: hidden;
+    margin: 0;
+    font-size: .8rem;
+    text-overflow: ellipsis;
+}
+
+.bio-ator h2,
+.cabecalho-filmografia h2 {
+    margin: 0 0 .5rem;
+    font-size: var(--text-md);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.bio-ator p {
+    margin: 0;
+    color: var(--color-gray-light);
+    font-size: .88rem;
+    line-height: 1.7;
+    white-space: pre-line;
+}
+
+.secao-filmografia {
+    padding: .5rem .25rem 1rem;
+}
+
+.cabecalho-filmografia {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: .25rem 0 .85rem;
+}
+
+.cabecalho-filmografia h2 {
+    margin: 0;
+}
+
+.cabecalho-filmografia span {
+    color: var(--color-gray-smoke);
+    font-size: var(--text-xs);
+}
+
+.grade-filmografia {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: .85rem;
+}
+
+.mensagem-ator {
+    padding: 2rem 1rem;
+    color: var(--color-gray-smoke);
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .grade-filmografia {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 680px) {
+    main {
+        width: calc(100% - 1rem);
+        padding: .65rem;
+        border-radius: 18px;
+    }
+
+    .hero-ator {
+        grid-template-columns: 150px minmax(0, 1fr);
+        gap: 1rem;
+        padding: .75rem;
+    }
+
+    .ator-resumo h1 {
+        font-size: 1.5rem;
+    }
+
+    .dados-ator {
+        grid-template-columns: 1fr;
+        gap: .4rem;
+        margin-bottom: .85rem;
+    }
+
+    .dados-ator > div {
+        min-height: 0;
+        padding: .45rem .6rem;
+    }
+
+    .grade-filmografia {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: .7rem;
+    }
+}
+
+@media (max-width: 460px) {
+    .hero-ator {
+        grid-template-columns: 1fr;
+    }
+
+    .ator-retrato {
+        width: min(240px, 100%);
+        justify-self: center;
+    }
+
+    .grade-filmografia {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

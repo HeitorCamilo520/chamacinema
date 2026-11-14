@@ -6,8 +6,9 @@ function verificarPlano() {
 
 if (getmemoria("usuarioLogado")) {
     let infos = getmemoria("usuarioLogado");
+  const plano = obterPlanoUsuario(infos);
 
-    if (infos['plano'] == "Faísca") {
+  if (plano === "Faísca") {
       cfaisca.innerHTML = `
         <p class="preco-plano"><span class="valor-preco">Gratuito</span><span>para sempre</span></p>
         <button class="botao-plano selecionado" type="button" id="faisca"><i class="fa-solid fa-check"></i><span>Selecionado</span></button>`
@@ -18,7 +19,7 @@ if (getmemoria("usuarioLogado")) {
         </a>`
     }
 
-    else if (infos['plano'] == "Produtor") {
+    else if (plano === "Produtor") {
       cprodutor.innerHTML = `
         <p class="preco-plano"><span class="valor-preco">R$ 59,90</span><span>por mês</span></p>
         <button class="botao-plano selecionado" type="button" id="produtor"><i class="fa-solid fa-tag" aria-hidden="true"></i><span>Selecionado</span></button>`
@@ -27,7 +28,7 @@ if (getmemoria("usuarioLogado")) {
         <button class="botao-plano selecionado" type="button" id="faisca"><i class="fa-solid fa-ban"></i><span>Não disponivel</span></button>`
     }
 
-    else if (infos['plano'] == "Administrador") {
+    else if (plano === "Administrador") {
       cprodutor.innerHTML = `
         <p class="preco-plano"><span class="valor-preco">R$ 59,90</span><span>por mês</span></p>
         <button class="botao-plano selecionado" type="button" id="produtor"><i class="fa-solid fa-ban"></i><span>Não disponivel</span></button>`

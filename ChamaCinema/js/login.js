@@ -1,15 +1,62 @@
-document.addEventListener('DOMContentLoaded', () =>{
-    if(!getmemoria("usuarios")){
-        fetch('../json/json_usuarios.json')
-        .then(resposta => resposta.json())
-        .then(usuariosJson =>{
-            setmemoria("usuarios", usuariosJson);
-        })
+let usuariosLoginPromise;
+
+function lerUsuariosSalvos() {
+    try {
+        const usuarios = getmemoria('usuarios');
+        return Array.isArray(usuarios) ? usuarios : [];
+    } catch {
+        return [];
     }
-})
+}
+
+async function buscarUsuariosBase() {
+    const resposta = await fetch('../json/json_usuarios.json');
+    if (!resposta.ok) throw new Error('Não foi possível carregar as contas.');
+    const usuarios = await resposta.json();
+    if (!Array.isArray(usuarios)) throw new Error('A lista de contas está inválida.');
+    return usuarios;
+}
+
+function combinarUsuarios(usuariosSalvos, usuariosBase) {
+    const usuarios = [...usuariosSalvos];
+
+    usuariosBase.forEach(usuarioBase => {
+        const indice = usuarios.findIndex(usuario =>
+            usuario.usuario === usuarioBase.usuario || usuario.email === usuarioBase.email
+        );
+        if (indice < 0) usuarios.push(usuarioBase);
+        else if (usuarioBase.plano) usuarios[indice].plano = usuarioBase.plano;
+    });
+
+    setmemoria('usuarios', usuarios);
+    return usuarios;
+}
+
+function carregarUsuariosLogin() {
+    if (!usuariosLoginPromise) {
+        usuariosLoginPromise = (async () => {
+            const usuariosSalvos = lerUsuariosSalvos();
+            try {
+                return combinarUsuarios(usuariosSalvos, await buscarUsuariosBase());
+            } catch (error_) {
+                if (usuariosSalvos.length) return usuariosSalvos;
+                throw error_;
+            }
+        })().catch(error_ => {
+            usuariosLoginPromise = null;
+            throw error_;
+        });
+    }
+
+    return usuariosLoginPromise;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    carregarUsuariosLogin().catch(error_ => console.error(error_));
+});
 
 
-function validarLogin(event) {
+async function validarLogin(event) {
     event.preventDefault();
 
     const emailOuUsuario = document.getElementById('email-login').value.trim();
@@ -29,10 +76,33 @@ function validarLogin(event) {
         return false;
     }
 
-    let usuarios = getmemoria("usuarios");
-    
-    let achouUsuario = usuarios.find(
-        u => (u.usuario === emailOuUsuario || u.email === emailOuUsuario) && u.senha === senha);
+    let usuarios;
+    try {
+        usuarios = await carregarUsuariosLogin();
+    } catch {
+        mostrarMensagem(mensagem, 'Não foi possível carregar as contas. Tente novamente.');
+        return false;
+    }
+
+    const identificador = emailOuUsuario.toLocaleLowerCase('pt-BR');
+    let achouUsuario = usuarios.find(usuario =>
+        (usuario.usuario.toLocaleLowerCase('pt-BR') === identificador
+            || usuario.email.toLocaleLowerCase('pt-BR') === identificador)
+        && usuario.senha === senha
+    );
+
+    if (!achouUsuario) {
+        try {
+            usuarios = combinarUsuarios(usuarios, await buscarUsuariosBase());
+            achouUsuario = usuarios.find(usuario =>
+                (usuario.usuario.toLocaleLowerCase('pt-BR') === identificador
+                    || usuario.email.toLocaleLowerCase('pt-BR') === identificador)
+                && usuario.senha === senha
+            );
+        } catch (error_) {
+            console.error(error_);
+        }
+    }
 
 
     if(!achouUsuario){
@@ -40,7 +110,9 @@ function validarLogin(event) {
         return false;
     }
   
-    achouUsuario.logado = true;
+    usuarios.forEach(usuario => {
+        usuario.logado = usuario === achouUsuario;
+    });
     setmemoria("usuarios", usuarios);
     setmemoria("usuarioLogado", achouUsuario);
     

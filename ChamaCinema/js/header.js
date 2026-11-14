@@ -5,13 +5,41 @@ const dropdown = document.getElementById('dropdown_menu');
 const usuario = document.getElementById('usuario-login');
 let temporizadorPesquisa;
 
-if(!getmemoria("usuarios")){
-        fetch('../json/json_usuarios.json')
-        .then(resposta => resposta.json())
-        .then(usuariosJson =>{
-            setmemoria("usuarios", usuariosJson);
-        })
+function obterPlanoUsuario(usuarioAtual) {
+  if (!usuarioAtual) return '';
+
+  let usuarios = [];
+  try {
+    usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+  } catch {
+    usuarios = [];
+  }
+
+  const registro = usuarios.find(conta =>
+    (usuarioAtual.email && conta.email === usuarioAtual.email)
+    || (usuarioAtual.usuario && conta.usuario === usuarioAtual.usuario)
+  );
+  const planoSalvo = registro?.plano || usuarioAtual.plano || '';
+  const identificadorPlano = String(planoSalvo).trim().toLocaleLowerCase('pt-BR')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const planos = {
+    faisca: 'Faísca',
+    produtor: 'Produtor',
+    administrador: 'Administrador'
+  };
+  const plano = planos[identificadorPlano] || '';
+
+  if (plano && usuarioAtual.plano !== plano) {
+    usuarioAtual.plano = plano;
+    const sessao = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
+    if (sessao && ((usuarioAtual.email && sessao.email === usuarioAtual.email)
+      || (usuarioAtual.usuario && sessao.usuario === usuarioAtual.usuario))) {
+      localStorage.setItem('usuarioLogado', JSON.stringify({ ...sessao, plano }));
     }
+  }
+
+  return plano;
+}
 
 function redirecionarParaResultados() {
   const termo = pesquisa?.value.trim();
@@ -23,21 +51,7 @@ formularioPesquisa?.addEventListener('submit', (evento) => {
   redirecionarParaResultados();
 });
 
-function redirecionarParaFavoritos() {
-  if (getmemoria("usuarioLogado")) {
-    window.location.href = 'favoritos.html';
-  } else {
-    window.location.href = 'login.html';
-  }
-}
-
-function redirecionarParaCatalogo() {
-  window.location.href = 'catalogo.html';
-}
-
 document.querySelector('#lupa')?.addEventListener('click', redirecionarParaResultados);
-document.getElementById('favoritos').addEventListener('click', redirecionarParaFavoritos);
-document.getElementById('catalogo').addEventListener('click', redirecionarParaCatalogo);
 
 pesquisa?.addEventListener('input', () => {
   clearTimeout(temporizadorPesquisa);
@@ -62,12 +76,18 @@ pesquisa?.addEventListener('input', () => {
       const dados = await resposta.json();
       const filmes = dados.results.slice(0, 5);
       resultadosPesquisa.innerHTML = filmes.length
-        ? filmes.map((filme) => `
-          <a class="sugestao-filme" href="resultados.html?busca=${encodeURIComponent(filme.title)}">
-            <img src="${filme.poster_path ? `${TMDB_IMAGE_URL}${filme.poster_path}` : 'Imagens/Geral_1.png'}" alt="">
-            <span>${filme.title}<small>${filme.release_date?.slice(0, 4) || 'Ano não informado'}</small></span>
-          </a>
-        `).join('')
+        ? filmes.map((filme) => {
+          const titulo = escaparTextoCartao(filme.title);
+          const genero = escaparTextoCartao(obterGeneroPrincipal(filme));
+          const ano = (filme.release_date || '').slice(0, 4) || 'Ano não informado';
+          const nota = obterNotaCartao(filme);
+          return `
+            <a class="sugestao-filme" href="resultados.html?busca=${encodeURIComponent(filme.title)}">
+              <img src="${filme.poster_path ? `${TMDB_IMAGE_URL}${filme.poster_path}` : '../Imagens/Geral_1.png'}" alt="">
+              <span>${titulo}<small>${genero} · ${ano} · Nota ${nota}/5</small></span>
+            </a>
+          `;
+        }).join('')
         : '<p class="mensagem-pesquisa">Nenhum filme encontrado.</p>';
     } catch (error_) {
       resultadosPesquisa.innerHTML = `<p class="mensagem-pesquisa">${error_.message}</p>`;
@@ -101,8 +121,24 @@ function dropdownMenu() {
 function atualizarOpcaoSairConta() {
   const tabela = document.querySelector('#dropdown_menu table');
   const sairConta = document.getElementById('sair-conta');
+  const usuarioAtual = getmemoria('usuarioLogado');
+  const plano = obterPlanoUsuario(usuarioAtual);
+  const linkPlano = document.getElementById('dire_plano');
+  const acaoPerfilExistente = document.getElementById('acao-perfil');
 
-  if (getmemoria("usuarioLogado")) {
+  acaoPerfilExistente?.remove();
+  if (usuarioAtual && linkPlano && (plano === 'Produtor' || plano === 'Administrador')) {
+    const acaoPerfil = document.createElement('a');
+    acaoPerfil.id = 'acao-perfil';
+    acaoPerfil.className = 'opcoes_header';
+    acaoPerfil.href = 'index.html';
+    acaoPerfil.innerHTML = plano === 'Produtor'
+      ? '<i class="fa-solid fa-video icone-header" aria-hidden="true"></i><p>Produções</p>'
+      : '<i class="fa-solid fa-user-shield icone-header" aria-hidden="true"></i><p>Administrar</p>';
+    linkPlano.after(acaoPerfil);
+  }
+
+  if (usuarioAtual) {
     usuario.classList.add('opcoes_header');
     usuario.parentNode.classList.add('drop');
     usuario.innerHTML = `
@@ -135,7 +171,7 @@ function atualizarOpcaoSairConta() {
     sairConta.remove();
   }
 
-  if (!getmemoria("usuarioLogado")) {
+  if (!usuarioAtual) {
     usuario.classList.remove('opcoes_header');
     usuario.parentNode.classList.remove('drop');
     usuario.innerHTML = `<a href="login.html" class="opcoes_header"><i class="fa-solid fa-user icone-header" id="pessoa_login"></i><p>Login</p></a>`;
@@ -156,17 +192,18 @@ function Redirecionador() {
 
   if (getmemoria("usuarioLogado")) {
     let infos = getmemoria("usuarioLogado");
+    const plano = obterPlanoUsuario(infos);
     $("#dire_plano").attr("href", "planos.html");
 
-    if (infos["plano"] == "Faísca") {
+    if (plano === "Faísca") {
       fundo.href = "../css/components/fundo_base.css";
     }
 
-    else if (infos["plano"] == "Produtor") {
-      fundo.href = "../css/components/produtor.css";
+    else if (plano === "Produtor") {
+      fundo.href = "../css/components/produtor.css?v=20261114-3";
     }
 
-    else if (infos["plano"] == "Administrador") {
+    else if (plano === "Administrador") {
       fundo.href = "../css/components/administrador.css";
     }
 

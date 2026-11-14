@@ -1,0 +1,133 @@
+.media-card {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-gray-deep);
+    border-radius: 8px;
+    background: #171717;
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+.media-card:focus-visible {
+    outline: 2px solid var(--color-orange);
+    outline-offset: 2px;
+}
+
+.media-card .poster-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    background: var(--color-black-main);
+}
+
+.media-card .poster-midia {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.media-card .info-obra {
+    display: grid;
+    align-content: start;
+    gap: .4rem;
+    min-height: 108px;
+    padding: .7rem;
+}
+
+.media-card .titulo-obra {
+    display: -webkit-box;
+    min-height: 2.4em;
+    overflow: hidden;
+    margin: 0;
+    color: var(--color-white);
+    font-size: .9rem;
+    font-weight: 700;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.media-card .detalhe-obra {
+    display: flex;
+    gap: .35rem;
+    overflow: hidden;
+    margin: 0;
+    color: var(--color-gray-smoke);
+    font-size: .75rem;
+    white-space: nowrap;
+}
+
+.media-card .detalhe-obra span:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.media-card .linha-nota-card {
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+}
+
+.media-card .chamas-nota {
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+}
+
+.media-card .chamas-nota img {
+    display: block;
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+}
+
+.media-card .chamas-nota .chama-apagada {
+    opacity: .24;
+}
+
+.media-card .nota-card {
+    color: var(--color-white);
+    font-size: .8rem;
+    font-weight: 700;
+}
+
+.media-card .nota-escala {
+    color: var(--color-gray-smoke);
+    font-size: .72rem;
+}
+
+.media-card .btn-favorito-card {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border: 1px solid rgb(255 255 255 / 25%);
+    border-radius: 50%;
+    background: rgb(0 0 0 / 72%);
+    color: var(--color-white);
+    cursor: pointer;
+    transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.media-card .btn-favorito-card:hover,
+.media-card .btn-favorito-card:focus-visible {
+    border-color: var(--color-white);
+    background: rgb(0 0 0 / 92%);
+}
+
+.media-card .btn-favorito-card:focus-visible {
+    outline: 2px solid var(--color-orange);
+    outline-offset: 2px;
+}
+
+.media-card .btn-favorito-card.ativo {
+    border-color: var(--color-pink);
+    color: var(--color-pink);
+}

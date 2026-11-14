@@ -1,6 +1,5 @@
 const idFilme = new URLSearchParams(window.location.search).get('id');
 const detalhesFilme = document.getElementById('detalhes-filme');
-const chaveFavoritos = 'filmesFavoritos';
 
 function escaparHtml(valor = '') {
   return String(valor).replace(/[&<>"']/g, caractere => ({
@@ -24,21 +23,13 @@ function formatarDuracao(minutos) {
   return horas ? `${horas}h ${resto}min` : `${resto}min`;
 }
 
-function lerFavoritos() {
-  try {
-    return JSON.parse(localStorage.getItem(chaveFavoritos) || '[]');
-  } catch {
-    return [];
-  }
-}
-
 function renderizarElenco(elenco) {
   if (!elenco.length) return '<p class="estado-vazio">Elenco não disponível.</p>';
   return elenco.map(pessoa => `
-    <article class="cartao-elenco">
+    <a class="cartao-elenco" href="ator.html?id=${encodeURIComponent(pessoa.id)}" aria-label="Ver perfil de ${escaparHtml(pessoa.name)}">
       <img src="${pessoa.profile_path ? `https://image.tmdb.org/t/p/w185${pessoa.profile_path}` : '../Imagens/Geral_1.png'}" alt="Foto de ${escaparHtml(pessoa.name)}" loading="lazy">
       <div><h3>${escaparHtml(pessoa.name)}</h3><p>${escaparHtml(pessoa.character || 'Elenco')}</p></div>
-    </article>
+    </a>
   `).join('');
 }
 
@@ -46,7 +37,7 @@ function renderizarFilme(filme) {
   const diretor = filme.credits.crew.find(pessoa => pessoa.job === 'Director')?.name || 'Não informado';
   const trailer = filme.videos.results.find(video => video.site === 'YouTube' && video.type === 'Trailer')
     || filme.videos.results.find(video => video.site === 'YouTube');
-  const favorito = lerFavoritos().some(item => String(item.id) === String(filme.id));
+  const favorito = filmeEstaFavorito(filme.id);
   const backdrop = filme.backdrop_path ? `https://image.tmdb.org/t/p/w1280${filme.backdrop_path}` : '';
   const sinopse = filme.overview || 'A sinopse deste filme ainda não está disponível.';
 
@@ -68,7 +59,7 @@ function renderizarFilme(filme) {
         <p class="sinopse-filme">${escaparHtml(sinopse)}</p>
         ${filme.overview ? '<button type="button" class="botao-sinopse" data-acao="sinopse">Ler sinopse completa <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></button>' : ''}
         <div class="acoes-filme">
-          <button type="button" class="botao-acao ${favorito ? 'favorito-ativo' : ''}" data-acao="favorito" aria-pressed="${favorito}"><i class="fa-solid fa-heart" aria-hidden="true"></i><span>${favorito ? 'Favorito' : 'Favoritar'}</span></button>
+          <button type="button" class="botao-acao ${favorito ? 'favorito-ativo' : ''}" data-acao="favorito" aria-label="${favorito ? 'Abrir perfil com filme favoritado' : 'Favoritar filme e abrir perfil'}" aria-pressed="${favorito}"><i class="fa-solid fa-heart" aria-hidden="true"></i><span>${favorito ? 'Favorito' : 'Favoritar'}</span></button>
           <a class="botao-acao" href="#avaliacoes"><i class="fa-regular fa-star" aria-hidden="true"></i><span>Avaliações</span></a>
         </div>
       </div>
@@ -131,18 +122,17 @@ function carregarFilme() {
 }
 
 function alternarFavorito(botao) {
-  const favoritos = lerFavoritos();
-  const indice = favoritos.findIndex(item => String(item.id) === String(idFilme));
-  if (indice >= 0) {
-    favoritos.splice(indice, 1);
-  } else {
-    const titulo = detalhesFilme.querySelector('h1')?.textContent || 'Filme';
-    favoritos.push({ id: idFilme, titulo });
+  const usuario = adicionarFavoritoUsuario(idFilme);
+  if (!usuario) {
+    window.location.href = 'login.html';
+    return;
   }
-  localStorage.setItem(chaveFavoritos, JSON.stringify(favoritos));
-  botao.classList.toggle('favorito-ativo', indice < 0);
-  botao.setAttribute('aria-pressed', String(indice < 0));
-  botao.querySelector('span').textContent = indice < 0 ? 'Favorito' : 'Favoritar';
+
+  botao.classList.add('favorito-ativo');
+  botao.setAttribute('aria-pressed', 'true');
+  botao.setAttribute('aria-label', 'Abrir perfil com filme favoritado');
+  botao.querySelector('span').textContent = 'Favorito';
+  window.location.href = 'usuario.html';
 }
 
 detalhesFilme.addEventListener('click', evento => {

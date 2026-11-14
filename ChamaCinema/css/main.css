@@ -1,4 +1,5 @@
 @import "base/global.css";
 @import "base/typography.css";
-@import "base/header.css";
+@import "base/header.css?v=20261114-2";
 @import "base/footer.css";
+@import "components/cartao_filme.css";

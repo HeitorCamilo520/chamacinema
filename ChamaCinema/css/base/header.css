@@ -309,4 +309,35 @@
     color: transparent;
 }
 
+@media (max-width: 1200px) {
+    #header {
+        gap: .75rem;
+        padding: 0 .9rem;
+    }
+
+    #container-logo {
+        min-width: 0;
+        font-size: .9rem;
+    }
+
+    #logo {
+        width: 34px;
+        height: 34px;
+    }
+
+    #header form {
+        min-width: 0;
+    }
+
+    .barra-pesquisa {
+        width: min(100%, 300px);
+    }
+
+    .opcoes_header {
+        gap: .4rem;
+        padding: 8px;
+        font-size: .85rem;
+    }
+}
+
 

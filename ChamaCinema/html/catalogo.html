@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/main.css?v=20261114-3">
     <link rel="stylesheet" href="../css/pages/catalogo.css">
     <link id="estampa" rel="stylesheet" href="../css/components/fundo_base.css">
     <link rel="shortcut icon" href="../Imagens/favicon.ico" type="image/x-icon">
@@ -22,11 +22,10 @@
             <div id="resultados-pesquisa" class="resultados-pesquisa" aria-live="polite"></div>
         </form>
 
-        <button class="opcoes_header" id="catalogo"><i class="fa-solid fa-clapperboard icone-header" id="catalogo-icone"></i><p>Catalogo</p></button>
+        <a href="catalogo.html" class="opcoes_header" id="catalogo"><i class="fa-solid fa-clapperboard icone-header" id="catalogo-icone"></i><p>Catálogo</p></a>
 
         <a href="planos.html" class="opcoes_header" id="dire_plano"><i class="fa-solid fa-tag icone-header" id="etiqueta_plano"></i><p>Planos</p></a>
 
-        <button class="opcoes_header" id="favoritos"><i class="fa-solid fa-heart icone-header" id="coracao_favoritos"></i><p>Favoritos</p></button>
 
         <button class="opcoes_header drop" onclick="dropdownMenu()" id="dropdown_icon" >
             <div id="usuario-login" class="opcoes_header"></div>
@@ -51,12 +50,14 @@
         <div id="container-principal">
 
             <div id="filtros">
-                
-            <div id="icone">
-                <i class="fa-solid fa-filter"></i>
-            </div>
+                <div class="filtros-cabecalho">
+                    <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+                    <h2>Refinar catálogo</h2>
+                </div>
 
-            <select id="opcoes">
+                <div class="controle-filtro">
+                    <label for="opcoes">Gênero</label>
+                    <select id="opcoes">
                     <option class="genre-btn" value="">Todos os Gêneros</option>
                     <option class="genre-btn" value="28">Ação</option>
                     <option class="genre-btn" value="12">Aventura</option>
@@ -76,9 +77,12 @@
                     <option class="genre-btn" value="53">Horror</option>
                     <option class="genre-btn" value="10752">Guerra</option>
                     <option class="genre-btn" value="37">Faroeste</option>
-            </select>
+                    </select>
+                </div>
 
-            <select id="ano">
+                <div class="controle-filtro">
+                    <label for="ano">Ano de lançamento</label>
+                    <select id="ano">
                     <option value="">Todos os anos</option>
                     <option value="2026">2026</option>
                     <option value="2025">2025</option>
@@ -147,23 +151,30 @@
                     <option value="1962">1962</option>
                     <option value="1961">1961</option>
                     <option value="1960">1960</option>
-            </select>
+                    </select>
+                </div>
 
-            <select id="nota">
+                <div class="controle-filtro">
+                    <label for="nota">Nota mínima</label>
+                    <select id="nota">
                     <option value="">Todas as notas</option>
-                    <option value="9">9 ou mais</option>
-                    <option value="8">8 ou mais</option>
-                    <option value="7">7 ou mais</option>
-                    <option value="6">6 ou mais</option>
                     <option value="5">5 ou mais</option>
+                    <option value="4.5">4,5 ou mais</option>
                     <option value="4">4 ou mais</option>
+                    <option value="3.5">3,5 ou mais</option>
                     <option value="3">3 ou mais</option>
+                    <option value="2.5">2,5 ou mais</option>
                     <option value="2">2 ou mais</option>
+                    <option value="1.5">1,5 ou mais</option>
                     <option value="1">1 ou mais</option>
-            </select>
-                
-            <button onclick="imagemFilme()">Filtrar</button>
-            <button onclick="VoltarPadrão()">Resetar</button>
+                    <option value="0.5">0,5 ou mais</option>
+                    </select>
+                </div>
+
+                <button class="botao-limpar-filtros" type="button" onclick="VoltarPadrão()">
+                    <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+                    Limpar filtros
+                </button>
 
             </div>
 
@@ -183,7 +194,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="../js/manipulaLS.js"></script>
     <script src="../js/config.js"></script>
-    <script src="../js/header.js"></script>
+    <script src="../js/header.js?v=20261114-5"></script>
     <script src="../js/catalogo.js"></script>
 
 </body>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuário | ChamaCinema</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/main.css?v=20261114-3">
     <link rel="stylesheet" href="../css/pages/usuario.css">
     <link id="estampa" rel="stylesheet" href="../css/components/fundo_base.css">
     <link rel="shortcut icon" href="../Imagens/favicon.ico" type="image/x-icon">
@@ -23,9 +23,8 @@
             <div id="resultados-pesquisa" class="resultados-pesquisa" aria-live="polite"></div>
         </form>
 
-        <button class="opcoes_header"><i class="fa-solid fa-clapperboard icone-header" id="catalogo-icone"></i><p>Catalogo</p></button>
+        <a href="catalogo.html" class="opcoes_header" id="catalogo"><i class="fa-solid fa-clapperboard icone-header" id="catalogo-icone"></i><p>Catálogo</p></a>
         <a href="planos.html" class="opcoes_header" id="dire_plano"><i class="fa-solid fa-tag icone-header" id="etiqueta_plano"></i><p>Planos</p></a>
-        <button class="opcoes_header"><i class="fa-solid fa-heart icone-header" id="coracao_favoritos"></i><p>Favoritos</p></button>
 
         <button class="opcoes_header drop" onclick="dropdownMenu()" id="dropdown_icon">
             <div id="usuario-login" class="opcoes_header"></div>
@@ -73,10 +72,6 @@
                         <div class="stat-item">
                             <span class="stat-numero" id="stat-avaliados">0</span>
                             <span class="stat-label">Filmes avaliados</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-numero" id="stat-series">0</span>
-                            <span class="stat-label">Séries avaliadas</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-numero" id="stat-favoritos">0</span>
@@ -154,7 +149,6 @@
             <section class="card-secao">
                 <div class="cabecalho-favoritos">
                     <h2 class="titulo-secao"><i class="fa-regular fa-heart"></i> Meus Favoritos</h2>
-                    <a href="#" class="link-ver-todos">Ver todos</a>
                 </div>
                 <div class="grid-obras" id="grid-favoritos"></div>
             </section>
@@ -176,8 +170,10 @@
                 <label for="edit-foto">URL da Foto de Perfil</label>
                 <input type="text" id="edit-foto" placeholder="../Imagens/StanLee.jpg">
 
-                <label>Editar Minhas Preferências</label>
-                <div id="edit-generos-grid" class="edit-generos-grid"></div>
+                <fieldset class="edit-generos-fieldset">
+                    <legend id="edit-generos-label" class="modal-field-label">Editar Minhas Preferências</legend>
+                    <div id="edit-generos-grid" class="edit-generos-grid"></div>
+                </fieldset>
 
                 <div class="acoes-modal">
                     <button type="button" id="btn-cancelar-modal" class="btn-secundario">Cancelar</button>
@@ -200,7 +196,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="../js/manipulaLS.js"></script>
     <script src="../js/config.js"></script>
-    <script src="../js/header.js"></script>
-    <script src="../js/usuario.js"></script>
+    <script src="../js/header.js?v=20261114-5"></script>
+    <script src="../js/usuario.js?v=20261114-2"></script>
 </body>
 </html>
