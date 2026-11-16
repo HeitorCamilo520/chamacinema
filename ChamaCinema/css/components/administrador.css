@@ -53,3 +53,234 @@ body::before {
   #botao-administrador:hover {
     background-color: var(--color-black-panel-strong);
   }
+
+  #botao-administrador:focus-visible,
+  .fechar-modal-usuarios-admin:focus-visible {
+    outline: 2px solid var(--color-white);
+    outline-offset: 3px;
+  }
+
+  dialog.modal-usuarios-admin {
+    position: fixed;
+    inset: 0;
+    width: min(920px, calc(100% - 2rem));
+    max-width: none;
+    max-height: min(88vh, 760px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: auto;
+    padding: 1.5rem;
+    border: 1px solid var(--color-gray-deep);
+    border-radius: 16px;
+    background: linear-gradient(150deg, var(--color-black-panel-strong), var(--color-black-deepest));
+    color: var(--color-white);
+    box-shadow: 0 24px 70px rgb(0 0 0 / 70%);
+  }
+
+  dialog.modal-usuarios-admin::backdrop {
+    background: rgb(0 0 0 / 76%);
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-usuarios-admin-cabecalho {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: .75rem;
+  }
+
+  .modal-usuarios-admin-sobretitulo {
+    margin: 0 0 .3rem;
+    color: var(--color-red);
+    font-size: .7rem;
+    font-weight: 700;
+  }
+
+  .modal-usuarios-admin-cabecalho h2 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+
+  .fechar-modal-usuarios-admin {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid var(--color-gray-deep);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--color-gray-light);
+    cursor: pointer;
+  }
+
+  .fechar-modal-usuarios-admin:hover {
+    background: var(--color-black-main);
+    color: var(--color-white);
+  }
+
+  .status-usuarios-admin {
+    min-height: 1.4rem;
+    margin: 0 0 .75rem;
+    color: var(--color-gray-light);
+    font-size: .85rem;
+  }
+
+  .lista-usuarios-admin {
+    display: grid;
+    gap: .75rem;
+    min-width: 0;
+  }
+
+  .usuario-admin {
+    min-width: 0;
+    padding: .9rem;
+    border: 1px solid var(--color-gray-deep);
+    border-radius: 8px;
+    background: rgb(255 255 255 / 3%);
+  }
+
+  .usuario-admin-cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    min-width: 0;
+    margin-bottom: .75rem;
+  }
+
+  .usuario-admin-cabecalho h3 {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    font-size: 1rem;
+  }
+
+  .botao-editar-usuario-admin,
+  .cancelar-edicao-usuario-admin,
+  .salvar-edicao-usuario-admin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .45rem;
+    min-height: 38px;
+    padding: .5rem .75rem;
+    border: 1px solid var(--color-gray-deep);
+    border-radius: 8px;
+    color: var(--color-white);
+    background: var(--color-black-main);
+    font: inherit;
+    font-size: .8rem;
+    cursor: pointer;
+  }
+
+  .botao-editar-usuario-admin:hover,
+  .cancelar-edicao-usuario-admin:hover {
+    background: var(--color-black-panel-strong);
+  }
+
+  .dados-usuario-admin {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .55rem;
+    min-width: 0;
+    margin: 0;
+  }
+
+  .dados-usuario-admin > div {
+    min-width: 0;
+    padding: .55rem .65rem;
+    border-radius: 6px;
+    background: var(--color-black-deepest);
+  }
+
+  .dados-usuario-admin dt {
+    margin-bottom: .2rem;
+    color: var(--color-gray-smoke);
+    font-size: .72rem;
+    font-weight: 600;
+  }
+
+  .dados-usuario-admin dd {
+    margin: 0;
+    color: var(--color-gray-light);
+    font-size: .78rem;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+  }
+
+  #form-edicao-usuario-admin {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .dados-usuario-admin input:not([type="checkbox"]),
+  .dados-usuario-admin textarea {
+    width: 100%;
+    min-width: 0;
+    min-height: 40px;
+    padding: .6rem .7rem;
+    border: 1px solid var(--color-gray-deep);
+    border-radius: 6px;
+    color: var(--color-white);
+    background: var(--color-black-deepest);
+    font: inherit;
+    font-size: .8rem;
+  }
+
+  .dados-usuario-admin textarea {
+    min-height: 76px;
+    resize: vertical;
+    overflow-wrap: anywhere;
+  }
+
+  .campo-json-usuario-admin {
+    grid-column: 1 / -1;
+  }
+
+  .dados-usuario-admin input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--color-red);
+  }
+
+  .mensagem-edicao-usuario-admin {
+    min-height: 1.4rem;
+    margin: .6rem 0;
+    color: var(--color-red);
+    font-size: .8rem;
+  }
+
+  .acoes-edicao-usuario-admin {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: .6rem;
+  }
+
+  .salvar-edicao-usuario-admin {
+    border-color: var(--color-red-dark);
+    background: var(--color-red-dark);
+  }
+
+  .salvar-edicao-usuario-admin:hover {
+    background: var(--color-red);
+  }
+
+  .botao-editar-usuario-admin:focus-visible,
+  .cancelar-edicao-usuario-admin:focus-visible,
+  .salvar-edicao-usuario-admin:focus-visible,
+  .dados-usuario-admin :focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 600px) {
+    dialog.modal-usuarios-admin {
+      padding: 1rem;
+    }
+
+    .dados-usuario-admin {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }

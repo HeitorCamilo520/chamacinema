@@ -1,37 +1,33 @@
-#body{
+#body {
     height: 100%;
 }
 
 body {
     position: relative;
-    background-color: var(--color-black-deepest);
     overflow-x: hidden;
+    background: var(--color-black-deepest);
 }
 
 body::before {
     content: "";
     position: fixed;
-    inset: -12% -8% -12% -8%;
+    inset: -12% -8%;
     z-index: -1;
-    background-image: url(../../Imagens/Estampa.png);
-    background-repeat: repeat;
-    background-size: 45% auto;
-    background-position: center;
-    opacity: 0.3;
+    background: url(../../Imagens/Estampa.png) center / 45% auto repeat;
+    opacity: .3;
     transform: perspective(1400px) rotateZ(-12deg) scale(1.2);
-    transform-origin: center center;
     pointer-events: none;
 }
 
-main {
+main#pagina-resultados {
     position: relative;
-    min-height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 1rem 0;
-    margin: 1rem auto;
+    align-items: flex-start;
     width: min(1360px, calc(100% - 2.5rem));
+    min-height: calc(100vh - 80px);
+    margin: 1rem auto;
+    padding: 3rem 4%;
     border: 1px solid var(--color-gray-deep);
     border-radius: 28px;
     background: linear-gradient(180deg,
@@ -39,92 +35,227 @@ main {
         var(--color-black-panel) 38%,
         var(--color-black-deepest) 100%);
     box-shadow: 0 22px 50px #000000;
-    overflow
-
-#pagina-resultados {
-  min-height: calc(100vh - 80px);
-  padding: 3rem 4%;
-  background-color: var(--color-black-deepest);
 }
 
 #lista-resultados {
-  width: min(1200px, 100%);
-  margin: 0 auto;
+    width: min(1200px, 100%);
+    margin: 0 auto;
 }
 
-#lista-resultados h1 {
-  color: white;
-  margin: 0 0 1.5rem;
+.seletor-tipo-resultados {
+    display: flex;
+    justify-content: center;
+    gap: .25rem;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 1.5rem;
+    padding: .25rem;
+    border: 1px solid var(--color-gray-deep);
+    border-radius: var(--radius-full);
+    background: var(--color-black-panel);
+}
+
+.seletor-tipo-resultados legend {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+.tipo-resultados {
+    min-width: 112px;
+    min-height: 42px;
+    padding: .55rem 1.2rem;
+    border: 0;
+    border-radius: var(--radius-full);
+    color: var(--color-gray-light);
+    background: transparent;
+    font: inherit;
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 160ms ease, background-color 160ms ease;
+}
+
+.tipo-resultados:hover {
+    color: var(--color-white);
+    background: var(--color-black-panel-strong);
+}
+
+.tipo-resultados.selecionado {
+    color: var(--color-white);
+    background: var(--color-red-dark);
+}
+
+.tipo-resultados:focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: 2px;
+}
+
+#conteudo-resultados h1 {
+    margin: 0 0 1.5rem;
+    color: var(--color-white);
+    font-size: 1.5rem;
 }
 
 .grade-resultados {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 1.25rem;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1.25rem;
 }
 
 .filme-card {
-  display: block;
-  overflow: hidden;
-  background: #171717;
-  border-radius: 8px;
-  color: white;
-  text-decoration: none;
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-gray-deep);
+    border-radius: 8px;
+    color: var(--color-white);
+    background: #171717;
+    text-decoration: none;
 }
 
 .filme-card:focus-visible {
-  outline: 2px solid var(--color-orange);
-  outline-offset: 2px;
+    outline: 2px solid var(--color-orange);
+    outline-offset: 2px;
 }
 
 .filme-card img {
-  width: 100%;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
-  display: block;
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
 }
 
 .filme-info {
-  padding: .75rem;
+    padding: .75rem;
 }
 
 .filme-info h2 {
-  font-size: 1rem;
-  min-height: 2.4em;
-  margin: 0 0 .4rem;
+    min-height: 2.4em;
+    margin: 0 0 .4rem;
+    font-size: 1rem;
 }
 
 .filme-info p,
 .mensagem-resultados {
-  color: #c8c8c8;
-  margin: 0;
+    margin: 0;
+    color: #c8c8c8;
+}
+
+.resultado-ator {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-gray-deep);
+    border-radius: 8px;
+    color: var(--color-white);
+    background: #171717;
+    text-decoration: none;
+    transition: border-color 160ms ease;
+}
+
+.resultado-ator:hover,
+.resultado-ator:focus-visible {
+    border-color: var(--color-red);
+}
+
+.resultado-ator:focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: 2px;
+}
+
+.resultado-ator > img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    background: var(--color-black-main);
+}
+
+.resultado-ator-info {
+    display: grid;
+    gap: .35rem;
+    min-height: 112px;
+    padding: .75rem;
+}
+
+.resultado-ator-info h2 {
+    margin: 0;
+    font-size: .95rem;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+}
+
+.resultado-ator-info p,
+.resultado-ator-info small {
+    color: var(--color-gray-smoke);
+    font-size: .75rem;
+    line-height: 1.4;
+}
+
+.resultado-ator-info small {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
 
 .paginacao-resultados {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
-  color: #c8c8c8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    color: #c8c8c8;
 }
 
 .paginacao-resultados button {
-  padding: .65rem 1rem;
-  border: 1px solid #555;
-  border-radius: 6px;
-  background: #242424;
-  color: white;
-  cursor: pointer;
+    padding: .65rem 1rem;
+    border: 1px solid #555;
+    border-radius: 6px;
+    color: var(--color-white);
+    background: #242424;
+    cursor: pointer;
 }
 
 .paginacao-resultados button:hover:not(:disabled) {
-  background: #3a3a3a;
+    background: #3a3a3a;
 }
 
 .paginacao-resultados button:disabled {
-  cursor: not-allowed;
-  opacity: .45;
+    cursor: not-allowed;
+    opacity: .45;
 }
 
+@media (max-width: 1000px) {
+    .grade-resultados {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    main#pagina-resultados {
+        width: calc(100% - 1rem);
+        padding: 2rem 1rem;
+        border-radius: 18px;
+    }
+
+    .grade-resultados {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: .85rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .grade-resultados {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: .65rem;
+    }
+
+    .tipo-resultados {
+        min-width: 104px;
+    }
 }

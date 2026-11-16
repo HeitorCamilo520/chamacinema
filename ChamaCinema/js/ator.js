@@ -17,6 +17,25 @@ function formatarDataAtor(data) {
         .format(new Date(`${data}T00:00:00Z`));
 }
 
+function traduzirDepartamentoAtor(departamento) {
+    const traducoes = {
+        'Acting': 'Atuação',
+        'Directing': 'Direção',
+        'Writing': 'Roteiro',
+        'Production': 'Produção',
+        'Camera': 'Fotografia',
+        'Editing': 'Montagem',
+        'Art': 'Arte',
+        'Sound': 'Som',
+        'Visual Effects': 'Efeitos visuais',
+        'Costume & Make-Up': 'Figurino e maquiagem',
+        'Crew': 'Equipe técnica',
+        'Creator': 'Criação',
+        'Lighting': 'Iluminação'
+    };
+    return traducoes[departamento] || departamento || 'Cinema';
+}
+
 function renderizarFilmografia(filmes) {
     const filmesUnicos = [...new Map(filmes
         .filter(filme => filme?.id && filme.title)
@@ -49,7 +68,7 @@ function renderizarAtor(ator) {
                 <img src="${retrato}" alt="Foto de ${nome}" fetchpriority="high">
             </div>
             <div class="ator-resumo">
-                <p class="ator-sobretitulo">${escaparTextoAtor(ator.known_for_department || 'Cinema')}</p>
+                <p class="ator-sobretitulo">${escaparTextoAtor(traduzirDepartamentoAtor(ator.known_for_department))}</p>
                 <h1>${nome}</h1>
                 <dl class="dados-ator">
                     <div><dt>Nascimento</dt><dd>${escaparTextoAtor(nascimento)}${escaparTextoAtor(falecimento)}</dd></div>

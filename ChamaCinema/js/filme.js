@@ -1,5 +1,6 @@
 const idFilme = new URLSearchParams(window.location.search).get('id');
 const detalhesFilme = document.getElementById('detalhes-filme');
+let notaAvaliacaoSelecionada = 3;
 
 function escaparHtml(valor = '') {
   return String(valor).replace(/[&<>"']/g, caractere => ({
@@ -23,6 +24,65 @@ function formatarDuracao(minutos) {
   return horas ? `${horas}h ${resto}min` : `${resto}min`;
 }
 
+function obterCorNotaFilme(nota) {
+  const valor = Number(nota);
+  if (!Number.isFinite(valor)) return 'var(--color-white)';
+  if (valor >= 4) return 'var(--color-pink)';
+  if (valor >= 3) return 'var(--color-red)';
+  if (valor >= 2) return 'var(--color-orange)';
+  if (valor >= 1) return 'var(--color-yellow)';
+  return 'var(--color-white)';
+}
+
+function obterImagemChamaNota(nota) {
+  const valor = Number(nota);
+  if (valor >= 4) return '../Imagens/foguin_rosa.png';
+  if (valor >= 3) return '../Imagens/foguin_vermelho.png';
+  if (valor >= 2) return '../Imagens/foguin_naranja.png';
+  if (valor >= 1) return '../Imagens/foguin_marelo.png';
+  return '../Imagens/foguin_branco.png';
+}
+
+function criarControleChamasAvaliacao(nota) {
+  const botoes = Array.from({ length: 5 }, (_, indice) => {
+    const notaMetade = indice + 0.5;
+    const notaCompleta = indice + 1;
+    return `
+      <span class="chama-avaliacao" data-indice-chama="${indice}">
+        <img class="chama-avaliacao-base" src="../Imagens/foguin_branco.png" alt="">
+        <img class="chama-avaliacao-preenchida" src="${obterImagemChamaNota(nota)}" alt="">
+        <button type="button" class="metade-nota-avaliacao metade-esquerda" data-nota-avaliacao="${notaMetade}" aria-label="Nota ${notaMetade.toFixed(1).replace('.', ',')} de 5" aria-pressed="${nota === notaMetade}"></button>
+        <button type="button" class="metade-nota-avaliacao metade-direita" data-nota-avaliacao="${notaCompleta}" aria-label="Nota ${notaCompleta.toFixed(1).replace('.', ',')} de 5" aria-pressed="${nota === notaCompleta}"></button>
+      </span>
+    `;
+  }).join('');
+
+  return `<div class="seletor-chamas-avaliacao" role="group" aria-label="Escolha uma nota de meio em meio ponto">${botoes}</div>`;
+}
+
+function atualizarVisualChamasAvaliacao(nota, opacidade = 1) {
+  const imagem = obterImagemChamaNota(nota);
+  detalhesFilme.querySelectorAll('.chama-avaliacao').forEach((chama, indice) => {
+    const progresso = Math.max(0, Math.min(1, nota - indice));
+    const preenchida = chama.querySelector('.chama-avaliacao-preenchida');
+    preenchida.src = imagem;
+    preenchida.style.clipPath = `inset(0 ${(1 - progresso) * 100}% 0 0)`;
+    preenchida.style.opacity = String(opacidade);
+  });
+}
+
+function atualizarControleChamasAvaliacao(nota) {
+  notaAvaliacaoSelecionada = Math.max(0.5, Math.min(5, Math.round(Number(nota) * 2) / 2));
+  atualizarVisualChamasAvaliacao(notaAvaliacaoSelecionada);
+
+  detalhesFilme.querySelectorAll('[data-nota-avaliacao]').forEach(botao => {
+    botao.setAttribute('aria-pressed', String(Number(botao.dataset.notaAvaliacao) === notaAvaliacaoSelecionada));
+  });
+  const valorNota = detalhesFilme.querySelector('#valor-nota-avaliacao');
+  valorNota.textContent = `${notaAvaliacaoSelecionada.toFixed(1).replace('.', ',')} / 5`;
+  valorNota.style.color = obterCorNotaFilme(notaAvaliacaoSelecionada);
+}
+
 function renderizarElenco(elenco) {
   if (!elenco.length) return '<p class="estado-vazio">Elenco não disponível.</p>';
   return elenco.map(pessoa => `
@@ -34,12 +94,17 @@ function renderizarElenco(elenco) {
 }
 
 function renderizarFilme(filme) {
-  const diretor = filme.credits.crew.find(pessoa => pessoa.job === 'Director')?.name || 'Não informado';
+  const pessoaDiretor = filme.credits.crew.find(pessoa => pessoa.job === 'Director');
+  const diretor = pessoaDiretor?.id
+    ? `<a href="ator.html?id=${encodeURIComponent(pessoaDiretor.id)}">${escaparHtml(pessoaDiretor.name)}</a>`
+    : 'Não informado';
   const trailer = filme.videos.results.find(video => video.site === 'YouTube' && video.type === 'Trailer')
     || filme.videos.results.find(video => video.site === 'YouTube');
   const favorito = filmeEstaFavorito(filme.id);
   const backdrop = filme.backdrop_path ? `https://image.tmdb.org/t/p/w1280${filme.backdrop_path}` : '';
   const sinopse = filme.overview || 'A sinopse deste filme ainda não está disponível.';
+  const nota = obterNotaCartao(filme);
+  detalhesFilme.style.setProperty('--cor-nota-filme', obterCorNotaFilme(nota));
 
   document.title = `${filme.title} | ChamaCinema`;
   detalhesFilme.innerHTML = `
@@ -55,12 +120,19 @@ function renderizarFilme(filme) {
           <span>${formatarDuracao(filme.runtime)}</span><b aria-hidden="true">•</b>
           <span>${escaparHtml(filme.original_language?.toUpperCase() || 'Idioma não informado')}</span>
         </div>
+        <div class="nota-filme-api">
+          ${criarChamasNota(nota)}
+          <strong>${escaparHtml(nota)}</strong>
+          <span>/ 5</span>
+          <small>Nota TMDB</small>
+        </div>
         <div class="generos-filme">${filme.genres.map(genero => `<span>${escaparHtml(genero.name)}</span>`).join('')}</div>
         <p class="sinopse-filme">${escaparHtml(sinopse)}</p>
         ${filme.overview ? '<button type="button" class="botao-sinopse" data-acao="sinopse">Ler sinopse completa <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></button>' : ''}
         <div class="acoes-filme">
           <button type="button" class="botao-acao ${favorito ? 'favorito-ativo' : ''}" data-acao="favorito" aria-label="${favorito ? 'Abrir perfil com filme favoritado' : 'Favoritar filme e abrir perfil'}" aria-pressed="${favorito}"><i class="fa-solid fa-heart" aria-hidden="true"></i><span>${favorito ? 'Favorito' : 'Favoritar'}</span></button>
           <a class="botao-acao" href="#avaliacoes"><i class="fa-regular fa-star" aria-hidden="true"></i><span>Avaliações</span></a>
+          <button type="button" class="botao-acao" data-acao="abrir-avaliacao" aria-haspopup="dialog" aria-controls="dialog-avaliacao"><i class="fa-solid fa-fire" aria-hidden="true"></i><span>Avaliar filme</span></button>
         </div>
       </div>
       <div class="trailer-filme">
@@ -78,8 +150,38 @@ function renderizarFilme(filme) {
       </div>
     </dialog>
 
+    <dialog class="dialog-avaliacao" id="dialog-avaliacao" aria-labelledby="titulo-avaliacao">
+      <div class="conteudo-dialog-avaliacao">
+        <div class="cabecalho-dialog-avaliacao">
+          <div>
+            <p class="avaliacao-sobretitulo">SUA OPINIÃO</p>
+            <h2 id="titulo-avaliacao">Avaliar ${escaparHtml(filme.title)}</h2>
+          </div>
+          <button type="button" class="fechar-dialog-avaliacao" data-acao="fechar-avaliacao" aria-label="Fechar avaliação"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        </div>
+        <form id="form-avaliacao-filme">
+          <div class="campo-avaliacao-filme">
+            <p class="rotulo-avaliacao-filme">Sua nota</p>
+            <div class="controle-nota-avaliacao">
+              ${criarControleChamasAvaliacao(3)}
+              <output id="valor-nota-avaliacao">3,0 / 5</output>
+            </div>
+          </div>
+          <div class="campo-avaliacao-filme">
+            <label for="comentario-avaliacao-filme">Comentário <span>(opcional)</span></label>
+            <textarea id="comentario-avaliacao-filme" name="comentario" rows="4" maxlength="800" placeholder="O que você achou do filme?"></textarea>
+          </div>
+          <p class="mensagem-avaliacao-filme" id="mensagem-avaliacao-filme" aria-live="polite"></p>
+          <div class="acoes-avaliacao-filme">
+            <button type="button" class="cancelar-avaliacao-filme" data-acao="fechar-avaliacao">Cancelar</button>
+            <button type="submit" class="enviar-avaliacao-filme">Enviar avaliação</button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+
     <section class="ficha-filme" aria-label="Ficha técnica">
-      <div><i class="fa-solid fa-clapperboard" aria-hidden="true"></i><span><small>Direção</small><strong>${escaparHtml(diretor)}</strong></span></div>
+      <div><i class="fa-solid fa-clapperboard" aria-hidden="true"></i><span><small>Direção</small><strong>${diretor}</strong></span></div>
       <div><i class="fa-solid fa-calendar-days" aria-hidden="true"></i><span><small>Lançamento</small><strong>${formatarData(filme.release_date)}</strong></span></div>
       <div><i class="fa-solid fa-clock" aria-hidden="true"></i><span><small>Duração</small><strong>${formatarDuracao(filme.runtime)}</strong></span></div>
       <div><i class="fa-solid fa-film" aria-hidden="true"></i><span><small>Produção</small><strong>${escaparHtml(filme.production_companies[0]?.name || 'Não informada')}</strong></span></div>
@@ -101,6 +203,16 @@ function renderizarFilme(filme) {
       <p class="estado-vazio estado-avaliacoes">Ainda não há avaliações para este filme.</p>
     </section>
   `;
+
+  const seletorNota = detalhesFilme.querySelector('.seletor-chamas-avaliacao');
+  seletorNota.addEventListener('pointerover', evento => {
+    const botao = evento.target.closest('[data-nota-avaliacao]');
+    if (!botao || evento.pointerType === 'touch') return;
+    atualizarVisualChamasAvaliacao(Number(botao.dataset.notaAvaliacao), .35);
+  });
+  seletorNota.addEventListener('pointerleave', () => {
+    atualizarVisualChamasAvaliacao(notaAvaliacaoSelecionada);
+  });
 }
 
 function carregarFilme() {
@@ -136,8 +248,13 @@ function alternarFavorito(botao) {
 }
 
 detalhesFilme.addEventListener('click', evento => {
-  const botao = evento.target.closest('[data-elenco], [data-acao]');
+  const botao = evento.target.closest('[data-elenco], [data-acao], [data-nota-avaliacao]');
   if (!botao) return;
+
+  if (botao.dataset.notaAvaliacao !== undefined) {
+    atualizarControleChamasAvaliacao(Number(botao.dataset.notaAvaliacao));
+    return;
+  }
 
   if (botao.dataset.elenco) {
     const listaElenco = detalhesFilme.querySelector('#lista-elenco');
@@ -149,10 +266,36 @@ detalhesFilme.addEventListener('click', evento => {
   if (botao.dataset.acao === 'favorito') return alternarFavorito(botao);
   if (botao.dataset.acao === 'sinopse') return detalhesFilme.querySelector('#dialog-sinopse').showModal();
   if (botao.dataset.acao === 'fechar-sinopse') return detalhesFilme.querySelector('#dialog-sinopse').close();
+  if (botao.dataset.acao === 'abrir-avaliacao') {
+    let usuarioAtual = null;
+    try {
+      usuarioAtual = getmemoria('usuarioLogado');
+    } catch {
+      usuarioAtual = null;
+    }
+    if (!usuarioAtual) {
+      window.location.href = 'login.html';
+      return;
+    }
+
+    atualizarControleChamasAvaliacao(3);
+    detalhesFilme.querySelector('#mensagem-avaliacao-filme').textContent = '';
+    detalhesFilme.querySelector('#comentario-avaliacao-filme').value = '';
+    detalhesFilme.querySelector('#dialog-avaliacao').showModal();
+    return;
+  }
+  if (botao.dataset.acao === 'fechar-avaliacao') return detalhesFilme.querySelector('#dialog-avaliacao').close();
 });
 
 detalhesFilme.addEventListener('click', evento => {
   if (evento.target.matches('#dialog-sinopse')) evento.target.close();
+  if (evento.target.matches('#dialog-avaliacao')) evento.target.close();
+});
+
+detalhesFilme.addEventListener('submit', evento => {
+  if (!evento.target.matches('#form-avaliacao-filme')) return;
+  evento.preventDefault();
+  detalhesFilme.querySelector('#mensagem-avaliacao-filme').textContent = 'O envio de avaliações estará disponível em breve.';
 });
 
 carregarFilme();

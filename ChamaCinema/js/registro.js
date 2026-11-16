@@ -18,33 +18,19 @@ function validarFormulario(event) {
     const confirmarSenha = document.getElementById('senha-registro2').value;
     const mensagem = document.getElementById('mensagem-registro');
     const caracteresEspeciaisAceitos = /[!@#$%"&*():{};:<>/?']/;
-    let temCaractereEspecial = false;
 
     mensagem.textContent = '';
     mensagem.classList.remove('visivel');
 
-
-    for(let i = 0; i < senha.length; i++){
-        if(caracteresEspeciaisAceitos.test(senha) == true){
-            temCaractereEspecial = true;
-
-        }
-    }
-
-    if(senha.length < 8){
-        mostrarMensagem(mensagem, 'Sua senha deve possuir ao menos 8 caracteres no total (com um caractere especial).');
-        return false;
-
-    }
-
-    if(temCaractereEspecial == false){
-        mostrarMensagem(mensagem, 'Sua senha deve possuir ao menos um caractere especial.');
-        return false;
-
-    }
-
-    if (usuario == "" || email == "" || senha == "" || confirmarSenha == "") {
+    if (!usuario || !email || !senha || !confirmarSenha) {
         mostrarMensagem(mensagem, 'Por favor, preencha todos os campos.');
+        return false;
+    }
+
+    const temLetraMaiuscula = /[A-ZÁÉÍÓÚÀÂÊÔÃÕÇ]/.test(senha);
+    const temCaractereEspecial = caracteresEspeciaisAceitos.test(senha);
+    if (senha.length < 8 || !temLetraMaiuscula || !temCaractereEspecial) {
+        mostrarMensagem(mensagem, 'A senha precisa ter ao menos 8 caracteres, uma letra maiúscula e um caractere especial.');
         return false;
     }
 

@@ -103,7 +103,7 @@ main {
 
 .sobretitulo {
     margin-bottom: .35rem;
-    color: var(--color-orange);
+    color: var(--cor-nota-filme, var(--color-red));
     font-size: var(--text-xs);
     font-weight: 600;
     text-transform: uppercase;
@@ -136,7 +136,45 @@ main {
 }
 
 .metadados-filme b {
-    color: var(--color-orange);
+    color: var(--cor-nota-filme, var(--color-red));
+}
+
+.nota-filme-api {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .35rem;
+    margin-top: .65rem;
+}
+
+.nota-filme-api .chamas-nota {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    margin-right: .2rem;
+}
+
+.nota-filme-api .chamas-nota img {
+    display: block;
+    width: 19px;
+    height: 19px;
+    object-fit: contain;
+}
+
+.nota-filme-api > strong {
+    color: var(--cor-nota-filme, var(--color-red));
+    font-size: .95rem;
+}
+
+.nota-filme-api > span {
+    color: var(--color-gray-smoke);
+    font-size: .8rem;
+}
+
+.nota-filme-api > small {
+    margin-left: .25rem;
+    color: var(--color-gray-smoke);
+    font-size: .68rem;
 }
 
 .generos-filme {
@@ -173,7 +211,7 @@ main {
     gap: .4rem;
     padding: .25rem 0;
     border: 0;
-    color: var(--color-orange);
+    color: var(--cor-nota-filme, var(--color-red));
     background: transparent;
     font-size: .72rem;
     cursor: pointer;
@@ -211,7 +249,7 @@ main {
 
 .botao-acao:hover,
 .botao-acao:focus-visible {
-    border-color: var(--color-orange);
+    border-color: var(--cor-nota-filme, var(--color-red));
     color: var(--color-white);
 }
 
@@ -299,14 +337,228 @@ main {
 
 .fechar-dialog-sinopse:hover,
 .fechar-dialog-sinopse:focus-visible {
-    border-color: var(--color-orange);
-    color: var(--color-orange);
+    border-color: var(--cor-nota-filme, var(--color-red));
+    color: var(--cor-nota-filme, var(--color-red));
 }
 
 .conteudo-dialog-sinopse > p {
     color: var(--color-gray-light);
     font-size: var(--text-sm);
     line-height: 1.8;
+}
+
+.dialog-avaliacao {
+    position: fixed;
+    inset: 50% auto auto 50%;
+    width: min(580px, calc(100vw - 2rem));
+    max-height: min(88vh, 720px);
+    padding: 0;
+    transform: translate(-50%, -50%);
+    border: 1px solid var(--color-gray-deep);
+    border-radius: 16px;
+    color: var(--color-white);
+    background: linear-gradient(150deg, var(--color-black-panel-strong), var(--color-black-deepest));
+    box-shadow: 0 24px 70px rgb(0 0 0 / 75%);
+}
+
+.dialog-avaliacao::backdrop {
+    background: rgb(0 0 0 / 78%);
+    backdrop-filter: blur(4px);
+}
+
+.conteudo-dialog-avaliacao {
+    max-height: inherit;
+    overflow-y: auto;
+    padding: 1.4rem 1.5rem 1.5rem;
+}
+
+.cabecalho-dialog-avaliacao {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.avaliacao-sobretitulo {
+    margin: 0 0 .3rem;
+    color: var(--cor-nota-filme, var(--color-red));
+    font-size: .7rem;
+    font-weight: 700;
+}
+
+.cabecalho-dialog-avaliacao h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    overflow-wrap: anywhere;
+}
+
+.fechar-dialog-avaliacao {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid var(--color-gray-deep);
+    border-radius: 8px;
+    color: var(--color-gray-light);
+    background: transparent;
+    cursor: pointer;
+}
+
+.fechar-dialog-avaliacao:hover,
+.fechar-dialog-avaliacao:focus-visible {
+    color: var(--cor-nota-filme, var(--color-red));
+    border-color: var(--cor-nota-filme, var(--color-red));
+}
+
+#form-avaliacao-filme {
+    display: grid;
+    gap: 1rem;
+}
+
+.campo-avaliacao-filme {
+    display: grid;
+    gap: .55rem;
+}
+
+.campo-avaliacao-filme > label {
+    color: var(--color-gray-light);
+    font-size: .82rem;
+    font-weight: 600;
+}
+
+.campo-avaliacao-filme > label span {
+    color: var(--color-gray-smoke);
+    font-weight: 400;
+}
+
+.rotulo-avaliacao-filme {
+    color: var(--color-gray-light);
+    font-size: .82rem;
+    font-weight: 600;
+}
+
+.controle-nota-avaliacao {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .75rem;
+}
+
+.seletor-chamas-avaliacao {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+}
+
+.chama-avaliacao {
+    position: relative;
+    display: block;
+    width: 38px;
+    height: 44px;
+    flex: 0 0 38px;
+}
+
+.chama-avaliacao img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.chama-avaliacao-base {
+    opacity: .3;
+}
+
+.metade-nota-avaliacao {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.metade-esquerda {
+    left: 0;
+}
+
+.metade-direita {
+    right: 0;
+}
+
+.controle-nota-avaliacao output {
+    color: var(--cor-nota-filme, var(--color-red));
+    font-size: .9rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.campo-avaliacao-filme textarea {
+    width: 100%;
+    min-height: 110px;
+    padding: .7rem .75rem;
+    border: 1px solid var(--color-gray-deep);
+    border-radius: 8px;
+    color: var(--color-white);
+    background: var(--color-black-deepest);
+    font: inherit;
+    font-size: .85rem;
+    resize: vertical;
+}
+
+.campo-avaliacao-filme :focus-visible,
+.metade-nota-avaliacao:focus-visible,
+.fechar-dialog-avaliacao:focus-visible,
+.acoes-avaliacao-filme button:focus-visible {
+    outline: 2px solid var(--cor-nota-filme, var(--color-red));
+    outline-offset: 2px;
+}
+
+.mensagem-avaliacao-filme {
+    min-height: 1.2em;
+    margin: 0;
+    color: var(--color-gray-light);
+    font-size: .8rem;
+}
+
+.acoes-avaliacao-filme {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: .65rem;
+}
+
+.acoes-avaliacao-filme button {
+    min-height: 40px;
+    padding: .55rem .9rem;
+    border-radius: 8px;
+    font: inherit;
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cancelar-avaliacao-filme {
+    border: 1px solid var(--color-gray-deep);
+    color: var(--color-gray-light);
+    background: transparent;
+}
+
+.enviar-avaliacao-filme {
+    border: 0;
+    color: var(--color-black-deepest);
+    background: var(--cor-nota-filme, var(--color-red));
+}
+
+.enviar-avaliacao-filme:hover {
+    filter: brightness(1.12);
 }
 
 .ficha-filme {
@@ -329,7 +581,7 @@ main {
 
 .ficha-filme > div > i {
     flex: 0 0 20px;
-    color: var(--color-orange);
+    color: var(--cor-nota-filme, var(--color-red));
     text-align: center;
 }
 
@@ -350,6 +602,16 @@ main {
     font-weight: 500;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.ficha-filme strong a {
+    color: var(--cor-nota-filme, var(--color-red));
+    text-decoration: none;
+}
+
+.ficha-filme strong a:hover,
+.ficha-filme strong a:focus-visible {
+    text-decoration: underline;
 }
 
 .secao-filme {
@@ -449,12 +711,12 @@ main {
 
 .cartao-elenco:hover,
 .cartao-elenco:focus-visible {
-    border-color: var(--color-orange);
+    border-color: var(--cor-nota-filme, var(--color-red));
     background: var(--color-black-panel-strong);
 }
 
 .cartao-elenco:focus-visible {
-    outline: 2px solid var(--color-orange);
+    outline: 2px solid var(--cor-nota-filme, var(--color-red));
     outline-offset: 2px;
 }
 

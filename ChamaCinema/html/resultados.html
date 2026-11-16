@@ -6,7 +6,7 @@
     <title>Resultados</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/main.css?v=20261114-3">
-    <link rel="stylesheet" href="../css/pages/resultados.css">
+    <link rel="stylesheet" href="../css/pages/resultados.css?v=20261116-2">
     <link id="estampa" rel="stylesheet" href="../css/components/fundo_base.css">
 </head>
 <body>
@@ -15,7 +15,7 @@
 
         <form id="formulario-pesquisa">
             <div class="barra-pesquisa">
-                <input id="pesquisa" type="text" placeholder="Procure por filmes ou séries...">
+                <input id="pesquisa" type="text" placeholder="Procure por filmes ou atores...">
                 <i class="fa-solid fa-magnifying-glass" id="lupa"></i>
             </div>
             <div id="resultados-pesquisa" class="resultados-pesquisa" aria-live="polite"></div>
@@ -45,7 +45,14 @@
     
     <main id="pagina-resultados">
         <section id="lista-resultados">
-            <p class="mensagem-resultados">Carregando resultados...</p>
+            <fieldset class="seletor-tipo-resultados">
+                <legend>Tipo de pesquisa</legend>
+                <button type="button" class="tipo-resultados selecionado" data-tipo="filmes" aria-pressed="true">Filmes</button>
+                <button type="button" class="tipo-resultados" data-tipo="atores" aria-pressed="false">Atores</button>
+            </fieldset>
+            <div id="conteudo-resultados">
+                <p class="mensagem-resultados">Carregando resultados...</p>
+            </div>
         </section>
     </main>
 
@@ -60,6 +67,6 @@
     <script src="../js/config.js"></script>
     <script src="../js/manipulaLS.js"></script>
     <script src="../js/header.js?v=20261114-5"></script>
-    <script src="../js/resultados.js"></script>
+    <script src="../js/resultados.js?v=20261116-1"></script>
 </body>
 </html>

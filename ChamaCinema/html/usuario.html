@@ -17,7 +17,7 @@
 
         <form id="formulario-pesquisa">
             <div class="barra-pesquisa">
-                <input id="pesquisa" type="text" placeholder="Procure por filmes ou séries...">
+                <input id="pesquisa" type="text" placeholder="Procure por filmes ou atores...">
                 <i class="fa-solid fa-magnifying-glass" id="lupa"></i>
             </div>
             <div id="resultados-pesquisa" class="resultados-pesquisa" aria-live="polite"></div>
@@ -92,47 +92,41 @@
 
                 <div class="painel-avaliacoes">
                     <div class="bloco-media-geral">
-                        <span class="nota-grande">4.0</span>
-                        <div class="linha-chamas-media">
-                            <img src="../Imagens/foguin_rosa.png" alt="Chama rosa">
-                            <img src="../Imagens/foguin_rosa.png" alt="Chama rosa">
-                            <img src="../Imagens/foguin_rosa.png" alt="Chama rosa">
-                            <img src="../Imagens/foguin_rosa.png" alt="Chama rosa">
-                            <img src="../Imagens/foguin_branco.png" alt="Chama inativa" class="chama-escura">
-                        </div>
+                        <span class="nota-grande" id="nota-media-geral">--</span>
+                        <div class="linha-chamas-media" id="chamas-media-geral" aria-label="Média das avaliações"></div>
                         <span class="rotulo-media">Média geral</span>
                     </div>
 
                     <div class="distribuicao-barras">
-                        <div class="linha-barra">
+                        <div class="linha-barra" data-faixa-nota="5">
                             <div class="chamas-grupo">
                                 <img src="../Imagens/foguin_rosa.png" alt="Chama"><img src="../Imagens/foguin_rosa.png" alt="Chama"><img src="../Imagens/foguin_rosa.png" alt="Chama"><img src="../Imagens/foguin_rosa.png" alt="Chama"><img src="../Imagens/foguin_rosa.png" alt="Chama">
                             </div>
-                            <div class="trilho-barra"><div class="preenchimento-barra rosa" style="width: 50%;"></div></div>
-                            <span class="porcentagem-texto">50%</span>
+                            <div class="trilho-barra"><div class="preenchimento-barra rosa" style="width: 0%;"></div></div>
+                            <span class="porcentagem-texto">0%</span>
                         </div>
-                        <div class="linha-barra">
+                        <div class="linha-barra" data-faixa-nota="4">
                             <div class="chamas-grupo">
                                 <img src="../Imagens/foguin_vermelho.png" alt="Chama"><img src="../Imagens/foguin_vermelho.png" alt="Chama"><img src="../Imagens/foguin_vermelho.png" alt="Chama"><img src="../Imagens/foguin_vermelho.png" alt="Chama">
                             </div>
-                            <div class="trilho-barra"><div class="preenchimento-barra vermelho" style="width: 50%;"></div></div>
+                            <div class="trilho-barra"><div class="preenchimento-barra vermelho" style="width: 0%;"></div></div>
                             <span class="porcentagem-texto">50%</span>
                         </div>
-                        <div class="linha-barra">
+                        <div class="linha-barra" data-faixa-nota="3">
                             <div class="chamas-grupo">
                                 <img src="../Imagens/foguin_naranja.png" alt="Chama"><img src="../Imagens/foguin_naranja.png" alt="Chama"><img src="../Imagens/foguin_naranja.png" alt="Chama">
                             </div>
                             <div class="trilho-barra"><div class="preenchimento-barra laranja" style="width: 0%;"></div></div>
                             <span class="porcentagem-texto">0%</span>
                         </div>
-                        <div class="linha-barra">
+                        <div class="linha-barra" data-faixa-nota="2">
                             <div class="chamas-grupo">
                                 <img src="../Imagens/foguin_marelo.png" alt="Chama"><img src="../Imagens/foguin_marelo.png" alt="Chama">
                             </div>
                             <div class="trilho-barra"><div class="preenchimento-barra amarelo" style="width: 0%;"></div></div>
                             <span class="porcentagem-texto">0%</span>
                         </div>
-                        <div class="linha-barra">
+                        <div class="linha-barra" data-faixa-nota="1">
                             <div class="chamas-grupo">
                                 <img src="../Imagens/foguin_branco.png" alt="Chama">
                             </div>
@@ -197,6 +191,6 @@
     <script src="../js/manipulaLS.js"></script>
     <script src="../js/config.js"></script>
     <script src="../js/header.js?v=20261114-5"></script>
-    <script src="../js/usuario.js?v=20261114-2"></script>
+    <script src="../js/usuario.js?v=20261116-1"></script>
 </body>
 </html>

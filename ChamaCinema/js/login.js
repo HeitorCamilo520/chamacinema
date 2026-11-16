@@ -23,9 +23,16 @@ function combinarUsuarios(usuariosSalvos, usuariosBase) {
     usuariosBase.forEach(usuarioBase => {
         const indice = usuarios.findIndex(usuario =>
             usuario.usuario === usuarioBase.usuario || usuario.email === usuarioBase.email
+            || usuario.__adminIdentidadeOriginal?.usuario === usuarioBase.usuario
+            || usuario.__adminIdentidadeOriginal?.email === usuarioBase.email
         );
         if (indice < 0) usuarios.push(usuarioBase);
-        else if (usuarioBase.plano) usuarios[indice].plano = usuarioBase.plano;
+        else {
+            usuarios[indice].senha = usuarioBase.senha;
+            if (usuarioBase.plano && !usuarios[indice].__adminIdentidadeOriginal) {
+                usuarios[indice].plano = usuarioBase.plano;
+            }
+        }
     });
 
     setmemoria('usuarios', usuarios);

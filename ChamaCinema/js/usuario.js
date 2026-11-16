@@ -26,6 +26,43 @@ const avaliacoesPadrao = [
     { id: 10195, tipo: 'filme', nota: 4.5 }  // O Espetacular Homem-Aranha
 ];
 
+function obterAvaliacoesUsuario(usu) {
+    return Array.isArray(usu?.avaliacoes) && usu.avaliacoes.length
+        ? usu.avaliacoes
+        : avaliacoesPadrao;
+}
+
+function renderizarGraficoAvaliacoes(notasFilmes) {
+    const notas = notasFilmes.filter(nota => Number.isFinite(nota) && nota >= 0 && nota <= 5);
+    const notaMedia = notas.length
+        ? notas.reduce((soma, nota) => soma + nota, 0) / notas.length
+        : null;
+    const textoMedia = notaMedia === null ? '--' : notaMedia.toFixed(1);
+
+    document.getElementById('nota-media-geral').textContent = textoMedia;
+    document.getElementById('chamas-media-geral').innerHTML = notaMedia === null
+        ? ''
+        : criarChamasNota(textoMedia);
+
+    const distribuicao = new Map([1, 2, 3, 4, 5].map(faixa => [faixa, 0]));
+    notas.forEach(nota => {
+        const inferior = Math.max(1, Math.floor(nota));
+        const superior = Math.max(1, Math.ceil(nota));
+        if (inferior === superior) distribuicao.set(inferior, distribuicao.get(inferior) + 1);
+        else {
+            distribuicao.set(inferior, distribuicao.get(inferior) + (superior - nota));
+            distribuicao.set(superior, distribuicao.get(superior) + (nota - inferior));
+        }
+    });
+
+    document.querySelectorAll('.linha-barra[data-faixa-nota]').forEach(linha => {
+        const faixa = Number(linha.dataset.faixaNota);
+        const percentual = notas.length ? distribuicao.get(faixa) / notas.length * 100 : 0;
+        linha.querySelector('.preenchimento-barra').style.width = `${percentual}%`;
+        linha.querySelector('.porcentagem-texto').textContent = `${Math.round(percentual)}%`;
+    });
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     let usu = getmemoria("usuarioLogado");
 
@@ -85,8 +122,8 @@ function renderizarDadosUsuario(usu) {
     }
 
     // Contadores Dinâmicos
-    const listaAvaliacoes = (usu.avaliacoes && Array.isArray(usu.avaliacoes)) ? usu.avaliacoes : avaliacoesPadrao;
-    const qtdFilmes = listaAvaliacoes.filter(a => a.tipo !== 'serie').length || 21;
+    const listaAvaliacoes = obterAvaliacoesUsuario(usu);
+    const qtdFilmes = listaAvaliacoes.filter(a => typeof a !== 'object' || a.tipo !== 'serie').length;
     const qtdFavoritos = (usu.favoritos && Array.isArray(usu.favoritos)) ? usu.favoritos.length : 0;
 
     document.getElementById('stat-avaliados').textContent = qtdFilmes;
@@ -94,9 +131,7 @@ function renderizarDadosUsuario(usu) {
 }
 
 async function carregarObras(usu) {
-    const listaAvaliacoes = (usu && usu.avaliacoes && usu.avaliacoes.length > 0)
-        ? usu.avaliacoes
-        : avaliacoesPadrao;
+    const listaAvaliacoes = obterAvaliacoesUsuario(usu);
 
     const idsFavoritos = (usu && usu.favoritos && Array.isArray(usu.favoritos))
         ? usu.favoritos
@@ -104,6 +139,7 @@ async function carregarObras(usu) {
 
     const gridAvaliacoes = document.getElementById('grid-avaliacoes');
     gridAvaliacoes.innerHTML = '';
+    const notasFilmesExibidos = [];
 
     // Renderizar Avaliações (Sem sumir quando favoritar)
     for (const item of listaAvaliacoes) {
@@ -115,10 +151,14 @@ async function carregarObras(usu) {
 
             const eFavorito = idsFavoritos.includes(filme.id);
             gridAvaliacoes.innerHTML += criarCardObraHTML(filme, eFavorito);
+            const notaCartao = obterNotaCartao(filme);
+            if (notaCartao !== 'N/A') notasFilmesExibidos.push(Number(notaCartao));
         } catch (err) {
             console.error("Erro ao carregar filme avaliado:", err);
         }
     }
+
+    renderizarGraficoAvaliacoes(notasFilmesExibidos);
 
     // Renderizar Apenas Favoritos Ativos na Seção Meus Favoritos
     await renderizarSecaoFavoritos(idsFavoritos);

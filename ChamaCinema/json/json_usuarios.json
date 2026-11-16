@@ -2,7 +2,7 @@
     {
         "usuario":"StanLee01",
         "email":"stanlee@gmail.com",
-        "senha" : "1234567",
+        "senha" : "1234567A!",
         "nacionalidade":null,
         "linkFoto":"../Imagens/StanLee.jpg",
         "dataNasc":null,
@@ -15,7 +15,7 @@
     {
         "usuario":"JoãoCosta03",
         "email":"joaocosta@gmail.com",
-        "senha" : "03030303",
+        "senha" : "03030303A!",
         "nacionalidade":"Brasil",
         "linkFoto":"../Imagens/JoaoCosta.jpg",
         "dataNasc":null,
@@ -28,7 +28,7 @@
     {
         "usuario":"ArthPLeo",
         "email":"arthur.leonnardo@estudante.iftm.edu.br",
-        "senha" : "12345678",
+        "senha" : "12345678A!",
         "nacionalidade":"Brasil",
         "linkFoto":"../Imagens/ArthPLeo.png",
         "dataNasc":"25/05/2010",

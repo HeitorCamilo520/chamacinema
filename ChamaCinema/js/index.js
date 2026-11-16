@@ -180,6 +180,269 @@ function atualizarPosicaoSlide() {
 }
 
 
+let usuariosAdministracao = [];
+let indiceUsuarioAdminEmEdicao = -1;
+
+function chaveVisivelUsuarioAdmin(chave) {
+  return !['senha', 'password', 'logado', '__adminidentidadeoriginal'].includes(chave.toLowerCase());
+}
+
+function idsUsuarioAdmin(valor) {
+  if (!Array.isArray(valor)) return [];
+  return valor
+    .map(item => item && typeof item === 'object' ? item.id : item)
+    .filter(item => item !== null && item !== undefined && item !== '')
+    .map(Number)
+    .filter(Number.isFinite);
+}
+
+function valorUsuarioAdmin(valor, chave) {
+  if (['preferencias', 'favoritos'].includes(chave.toLowerCase())) {
+    return idsUsuarioAdmin(valor).join(', ') || 'Nenhum';
+  }
+  if (valor === null || valor === undefined) return 'Não informado';
+  return typeof valor === 'object' ? JSON.stringify(valor) : String(valor);
+}
+
+function criarEntradaUsuarioAdmin(chave, valor, posicao) {
+  let entrada;
+  if (['preferencias', 'favoritos'].includes(chave.toLowerCase())) {
+    entrada = document.createElement('input');
+    entrada.type = 'text';
+    entrada.inputMode = 'numeric';
+    entrada.placeholder = 'IDs separados por vírgula';
+    entrada.dataset.tipoOriginal = 'lista-numerica';
+    entrada.value = idsUsuarioAdmin(valor).join(', ');
+  } else if (Array.isArray(valor) || (valor !== null && typeof valor === 'object')) {
+    entrada = document.createElement('textarea');
+    entrada.dataset.tipoOriginal = 'json';
+    entrada.value = JSON.stringify(valor, null, 2);
+  } else {
+    entrada = document.createElement('input');
+    if (typeof valor === 'boolean') {
+      entrada.type = 'checkbox';
+      entrada.checked = valor;
+      entrada.dataset.tipoOriginal = 'boolean';
+    } else if (typeof valor === 'number') {
+      entrada.type = 'number';
+      entrada.step = 'any';
+      entrada.value = String(valor);
+      entrada.dataset.tipoOriginal = 'number';
+    } else {
+      entrada.type = 'text';
+      entrada.value = valor ?? '';
+      entrada.placeholder = valor === null ? 'Não informado' : '';
+      entrada.dataset.tipoOriginal = valor === null ? 'null' : 'string';
+    }
+  }
+
+  entrada.id = `campo-usuario-admin-${posicao}`;
+  entrada.dataset.campoUsuario = chave;
+  entrada.setAttribute('aria-label', chave);
+  return entrada;
+}
+
+function renderizarUsuariosAdministracao() {
+  const lista = document.getElementById('lista-usuarios-admin');
+  lista.replaceChildren();
+
+  usuariosAdministracao.forEach((usuario, indice) => {
+    const editando = indiceUsuarioAdminEmEdicao === indice;
+    const cartao = document.createElement('article');
+    cartao.className = 'usuario-admin';
+
+    const cabecalho = document.createElement('div');
+    cabecalho.className = 'usuario-admin-cabecalho';
+    const titulo = document.createElement('h3');
+    titulo.textContent = usuario.usuario || usuario.email || `Usuário ${indice + 1}`;
+    const dados = document.createElement('dl');
+    dados.className = 'dados-usuario-admin';
+    Object.entries(usuario).filter(([chave]) => chaveVisivelUsuarioAdmin(chave)).forEach(([chave, valor], posicao) => {
+      const campo = document.createElement('div');
+      const nome = document.createElement('dt');
+      nome.textContent = chave;
+      campo.appendChild(nome);
+      if (editando) {
+        campo.classList.add('campo-editavel-usuario-admin');
+        const entrada = criarEntradaUsuarioAdmin(chave, valor, posicao);
+        if (entrada.tagName === 'TEXTAREA') campo.classList.add('campo-json-usuario-admin');
+        campo.appendChild(entrada);
+      } else {
+        const conteudo = document.createElement('dd');
+        conteudo.textContent = valorUsuarioAdmin(valor, chave);
+        campo.appendChild(conteudo);
+      }
+      dados.appendChild(campo);
+    });
+
+    if (editando) {
+      const formulario = document.createElement('form');
+      formulario.id = 'form-edicao-usuario-admin';
+      formulario.addEventListener('submit', salvarEdicaoUsuarioAdmin);
+
+      const acoes = document.createElement('div');
+      acoes.className = 'acoes-edicao-usuario-admin';
+      const cancelar = document.createElement('button');
+      cancelar.className = 'cancelar-edicao-usuario-admin';
+      cancelar.type = 'button';
+      cancelar.textContent = 'Cancelar';
+      cancelar.addEventListener('click', cancelarEdicaoUsuarioAdmin);
+      const salvar = document.createElement('button');
+      salvar.className = 'salvar-edicao-usuario-admin';
+      salvar.type = 'submit';
+      salvar.textContent = 'Salvar alterações';
+      acoes.append(cancelar, salvar);
+      cabecalho.append(titulo, acoes);
+
+      const mensagem = document.createElement('p');
+      mensagem.className = 'mensagem-edicao-usuario-admin';
+      mensagem.id = 'mensagem-edicao-usuario-admin';
+      mensagem.setAttribute('aria-live', 'polite');
+      formulario.append(cabecalho, dados, mensagem);
+      cartao.appendChild(formulario);
+    } else {
+      const botaoEditar = document.createElement('button');
+      botaoEditar.className = 'botao-editar-usuario-admin';
+      botaoEditar.type = 'button';
+      botaoEditar.setAttribute('aria-label', `Editar ${titulo.textContent}`);
+      botaoEditar.innerHTML = '<i class="fa-solid fa-pen" aria-hidden="true"></i><span>Editar</span>';
+      botaoEditar.addEventListener('click', () => editarUsuarioAdministracao(indice));
+      cabecalho.append(titulo, botaoEditar);
+      cartao.append(cabecalho, dados);
+    }
+    lista.appendChild(cartao);
+  });
+}
+
+async function carregarUsuariosAdministracao() {
+  const status = document.getElementById('status-usuarios-admin');
+  const lista = document.getElementById('lista-usuarios-admin');
+  indiceUsuarioAdminEmEdicao = -1;
+  status.textContent = 'Carregando usuários...';
+  lista.replaceChildren();
+
+  try {
+    const resposta = await fetch('../json/json_usuarios.json');
+    if (!resposta.ok) throw new Error('Não foi possível carregar os usuários.');
+    const usuariosJson = await resposta.json();
+    if (!Array.isArray(usuariosJson)) throw new Error('A lista de usuários está inválida.');
+
+    usuariosAdministracao = [...usuariosJson];
+    const usuariosSalvos = getmemoria('usuarios');
+    if (Array.isArray(usuariosSalvos)) {
+      usuariosSalvos.forEach(usuarioSalvo => {
+        const identidadeOriginal = usuarioSalvo.__adminIdentidadeOriginal || {};
+        const indice = usuariosAdministracao.findIndex(usuario =>
+          (usuario.email && (usuario.email === usuarioSalvo.email || usuario.email === identidadeOriginal.email))
+          || (usuario.usuario && (usuario.usuario === usuarioSalvo.usuario || usuario.usuario === identidadeOriginal.usuario))
+        );
+        if (indice < 0) usuariosAdministracao.push(usuarioSalvo);
+        else usuariosAdministracao[indice] = { ...usuariosAdministracao[indice], ...usuarioSalvo };
+      });
+    }
+
+    renderizarUsuariosAdministracao();
+    status.textContent = `${usuariosAdministracao.length} usuário(s) encontrado(s).`;
+  } catch (error_) {
+    status.textContent = error_.message || 'Não foi possível carregar os usuários.';
+  }
+}
+
+function editarUsuarioAdministracao(indice) {
+  const usuarioAtual = getmemoria('usuarioLogado');
+  if (!usuarioAtual || obterPlanoUsuario(usuarioAtual) !== 'Administrador') return;
+
+  const usuario = usuariosAdministracao[indice];
+  if (!usuario) return;
+
+  indiceUsuarioAdminEmEdicao = indice;
+  renderizarUsuariosAdministracao();
+  document.querySelector('#form-edicao-usuario-admin [data-campo-usuario]')?.focus();
+}
+
+function cancelarEdicaoUsuarioAdmin() {
+  indiceUsuarioAdminEmEdicao = -1;
+  renderizarUsuariosAdministracao();
+}
+
+function salvarEdicaoUsuarioAdmin(evento) {
+  evento.preventDefault();
+  const usuarioAtual = getmemoria('usuarioLogado');
+  if (!usuarioAtual || obterPlanoUsuario(usuarioAtual) !== 'Administrador') return;
+
+  const status = document.getElementById('mensagem-edicao-usuario-admin');
+  const campos = document.querySelectorAll('#form-edicao-usuario-admin [data-campo-usuario]');
+  const indiceEditado = indiceUsuarioAdminEmEdicao;
+  const usuarioOriginal = usuariosAdministracao[indiceEditado];
+  if (!usuarioOriginal) return;
+
+  const usuarioEditado = { ...usuarioOriginal };
+  try {
+    campos.forEach(campo => {
+      const chave = campo.dataset.campoUsuario;
+      const tipo = campo.dataset.tipoOriginal;
+      if (tipo === 'boolean') usuarioEditado[chave] = campo.checked;
+      else if (tipo === 'json') usuarioEditado[chave] = JSON.parse(campo.value);
+      else if (tipo === 'lista-numerica') {
+        const partes = campo.value.split(',').map(item => item.trim()).filter(Boolean);
+        const numeros = partes.map(Number);
+        if (numeros.some(numero => !Number.isFinite(numero))) {
+          throw new Error('Use apenas números separados por vírgula em preferências e favoritos.');
+        }
+        usuarioEditado[chave] = numeros;
+      }
+      else if (tipo === 'number') usuarioEditado[chave] = campo.value === '' ? null : Number(campo.value);
+      else if (tipo === 'null') usuarioEditado[chave] = campo.value === '' ? null : campo.value;
+      else usuarioEditado[chave] = campo.value;
+    });
+  } catch (error_) {
+    status.textContent = error_.message || 'Revise os campos JSON: há um valor inválido.';
+    return;
+  }
+
+  usuarioEditado.__adminIdentidadeOriginal = usuarioOriginal.__adminIdentidadeOriginal || {
+    email: usuarioOriginal.email || '',
+    usuario: usuarioOriginal.usuario || ''
+  };
+
+  const usuariosSalvos = getmemoria('usuarios');
+  const listaSalva = Array.isArray(usuariosSalvos) ? usuariosSalvos : [];
+  const identidade = usuarioOriginal.__adminIdentidadeOriginal || {};
+  const indiceSalvo = listaSalva.findIndex(usuario =>
+    (usuarioOriginal.email && usuario.email === usuarioOriginal.email)
+    || (usuarioOriginal.usuario && usuario.usuario === usuarioOriginal.usuario)
+    || (identidade.email && usuario.email === identidade.email)
+    || (identidade.usuario && usuario.usuario === identidade.usuario)
+  );
+  if (indiceSalvo < 0) listaSalva.push(usuarioEditado);
+  else listaSalva[indiceSalvo] = usuarioEditado;
+  setmemoria('usuarios', listaSalva);
+
+  const mesmoUsuarioLogado = (usuarioOriginal.email && usuarioAtual.email === usuarioOriginal.email)
+    || (usuarioOriginal.usuario && usuarioAtual.usuario === usuarioOriginal.usuario);
+  if (mesmoUsuarioLogado) setmemoria('usuarioLogado', { ...usuarioAtual, ...usuarioEditado });
+
+  usuariosAdministracao[indiceEditado] = usuarioEditado;
+  indiceUsuarioAdminEmEdicao = -1;
+  renderizarUsuariosAdministracao();
+  document.getElementById('status-usuarios-admin').textContent = `${usuariosAdministracao.length} usuário(s) encontrado(s).`;
+}
+
+function abrirGerenciamentoUsuarios() {
+  const usuarioAtual = getmemoria('usuarioLogado');
+  if (!usuarioAtual || obterPlanoUsuario(usuarioAtual) !== 'Administrador') return;
+
+  const dialogo = document.getElementById('modal-gerenciar-usuarios');
+  if (!dialogo || dialogo.open) return;
+  dialogo.showModal();
+  void carregarUsuariosAdministracao();
+}
+
+function fecharGerenciamentoUsuarios() {
+  document.getElementById('modal-gerenciar-usuarios')?.close();
+}
+
+
 // ===== Planos =====
 
 
@@ -270,16 +533,29 @@ let fundo =  document.getElementById('estampa');
 
 
     else if (plano === "Administrador") {
-      fundo.href = "../css/components/administrador.css";
+      fundo.href = "../css/components/administrador.css?v=20261116-4";
       prefs.children[0].textContent = "Baseados em suas preferências";
       document.getElementById("planos").innerHTML = `<div id="container-administrador">
-                <button id="botao-administrador">
+                <button id="botao-administrador" type="button" onclick="abrirGerenciamentoUsuarios()" aria-haspopup="dialog" aria-controls="modal-gerenciar-usuarios">
                     <i class="fa-solid fa-user-shield icone-administrador"></i>
                     <div id="container-administrador-texto">
                         <h1>Gerenciar</h1>
                         <h2>Gerencie usuários e obras</h2>
                     </div>
                 </button>
+                <dialog class="modal-usuarios-admin" id="modal-gerenciar-usuarios" aria-labelledby="titulo-usuarios-admin">
+                  <div class="modal-usuarios-admin-cabecalho">
+                    <div>
+                      <p class="modal-usuarios-admin-sobretitulo">ADMINISTRAÇÃO</p>
+                      <h2 id="titulo-usuarios-admin">Usuários cadastrados</h2>
+                    </div>
+                    <button class="fechar-modal-usuarios-admin" type="button" onclick="fecharGerenciamentoUsuarios()" aria-label="Fechar gerenciamento de usuários">
+                      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  <p class="status-usuarios-admin" id="status-usuarios-admin" aria-live="polite"></p>
+                  <div class="lista-usuarios-admin" id="lista-usuarios-admin"></div>
+                </dialog>
       `;
     }
 
