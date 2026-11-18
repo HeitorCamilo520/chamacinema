@@ -36,5 +36,18 @@
         "favoritos": [],
         "logado":false,
         "plano":"Administrador"
+    },
+
+    {
+        "usuario":"HeitorCamilo",
+        "email":"heitor.sousa@estudante.iftm.edu.br",
+        "senha":"1234567A!",
+        "nacionalidade":"Brasil",
+        "linkFoto": null,
+        "dataNasc":"20/07/2009",
+        "preferencias":[9648,12,35,99],
+        "favoritos":[],
+        "logado":false,
+        "plano":"Administrador"
     }
 ]
